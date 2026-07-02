@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Doctor Website Admin Dashboard</title>
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+  <header class="header">
+    <h1 class="header__title">Doctor Site Manager</h1>
+    <div class="header__actions">
+      <input type="text" id="search-input" class="search-input" placeholder="Search sites...">
+      <button id="refresh-btn" class="btn btn--secondary">Refresh All</button>
+      <button id="add-site-btn" class="btn btn--primary">+ Add Site</button>
+    </div>
+  </header>
+
+  <main class="main">
+    <!-- Summary Bar -->
+    <section id="summary-bar" class="summary-bar">
+      <div class="summary-item">
+        <span class="summary-item__count" id="total-count">0</span>
+        <span class="summary-item__label">Total Sites</span>
+      </div>
+      <div class="summary-item summary-item--online">
+        <span class="summary-item__count" id="online-count">0</span>
+        <span class="summary-item__label">Online</span>
+      </div>
+      <div class="summary-item summary-item--offline">
+        <span class="summary-item__count" id="offline-count">0</span>
+        <span class="summary-item__label">Offline</span>
+      </div>
+      <div class="summary-item summary-item--warning">
+        <span class="summary-item__count" id="warning-count">0</span>
+        <span class="summary-item__label">Warnings</span>
+      </div>
+    </section>
+
+    <!-- Site Grid -->
+    <section id="site-grid" class="site-grid">
+      <!-- Site cards rendered by JS -->
+    </section>
+
+    <!-- Empty State -->
+    <section id="empty-state" class="empty-state" style="display: none;">
+      <p>No sites registered yet.</p>
+      <button class="btn btn--primary" onclick="document.getElementById('add-site-btn').click()">Add Your First Site</button>
+    </section>
+
+    <!-- Editor Panel -->
+    <section id="editor-panel" class="editor-panel" style="display: none;">
+      <div class="editor-panel__header">
+        <h2 id="editor-site-name">Edit Config</h2>
+        <button id="editor-close-btn" class="btn btn--icon">&times;</button>
+      </div>
+      <div id="editor-container" class="editor-container"></div>
+      <div class="editor-panel__actions">
+        <button id="preview-diff-btn" class="btn btn--secondary">Preview Diff</button>
+        <button id="save-deploy-btn" class="btn btn--primary">Save &amp; Deploy</button>
+      </div>
+      <div id="diff-view" class="diff-view" style="display: none;"></div>
+    </section>
+
+    <!-- Deployment Log Panel -->
+    <section id="log-panel" class="log-panel">
+      <div class="log-panel__header">
+        <h2>Deployment Log</h2>
+        <button id="toggle-log-btn" class="btn btn--icon">▼</button>
+      </div>
+      <div id="log-entries" class="log-entries" style="display: none;"></div>
+    </section>
+  </main>
+
+  <!-- Add Site Modal -->
+  <div id="add-site-modal" class="modal" style="display: none;">
+    <div class="modal__overlay"></div>
+    <div class="modal__content">
+      <div class="modal__header">
+        <h2>Add New Site</h2>
+        <button class="modal__close btn btn--icon">&times;</button>
+      </div>
+      <form id="add-site-form" class="form">
+        <div class="form__group">
+          <label for="site-domain">Domain URL</label>
+          <input type="url" id="site-domain" name="domain_url" required placeholder="https://doctor-site.example.com">
+        </div>
+        <div class="form__group">
+          <label for="site-ssh-host">SSH Host</label>
+          <input type="text" id="site-ssh-host" name="ssh_host" required placeholder="192.168.1.100">
+        </div>
+        <div class="form__row">
+          <div class="form__group">
+            <label for="site-ssh-port">SSH Port</label>
+            <input type="number" id="site-ssh-port" name="ssh_port" value="22" min="1" max="65535">
+          </div>
+          <div class="form__group">
+            <label for="site-ssh-user">SSH User</label>
+            <input type="text" id="site-ssh-user" name="ssh_user" required placeholder="deploy">
+          </div>
+        </div>
+        <div class="form__group">
+          <label for="site-auth-method">Auth Method</label>
+          <select id="site-auth-method" name="auth_method">
+            <option value="key">SSH Key</option>
+            <option value="password">Password</option>
+          </select>
+        </div>
+        <div class="form__group" id="key-path-group">
+          <label for="site-key-path">SSH Key Path</label>
+          <input type="text" id="site-key-path" name="ssh_key_path" placeholder="/home/user/.ssh/id_rsa">
+        </div>
+        <div class="form__group">
+          <label for="site-remote-path">Remote Config Path</label>
+          <input type="text" id="site-remote-path" name="remote_config_path" value="/var/www/site/config/doctor-profile.json">
+        </div>
+        <div class="form__actions">
+          <button type="button" id="test-connection-btn" class="btn btn--secondary">Test Connection</button>
+          <button type="submit" class="btn btn--primary">Add Site</button>
+        </div>
+        <div id="connection-test-result" class="connection-result" style="display: none;"></div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Confirmation Modal -->
+  <div id="confirm-modal" class="modal" style="display: none;">
+    <div class="modal__overlay"></div>
+    <div class="modal__content modal__content--small">
+      <div class="modal__header">
+        <h2>Confirm Removal</h2>
+        <button class="modal__close btn btn--icon">&times;</button>
+      </div>
+      <p id="confirm-message">Are you sure you want to remove this site?</p>
+      <p id="confirm-site-name" class="confirm-site-name"></p>
+      <div class="modal__actions">
+        <button id="confirm-cancel-btn" class="btn btn--secondary">Cancel</button>
+        <button id="confirm-ok-btn" class="btn btn--danger">Remove</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Health Detail Panel -->
+  <div id="health-panel" class="modal" style="display: none;">
+    <div class="modal__overlay"></div>
+    <div class="modal__content">
+      <div class="modal__header">
+        <h2>Health Details</h2>
+        <button class="modal__close btn btn--icon">&times;</button>
+      </div>
+      <div id="health-details" class="health-details"></div>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- No Connection Banner -->
+  <div id="offline-banner" class="offline-banner" style="display: none;">
+    ⚠ Backend unreachable — showing last known state
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/editor.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,324 @@
+{
+  "_instructions": {
+    "HOW_TO_USE": "Edit ONLY this file to customize the website. No coding needed.",
+    "STEPS": [
+      "1. Replace placeholder values with final clinic data",
+      "2. Add doctor photo to assets/images/doctor.jpg",
+      "3. Add OG image to assets/images/og-image.jpg (1200x630)",
+      "4. Update clinic.google_maps_embed from Google Maps",
+      "5. Replace Razorpay key in payment.razorpay_key_id",
+      "6. Refresh browser after saving this file"
+    ]
+  },
+
+  "site_id": "dr-prashant-pawar-narhe-pune",
+
+  "doctor": {
+    "name": "Dr. Prashant S.Pawar",
+    "degree": "BDS, MDS, FHNO",
+    "specialization": "Oral and Maxillofacial Surgeon, Head and Neck Oncosurgeon",
+    "secondary_specializations": [
+      "Facial Trauma Surgery",
+      "Thyroid Surgery",
+      "Facial Plastic Surgery"
+    ],
+    "experience_years": 8,
+    "registration_number": "[ADD_REGISTRATION_NUMBER]",
+    "certifications": [
+      "FHNO"
+    ],
+    "awards": [
+      "[ADD_AWARD_IF_ANY]"
+    ],
+    "tagline": "Comprehensive oral oncology, maxillofacial reconstruction, and advanced surgical care.",
+    "languages": [
+      "Marathi",
+      "Hindi",
+      "English"
+    ],
+    "photo_logo": "assets/images/dr-prashant-hero-clean.png",
+    "photo_about": "assets/images/Dr Prashant 2.png",
+    "about": "Dr. Prashant Subhash Pawar is an oral and maxillofacial surgeon with focused expertise in head and neck oncology, oral cancer surgery, and complex facial reconstruction.\n\nHe manages pre-malignant oral lesions, tongue and buccal mucosa cancers, facial bone trauma, thyroid surgery, and advanced oral rehabilitation procedures including implants and wisdom tooth surgery.\n\nHe believes in clear communication, evidence-based planning, and patient-centered care across diagnosis, surgery, and follow-up."
+  },
+
+  "clinic": {
+    "name": "Silverbirch Multispeciality Hospital",
+    "address": "U.P.D.Construction, S.No.6, Plot No.1 To Plot No.4, Dhayari Road, near Sawatamali Mandir, Narhe",
+    "city": "Pune, Maharashtra",
+    "pincode": "411041",
+    "phone": "+91 9762334583",
+    "whatsapp": "+919762334583",
+    "email": "prashantpawar7788@gmail.com",
+    "website": "",
+    "show_timing": false,
+    "timing": {
+      "weekdays": "10:00 AM - 2:00 PM, 5:00 PM - 8:00 PM",
+      "saturday": "10:00 AM - 2:00 PM",
+      "sunday": "Closed",
+      "day_wise": {
+        "monday": "10:00 AM - 2:00 PM, 5:00 PM - 8:00 PM",
+        "tuesday": "10:00 AM - 2:00 PM, 5:00 PM - 8:00 PM",
+        "wednesday": "10:00 AM - 2:00 PM, 5:00 PM - 8:00 PM",
+        "thursday": "10:00 AM - 2:00 PM, 5:00 PM - 8:00 PM",
+        "friday": "10:00 AM - 2:00 PM, 5:00 PM - 8:00 PM",
+        "saturday": "10:00 AM - 2:00 PM",
+        "sunday": "Closed"
+      }
+    },
+    "google_maps_embed": "https://maps.app.goo.gl/72sqsMThFwZGygK38",
+    "geo": {
+      "latitude": 18.4481464,
+      "longitude": 73.8319694
+    },
+    "area_served": [
+      "Narhe",
+      "Ambegaon",
+      "Dhayari",
+      "Bhumkar Bridge",
+      "Sinhgad Road",
+      "Vadgaon Budruk",
+      "Katraj"
+    ],
+    "appointment_only": false,
+    "branches_note": "Consultation availability may extend to Pune and Satara by appointment.",
+    "photos": [
+      "assets/images/dr-prashant-case-01.jpeg",
+      "assets/images/dr-prashant-case-02.jpeg",
+      "assets/images/dr-prashant-case-03.jpeg",
+      "assets/images/dr-prashant-case-04.jpeg",
+      "assets/images/dr-prashant-case-05.jpeg",
+      "assets/images/dr-prashant-case-06.jpeg",
+      "assets/images/dr-prashant-case-07.jpeg",
+      "assets/images/dr-prashant-case-08.jpeg",
+      "assets/images/dr-prashant-case-09.jpeg",
+      "assets/images/dr-prashant-case-10.jpeg",
+      "assets/images/dr-prashant-case-11.jpeg",
+      "assets/images/dr-prashant-case-12.jpeg",
+      "assets/images/dr-prashant-case-13.jpeg",
+      "assets/images/dr-prashant-case-14.jpeg",
+      "assets/images/dr-prashant-case-15.jpeg",
+      "assets/images/dr-prashant-case-16.jpeg",
+      "assets/images/dr-prashant-case-17.jpeg",
+      "assets/images/dr-prashant-case-18.jpeg",
+      "assets/images/dr-prashant-case-19.jpeg",
+      "assets/images/dr-prashant-case-20.jpeg",
+      "assets/images/dr-prashant-case-21.jpeg",
+      "assets/images/dr-prashant-case-22.jpeg"
+    ],
+    "images": [
+      "assets/images/dr-prashant-case-01.jpeg",
+      "assets/images/dr-prashant-case-02.jpeg",
+      "assets/images/dr-prashant-case-03.jpeg",
+      "assets/images/dr-prashant-case-04.jpeg",
+      "assets/images/dr-prashant-case-05.jpeg",
+      "assets/images/dr-prashant-case-06.jpeg",
+      "assets/images/dr-prashant-case-07.jpeg",
+      "assets/images/dr-prashant-case-08.jpeg",
+      "assets/images/dr-prashant-case-09.jpeg",
+      "assets/images/dr-prashant-case-10.jpeg",
+      "assets/images/dr-prashant-case-11.jpeg",
+      "assets/images/dr-prashant-case-12.jpeg",
+      "assets/images/dr-prashant-case-13.jpeg",
+      "assets/images/dr-prashant-case-14.jpeg",
+      "assets/images/dr-prashant-case-15.jpeg",
+      "assets/images/dr-prashant-case-16.jpeg",
+      "assets/images/dr-prashant-case-17.jpeg",
+      "assets/images/dr-prashant-case-18.jpeg",
+      "assets/images/dr-prashant-case-19.jpeg",
+      "assets/images/dr-prashant-case-20.jpeg",
+      "assets/images/dr-prashant-case-21.jpeg",
+      "assets/images/dr-prashant-case-22.jpeg"
+    ],
+    "homepage_images": [
+      "assets/images/dr-prashant-case-19.jpeg",
+      "assets/images/dr-prashant-case-07.jpeg",
+      "assets/images/dr-prashant-case-11.jpeg",
+      "assets/images/dr-prashant-case-13.jpeg",
+      "assets/images/dr-prashant-case-09.jpeg"
+    ],
+    "expertise_images": [
+      "assets/images/dr-prashant-case-01.jpeg",
+      "assets/images/dr-prashant-case-03.jpeg",
+      "assets/images/dr-prashant-case-06.jpeg",
+      "assets/images/dr-prashant-case-09.jpeg",
+      "assets/images/dr-prashant-case-04.jpeg"
+    ],
+    "case_archive_images": [
+      "assets/images/dr-prashant-case-02.jpeg",
+      "assets/images/dr-prashant-case-05.jpeg",
+      "assets/images/dr-prashant-case-08.jpeg",
+      "assets/images/dr-prashant-case-15.jpeg",
+      "assets/images/dr-prashant-case-16.jpeg",
+      "assets/images/dr-prashant-case-17.jpeg",
+      "assets/images/dr-prashant-case-18.jpeg",
+      "assets/images/dr-prashant-case-20.jpeg",
+      "assets/images/dr-prashant-case-22.jpeg"
+    ]
+  },
+
+  "services": [
+    {
+      "name": "Oral Cancer Surgery",
+      "icon": "🩺",
+      "description": "Diagnosis and surgical management for oral cavity malignancies with oncologic safety and reconstruction planning.",
+      "price_range": "On Consultation"
+    },
+    {
+      "name": "Tongue Cancer Surgery",
+      "icon": "🔬",
+      "description": "Comprehensive surgery for tongue lesions and cancers with functional rehabilitation approach.",
+      "price_range": "On Consultation"
+    },
+    {
+      "name": "Buccal Mucosa Cancer Surgery",
+      "icon": "🏥",
+      "description": "Definitive surgical treatment for buccal mucosa cancers and related oral lesions.",
+      "price_range": "On Consultation"
+    },
+    {
+      "name": "Facial Trauma Surgery",
+      "icon": "🦴",
+      "description": "Management of facial bone fractures and trauma reconstruction with functional and aesthetic goals.",
+      "price_range": "On Consultation"
+    },
+    {
+      "name": "Thyroid Surgery",
+      "icon": "🫁",
+      "description": "Evaluation and surgical care for thyroid gland disorders requiring operative treatment.",
+      "price_range": "On Consultation"
+    },
+    {
+      "name": "Dental Implant and Wisdom Tooth Surgery",
+      "icon": "🦷",
+      "description": "Dental implant surgery, prosthetic planning, and surgical removal of impacted wisdom teeth.",
+      "price_range": "On Consultation"
+    }
+  ],
+
+  "expertise_items": [
+    {
+      "title": "Oral Cancer Surgery",
+      "description": "Comprehensive diagnosis, staging, and surgery for oral cavity cancers with reconstruction planning.",
+      "read_more_url": ""
+    },
+    {
+      "title": "Tongue and Buccal Mucosa Cancer",
+      "description": "Site-specific surgical management focused on disease control and functional outcomes.",
+      "read_more_url": ""
+    },
+    {
+      "title": "Head and Neck Oncosurgery",
+      "description": "Evidence-based treatment planning across tumour board recommendations and follow-up care.",
+      "read_more_url": ""
+    },
+    {
+      "title": "Facial Trauma and Reconstruction",
+      "description": "Management of facial fractures and soft tissue trauma with reconstructive precision.",
+      "read_more_url": ""
+    }
+  ],
+
+  "expertise_section": {
+    "label": "Special Focus",
+    "title": "Complete Expertise in Head and Neck Cancer Treatment",
+    "subtitle": "Evidence-based management across oral oncology, reconstructive surgery, and complex head and neck care."
+  },
+
+  "testimonials": [
+    {
+      "name": "Patient Review",
+      "location": "Pune",
+      "rating": 5,
+      "text": "Very clear explanation of treatment options and excellent surgical care.",
+      "date": "2026-05"
+    },
+    {
+      "name": "Patient Review",
+      "location": "Narhe",
+      "rating": 5,
+      "text": "Professional team and smooth recovery support throughout treatment.",
+      "date": "2026-04"
+    },
+    {
+      "name": "Patient Review",
+      "location": "Ambegaon",
+      "rating": 5,
+      "text": "Detailed diagnosis and confident surgical approach. Highly recommended.",
+      "date": "2026-03"
+    }
+  ],
+
+  "faqs": [
+    {
+      "question": "How can I book an appointment?",
+      "answer": "Use the appointment form on this website, call the clinic, or message on WhatsApp."
+    },
+    {
+      "question": "Do you treat oral cancer and tongue cancer cases?",
+      "answer": "Yes, diagnosis and surgical management for oral cavity, tongue, and buccal mucosa cancers are available."
+    },
+    {
+      "question": "Do you perform facial trauma surgeries?",
+      "answer": "Yes, facial trauma and facial bone fracture surgeries are provided with reconstruction planning as needed."
+    },
+    {
+      "question": "Is wisdom tooth surgery available?",
+      "answer": "Yes, impacted wisdom tooth assessment and surgical removal are available."
+    },
+    {
+      "question": "Do you provide thyroid surgery consultation?",
+      "answer": "Yes, thyroid surgical consultations and treatment planning are available."
+    },
+    {
+      "question": "What should I bring for first consultation?",
+      "answer": "Bring prior reports, scans, biopsy reports (if any), and a list of current medications."
+    }
+  ],
+
+  "payment": {
+    "razorpay_key_id": "rzp_live_XXXXXXXXXXXXXXXXXX",
+    "consultation_fee": 500,
+    "currency": "INR"
+  },
+
+  "seo": {
+    "meta_title": "Dr. Prashant Pawar | Oral Cancer Surgeon | Pune",
+    "meta_description": "Consult Dr. Prashant Subhash Pawar for oral cancer, tongue cancer, buccal mucosa cancer, facial trauma, thyroid surgery, implants, and head-neck surgical care in Pune.",
+    "keywords": [
+      "oral cancer surgeon",
+      "tongue cancer surgeon",
+      "buccal mucosa cancer surgeon",
+      "facial trauma surgeon",
+      "thyroid surgeon",
+      "facial plastic surgeon",
+      "dental implant surgeon",
+      "wisdom tooth surgeon",
+      "head and neck surgeon"
+    ],
+    "local_keywords": [
+      "oral cancer surgeon narhe",
+      "tongue cancer surgeon narhe",
+      "buccal mucosa cancer surgeon pune",
+      "facial trauma surgeon ambegaon",
+      "thyroid surgeon narhe",
+      "dental implant surgeon narhe",
+      "wisdom tooth surgeon narhe",
+      "head and neck surgeon pune",
+      "oral cancer surgeon bhumkar bridge",
+      "maxillofacial surgeon narhe"
+    ],
+    "og_image": "assets/images/og-image.jpg",
+    "schema_type": "Physician",
+    "google_analytics_id": "G-XXXXXXXXXX"
+  },
+
+  "social": {
+    "google_business": "",
+    "instagram": "https://instagram.com/dr.prashant_oncomax_7788",
+    "facebook": "https://facebook.com/Dr.prashant.pawar"
+  },
+
+  "media": {
+    "videos": []
+  }
+}

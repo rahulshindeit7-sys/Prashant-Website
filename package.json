@@ -1,0 +1,18 @@
+{
+  "name": "doctor-website-template",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Config-first, SEO-focused doctor website template (HTML/CSS/Vanilla JS)",
+  "scripts": {
+    "start": "npx serve . -p 8000",
+    "serve": "npx serve . -p 8000",
+    "validate:json": "node -e \"JSON.parse(require('fs').readFileSync('config/doctor-profile.json','utf8')); console.log('doctor-profile.json valid');\"",
+    "check:config": "npm run validate:json",
+    "intake": "node scripts/intake-generate-config.js",
+    "generate:config": "npm run intake",
+    "intake:batch": "node scripts/intake-batch-from-csv.js"
+  },
+  "devDependencies": {
+    "speckit": "^0.1.0"
+  }
+}

@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- SEO: Populated dynamically by app.js from doctor-profile.json -->
+  <title>Loading...</title>
+  <meta name="description" content="" />
+  <meta name="keywords" content="" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="" id="canonical-url" />
+  <link rel="icon" type="image/svg+xml" href="assets/images/dr-prashant-logo-icon.svg" />
+  <link rel="apple-touch-icon" href="assets/images/dr-prashant-logo-icon.svg" />
+  <link rel="preload" as="image" href="assets/images/doctor-placeholder.svg" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="" id="og-title" />
+  <meta property="og:description" content="" id="og-description" />
+  <meta property="og:image" content="" id="og-image" />
+  <meta property="og:url" content="" id="og-url" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="" id="tw-title" />
+  <meta name="twitter:description" content="" id="tw-description" />
+  <meta name="twitter:image" content="" id="tw-image" />
+
+  <!-- Schema.org JSON-LD injected by app.js -->
+  <script type="application/ld+json" id="schema-jsonld"></script>
+
+  <!-- Google Fonts: Playfair Display + Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+
+  <!-- ================================================
+       1. STICKY NAVBAR
+  ================================================ -->
+  <nav id="navbar" class="navbar" role="navigation" aria-label="Main Navigation">
+    <div class="container navbar__inner">
+      <a href="#" class="navbar__logo" id="clinic-home-link" aria-label="Home">
+        <img
+          src="assets/images/dr-prashant-logo-lockup.svg"
+          alt="Dr. Prashant Pawar logo"
+          class="navbar__logo-mark"
+          width="360"
+          height="88"
+          loading="eager"
+        />
+      </a>
+      <button class="navbar__burger" id="nav-burger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="nav-links">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="navbar__links" id="nav-links" role="list">
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#why-us">Why Us</a></li>
+        <li><a href="#testimonials">Testimonials</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <a
+        href="#"
+        id="navbar-whatsapp"
+        class="btn btn--whatsapp navbar__wa"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Chat on WhatsApp"
+      >
+        WhatsApp
+      </a>
+      <a href="#appointment" class="btn btn--primary navbar__cta">Book Appointment</a>
+    </div>
+  </nav>
+
+  <main id="main-content">
+
+  <!-- ================================================
+       2. HERO SECTION
+  ================================================ -->
+  <section id="hero" class="hero" aria-labelledby="hero-name">
+    <div class="container hero__inner">
+      <div class="hero__content">
+        <p class="hero__label" id="hero-specialization"></p>
+        <h1 class="hero__name" id="hero-name"></h1>
+        <p class="hero__tagline" id="hero-tagline"></p>
+        <div class="hero__badges" aria-label="Doctor achievements">
+          <div class="badge">
+            <span class="badge__number" id="badge-experience"></span>
+            <span class="badge__label">Years Experience</span>
+          </div>
+          <div class="badge">
+            <span class="badge__number">5000+</span>
+            <span class="badge__label">Happy Patients</span>
+          </div>
+          <div class="badge">
+            <span class="badge__number">4.9 ★</span>
+            <span class="badge__label">Google Rating</span>
+          </div>
+        </div>
+        <div class="hero__ctas">
+          <a href="#appointment" class="btn btn--primary btn--lg">Book Appointment</a>
+          <a
+            href="#"
+            id="hero-whatsapp"
+            class="btn btn--whatsapp btn--lg"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Chat on WhatsApp"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+            </svg>
+            WhatsApp
+          </a>
+        </div>
+      </div>
+      <div class="hero__image-wrap">
+        <img
+          id="hero-photo"
+          src="assets/images/doctor-placeholder.svg"
+          alt="Doctor Photo"
+          class="hero__photo"
+          loading="eager"
+          width="420"
+          height="520"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================
+       3. ABOUT DOCTOR
+  ================================================ -->
+  <section id="about" class="section about" aria-labelledby="about-heading">
+    <div class="container about__inner">
+      <div class="about__image-wrap">
+        <img
+          id="about-photo"
+          src="assets/images/doctor-placeholder.svg"
+          alt="Doctor"
+          class="about__photo"
+          loading="lazy"
+          width="400"
+          height="520"
+        />
+        <div class="about__degree-badge" id="about-degree"></div>
+      </div>
+      <div class="about__content">
+        <span class="section__label">About The Doctor</span>
+        <h2 class="section__title" id="about-heading"><span id="about-name"></span></h2>
+        <p class="about__specialization" id="about-specialization"></p>
+        <div class="about__credentials" id="about-credentials"></div>
+        <div class="about__text" id="about-text"></div>
+        <p class="about__languages">
+          <strong>Languages: </strong><span id="about-languages"></span>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================
+       4. SERVICES GRID
+  ================================================ -->
+  <section id="services" class="section services" aria-labelledby="services-heading">
+    <div class="container">
+      <span class="section__label">What We Offer</span>
+      <h2 class="section__title" id="services-heading">Our Services</h2>
+      <div class="services__grid" id="services-grid" role="list"></div>
+    </div>
+  </section>
+
+  <!-- ================================================
+       4A. EXPERTISE GRID (OPTIONAL)
+  ================================================ -->
+  <section id="expertise" class="section expertise" aria-labelledby="expertise-heading" hidden>
+    <div class="container">
+      <span class="section__label" id="expertise-label">Special Focus</span>
+      <h2 class="section__title" id="expertise-heading">Complete Expertise in Head and Neck Cancer Treatment</h2>
+      <p class="expertise__subtitle" id="expertise-subtitle" hidden></p>
+      <div class="expertise__grid" id="expertise-grid" role="list"></div>
+      <div class="expertise__gallery" id="expertise-gallery" role="list" aria-label="Clinical expertise highlights" hidden></div>
+    </div>
+  </section>
+
+  <!-- ================================================
+       5. WHY CHOOSE US
+  ================================================ -->
+  <section id="why-us" class="section why-us" aria-labelledby="why-heading">
+    <div class="container">
+      <span class="section__label">Why Us</span>
+      <h2 class="section__title" id="why-heading">Why Choose Us</h2>
+      <div class="why-us__grid">
+        <div class="why-card">
+          <div class="why-card__icon" aria-hidden="true">🏥</div>
+          <div class="why-card__counter" id="patients-counter" data-target="5000" data-suffix="+">0</div>
+          <h3>Patients Treated</h3>
+          <p>Thousands of successful treatments with the highest patient satisfaction rates.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-card__icon" aria-hidden="true">⭐</div>
+          <div class="why-card__counter" id="rating-counter" data-target="4.9" data-suffix="★" data-decimal="true">0</div>
+          <h3>Google Rating</h3>
+          <p>Consistently rated 5 stars by our patients for quality care and professionalism.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-card__icon" aria-hidden="true">🎓</div>
+          <div class="why-card__counter" id="experience-counter" data-target="15" data-suffix="+">0</div>
+          <h3>Years Experience</h3>
+          <p>Decades of specialized expertise in oral surgery and advanced dental care.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-card__icon" aria-hidden="true">💳</div>
+          <div class="why-card__counter" id="transparency-counter" data-target="100" data-suffix="%">0</div>
+          <h3>Transparent Pricing</h3>
+          <p>No hidden charges. Clear pricing with multiple payment and EMI options.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================
+       6. APPOINTMENT BOOKING FORM
+  ================================================ -->
+  <section id="appointment" class="section appointment" aria-labelledby="appointment-heading">
+    <div class="container">
+      <span class="section__label">Book Now</span>
+      <h2 class="section__title" id="appointment-heading">Book an Appointment</h2>
+      <form id="appointment-form" class="appointment__form" novalidate aria-label="Appointment booking form">
+        <div class="form__row">
+          <div class="form__group">
+            <label for="apt-name">Full Name <span aria-hidden="true">*</span></label>
+            <input
+              type="text"
+              id="apt-name"
+              name="name"
+              required
+              placeholder="Your full name"
+              autocomplete="name"
+              aria-required="true"
+              aria-describedby="apt-name-error"
+            />
+            <span class="form__error" id="apt-name-error" role="alert" aria-live="polite"></span>
+          </div>
+          <div class="form__group">
+            <label for="apt-phone">Phone Number <span aria-hidden="true">*</span></label>
+            <input
+              type="tel"
+              id="apt-phone"
+              name="phone"
+              required
+              placeholder="+91 98765 43210"
+              autocomplete="tel"
+              pattern="[0-9+\s\-]{10,15}"
+              aria-required="true"
+              aria-describedby="apt-phone-error"
+            />
+            <span class="form__error" id="apt-phone-error" role="alert" aria-live="polite"></span>
+          </div>
+        </div>
+        <div class="form__row">
+          <div class="form__group">
+            <label for="apt-date">Preferred Date <span aria-hidden="true">*</span></label>
+            <input
+              type="date"
+              id="apt-date"
+              name="date"
+              required
+              aria-required="true"
+              aria-describedby="apt-date-error"
+            />
+            <span class="form__error" id="apt-date-error" role="alert" aria-live="polite"></span>
+          </div>
+          <div class="form__group">
+            <label for="apt-time">Preferred Time <span aria-hidden="true">*</span></label>
+            <select
+              id="apt-time"
+              name="time"
+              required
+              aria-required="true"
+              aria-describedby="apt-time-error"
+            >
+              <option value="">Select time slot</option>
+              <option value="9:00 AM">9:00 AM</option>
+              <option value="10:00 AM">10:00 AM</option>
+              <option value="11:00 AM">11:00 AM</option>
+              <option value="12:00 PM">12:00 PM</option>
+              <option value="5:00 PM">5:00 PM</option>
+              <option value="6:00 PM">6:00 PM</option>
+              <option value="7:00 PM">7:00 PM</option>
+            </select>
+            <span class="form__error" id="apt-time-error" role="alert" aria-live="polite"></span>
+          </div>
+        </div>
+        <div class="form__row">
+          <div class="form__group form__group--full">
+            <label for="apt-service">Service Required <span aria-hidden="true">*</span></label>
+            <select
+              id="apt-service"
+              name="service"
+              required
+              aria-required="true"
+              aria-describedby="apt-service-error"
+            >
+              <option value="">Select a service</option>
+            </select>
+            <span class="form__error" id="apt-service-error" role="alert" aria-live="polite"></span>
+          </div>
+        </div>
+        <div class="form__group">
+          <label for="apt-message">Message (Optional)</label>
+          <textarea
+            id="apt-message"
+            name="message"
+            rows="3"
+            placeholder="Any specific concern or message for the doctor..."
+          ></textarea>
+        </div>
+        <div class="appointment__fee-note" id="fee-note" role="note"></div>
+        <button type="submit" class="btn btn--primary btn--lg btn--full" id="submit-btn">
+          Confirm &amp; Pay Consultation Fee
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ================================================
+       7. PATIENT TESTIMONIALS
+  ================================================ -->
+  <section id="testimonials" class="section testimonials" aria-labelledby="testimonials-heading">
+    <div class="container">
+      <span class="section__label">Patient Stories</span>
+      <h2 class="section__title" id="testimonials-heading">What Our Patients Say</h2>
+      <div class="testimonials__grid" id="testimonials-grid" role="list"></div>
+      <div class="testimonials__actions" id="testimonials-actions"></div>
+      <div class="testimonials__gallery" id="testimonials-gallery" role="list" aria-label="Treatment outcomes and case highlights"></div>
+    </div>
+
+    <div id="testimonial-lightbox" class="testimonial-lightbox" role="dialog" aria-modal="true" aria-label="Testimonial image preview" hidden>
+      <button class="testimonial-lightbox__close" id="testimonial-lightbox-close" aria-label="Close image preview">&times;</button>
+      <button class="testimonial-lightbox__nav testimonial-lightbox__nav--prev" id="testimonial-lightbox-prev" aria-label="Previous image">&#10094;</button>
+      <figure class="testimonial-lightbox__figure">
+        <img id="testimonial-lightbox-image" src="" alt="Testimonial gallery image" />
+        <figcaption id="testimonial-lightbox-caption" class="testimonial-lightbox__caption"></figcaption>
+      </figure>
+      <button class="testimonial-lightbox__nav testimonial-lightbox__nav--next" id="testimonial-lightbox-next" aria-label="Next image">&#10095;</button>
+      <div class="testimonial-lightbox__backdrop" id="testimonial-lightbox-backdrop" aria-hidden="true"></div>
+    </div>
+  </section>
+
+  <!-- ================================================
+       7A. CLINICAL CASE ARCHIVE (OPTIONAL)
+  ================================================ -->
+  <section id="case-archive" class="section case-archive" aria-labelledby="case-archive-heading" hidden>
+    <div class="container">
+      <span class="section__label">Clinical Archive</span>
+      <h2 class="section__title" id="case-archive-heading">Case Archive</h2>
+      <p class="case-archive__notice">
+        Educational clinical documentation for professional awareness. Viewer discretion is advised.
+      </p>
+      <div class="case-archive__grid" id="case-archive-gallery" role="list" aria-label="Clinical case archive images"></div>
+    </div>
+  </section>
+
+  <!-- ================================================
+       8. FAQ SECTION (Schema-marked)
+  ================================================ -->
+  <section id="faq" class="section faq" aria-labelledby="faq-heading">
+    <div class="container">
+      <span class="section__label">FAQs</span>
+      <h2 class="section__title" id="faq-heading">Frequently Asked Questions</h2>
+      <div class="faq__list" id="faq-list"></div>
+    </div>
+  </section>
+
+  <!-- ================================================
+       9. CONTACT + GOOGLE MAPS
+  ================================================ -->
+  <section id="contact" class="section contact" aria-labelledby="contact-heading">
+    <div class="container contact__inner">
+      <div class="contact__info">
+        <span class="section__label">Find Us</span>
+        <h2 class="section__title" id="contact-heading">Contact &amp; Location</h2>
+        <ul class="contact__list" role="list">
+          <li>
+            <span class="contact__icon" aria-hidden="true">📍</span>
+            <div>
+              <strong>Address</strong>
+              <p id="contact-address"></p>
+            </div>
+          </li>
+          <li>
+            <span class="contact__icon" aria-hidden="true">📞</span>
+            <div>
+              <strong>Phone</strong>
+              <p><a id="contact-phone" href="#"></a></p>
+            </div>
+          </li>
+          <li>
+            <span class="contact__icon" aria-hidden="true">✉️</span>
+            <div>
+              <strong>Email</strong>
+              <p><a id="contact-email" href="#"></a></p>
+            </div>
+          </li>
+          <li id="contact-timing-item">
+            <span class="contact__icon" aria-hidden="true">🕐</span>
+            <div>
+              <strong>Clinic Timings</strong>
+              <div id="contact-timing"></div>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="contact__map" id="contact-map" aria-label="Clinic location map"></div>
+    </div>
+  </section>
+
+  </main>
+
+  <!-- ================================================
+       10. FOOTER
+  ================================================ -->
+  <footer class="footer" role="contentinfo">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <p class="footer__clinic" id="footer-clinic"></p>
+        <p class="footer__tagline" id="footer-tagline"></p>
+      </div>
+      <nav class="footer__links" aria-label="Footer navigation">
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#appointment">Book</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div class="footer__social" id="footer-social" aria-label="Social media links"></div>
+    </div>
+    <div class="footer__bottom">
+      <p id="footer-copyright"></p>
+    </div>
+  </footer>
+
+  <!-- ================================================
+       FLOATING WHATSAPP BUTTON
+  ================================================ -->
+  <a
+    href="#"
+    id="whatsapp-float"
+    class="whatsapp-float"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Chat with us on WhatsApp"
+  >
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+    <span class="whatsapp-float__label">Chat with us</span>
+  </a>
+
+  <!-- ================================================
+       BOOKING CONFIRMATION MODAL
+  ================================================ -->
+  <div
+    id="confirmation-modal"
+    class="modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modal-title"
+    hidden
+  >
+    <div class="modal__overlay" id="modal-overlay"></div>
+    <div class="modal__box">
+      <div class="modal__icon" aria-hidden="true">✅</div>
+      <h3 id="modal-title" class="modal__title">Appointment Confirmed!</h3>
+      <div id="modal-details" class="modal__details"></div>
+      <button class="btn btn--primary btn--full" id="modal-close">Done</button>
+    </div>
+  </div>
+
+  <!-- Razorpay (loaded before app.js) -->
+  <script defer src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+  <!-- Main App -->
+  <script defer src="assets/js/app.js"></script>
+</body>
+</html>
