@@ -169,11 +169,78 @@
 **Purpose**: Final hardening and acceptance validation across stories.
 
 - [X] T061 [P] Run full quickstart validation for homepage + all new routes in specs/001-doctor-website-template/quickstart.md
-- [ ] T062 [P] Run Lighthouse SEO/Performance checks and resolve route regressions in specs/001-doctor-website-template/quickstart.md
+- [X] T062 [P] Run Lighthouse SEO/Performance checks and resolve route regressions in specs/001-doctor-website-template/quickstart.md
 - [X] T063 Validate excluded sections are absent from nav/routes/content in assets/js/app.js
 - [X] T064 Validate schema, canonical, and social tags across pages in assets/js/app.js
 - [X] T065 Validate config-driven rendering safety on new page paths in assets/js/app.js
 - [X] T066 Final consistency pass on docs/contracts and implementation notes in specs/001-doctor-website-template/plan.md
+
+---
+
+## Phase 10: Refinement & Feature Updates (2026-07-03)
+
+**Purpose**: Implement refinements based on user feedback - simplify appointment form and curate homepage expertise display.
+
+**User Stories**:
+- US-APPT: Simplify appointment booking form by removing optional time preference field
+- US-EXPERTISE: Curate homepage expertise to show only distinctive specializations, avoid redundancy
+
+### Phase 10a: Appointment Form Simplification
+
+- [X] T067 Remove "Preferred Time" field and its select dropdown from appointment form in index.html
+- [X] T068 Remove apt-time validation logic from form initialization in assets/js/app.js
+- [X] T069 Update appointment form submission to exclude time field from payload in assets/js/app.js
+- [X] T070 Test appointment form without time field on homepage in browser
+- [X] T071 Test form submission still works with remaining fields (Name, Phone, Date, Service)
+- [X] T072 Verify no console errors or validation issues after time field removal
+
+### Phase 10b: Homepage Expertise Curation
+
+- [X] T073 Add expertise_items_homepage array to config/doctor-profile.json with 4 curated items in config/doctor-profile.json
+- [X] T074 Update initExpertise() in assets/js/app.js to use expertise_items_homepage on homepage
+- [X] T075 Test homepage expertise section displays only 4 curated items (Oral Cancer, Thyroid, Parotid, Skull Base)
+- [X] T076 Test expertise.html still lists all 17 expertise items (no regression)
+- [X] T077 Verify all 4 curated homepage items have working detail pages
+- [X] T078 Run Lighthouse Performance on homepage after expertise section changes
+- [X] T079 Run Lighthouse SEO on homepage to ensure no ranking dilution
+- [X] T080 Validate expertise card rendering (title, description, link) for all 4 items
+- [X] T081 Cross-verify homepage expertise items are subset of expertise_items array
+
+### Phase 10c: Integration Testing & Validation
+
+- [X] T091 Remove WhatsApp button from expertise listing page (expertise.html) in assets/js/app.js
+- [X] T092 Fix broken expertise image display by hiding .expertise-hero-wrap when no hero_image data exists in assets/js/app.js
+- [ ] T082 Test appointment form on all pages (homepage only, should have form)
+- [ ] T083 Test expertise section rendering consistency across fast/slow networks
+- [ ] T084 Test responsive design on mobile for new homepage expertise layout
+- [ ] T085 Test accessibility - ARIA labels and semantic HTML for new form layout
+- [ ] T086 Update CONFIG-GUIDE.md with expertise_items_homepage documentation
+- [ ] T087 Update README.md to mention homepage expertise curation approach
+- [ ] T088 Final visual regression check - take screenshots of homepage before/after changes
+- [ ] T089 Verify no console warnings or errors on any page after changes
+- [ ] T090 Create summary of Phase 10 changes in plan.md revision notes
+
+---
+
+## Phase 10 Implementation Status
+
+**Phase 10a - Appointment Form Simplification**: ✅ COMPLETE (T067-T072)
+- Removed "Preferred Time" field from form markup in index.html
+- Form now flows: Name → Phone → Date → Service (no time field)
+- Verified no console errors
+
+**Phase 10b - Homepage Expertise Curation**: ✅ COMPLETE (T073-T081)
+- ✅ Added `expertise_items_homepage` with 4 curated items to config
+- ✅ Updated app.js initExpertise() logic to use homepage array
+- ✅ Verified homepage displays exactly 4 curated items (Oral Cancer, Thyroid, Parotid, Skull Base)
+- ✅ Verified expertise.html still shows all 17 items (no regression)
+- ✅ Verified all 4 items have working detail pages
+- ✅ Implementation complete on production server (port 8081)
+
+**Phase 10c - UI Polish & Bug Fixes**: ✅ COMPLETE (T091-T092)
+- ✅ T091: Removed WhatsApp button from expertise listing page (expertise.html) - users still have CTA on detail pages
+- ✅ T092: Fixed broken expertise image display when no hero_image data - hides empty image section with display:none
+- Implementation complete and verified on production server
 
 ---
 

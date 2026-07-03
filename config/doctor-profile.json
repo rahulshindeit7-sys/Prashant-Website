@@ -17,8 +17,7 @@
     "home": {
       "anchors": [
         { "id": "about", "label": "About" },
-        { "id": "services", "label": "Services" },
-        { "id": "why-us", "label": "Why Us" },
+        { "id": "services", "label": "Treatments" },
         { "id": "testimonials", "label": "Testimonials" },
         { "id": "faq", "label": "FAQ" },
         { "id": "contact", "label": "Contact" }
@@ -227,132 +226,231 @@
 
   "expertise_items": [
     {
+      "slug": "head-and-neck-cancer",
       "title": "Head and Neck Cancer",
       "description": "Comprehensive surgical management of all head and neck cancers.",
-      "read_more_url": "expertise/head-and-neck-oncosurgery.html"
+      "read_more_url": "expertise-detail.html?slug=head-and-neck-cancer"
     },
     {
+      "slug": "diagnosing-head-and-neck-cancer",
       "title": "Diagnosing Head and Neck Cancer",
       "description": "Advanced diagnostic techniques for early detection and staging.",
-      "read_more_url": "expertise/diagnosing-head-and-neck-cancer.html"
+      "read_more_url": "expertise-detail.html?slug=diagnosing-head-and-neck-cancer"
     },
     {
+      "slug": "types-of-treatment-for-head-and-neck-cancer",
       "title": "Types of Treatment for Head and Neck Cancer",
       "description": "Multimodality treatment options including surgery, radiation and chemotherapy.",
-      "read_more_url": "expertise/head-and-neck-cancer-types-of-treatment.html"
+      "read_more_url": "expertise-detail.html?slug=types-of-treatment-for-head-and-neck-cancer"
     },
     {
+      "slug": "how-cancer-spreads-in-the-body",
       "title": "How does Cancer spread in the body",
       "description": "Understanding cancer metastasis and spread pathways.",
-      "read_more_url": "expertise/how-does-cancer-spread-in-the-body.html"
+      "read_more_url": "expertise-detail.html?slug=how-cancer-spreads-in-the-body"
     },
     {
+      "slug": "oral-precancerous-lesions-and-treatment",
       "title": "Oral Precancerous lesions and treatment",
       "description": "Identification and management of leukoplakia, erythroplakia, and submucous fibrosis.",
-      "read_more_url": "expertise/oral-precancerous-lesions-and-treatment.html"
+      "read_more_url": "expertise-detail.html?slug=oral-precancerous-lesions-and-treatment"
     },
     {
+      "slug": "oral-cancer-in-india",
       "title": "Oral Cancer in India",
       "description": "Understanding the epidemiology and risk factors of oral cancer in India.",
-      "read_more_url": "expertise/oral-cancer-in-india.html"
+      "read_more_url": "expertise-detail.html?slug=oral-cancer-in-india"
     },
     {
+      "slug": "oral-cancer-overview",
       "title": "Oral Cancer Overview",
       "description": "Complete overview of oral cancer types, stages, and treatment approaches.",
-      "read_more_url": "expertise/oral-cancer-overview.html"
+      "read_more_url": "expertise-detail.html?slug=oral-cancer-overview"
     },
     {
+      "slug": "human-papilloma-virus-and-oral-cancer",
       "title": "Human Papilloma Virus and Oral Cancer",
       "description": "Role of HPV in head and neck cancer development and prevention.",
-      "read_more_url": "expertise/human-papilloma-virus-and-oral-cancer.html"
+      "read_more_url": "expertise-detail.html?slug=human-papilloma-virus-and-oral-cancer"
     },
     {
+      "slug": "reconstruction-or-plastic-surgery-for-head-neck-cancer",
       "title": "Reconstruction or Plastic Surgery for Head Neck Cancer",
       "description": "Advanced reconstructive techniques following cancer surgery.",
-      "read_more_url": "expertise/reconstruction-or-plastic-surgery-for-head-neck-cancer.html"
+      "read_more_url": "expertise-detail.html?slug=reconstruction-or-plastic-surgery-for-head-neck-cancer"
     },
     {
+      "slug": "salivary-glands-and-tumours-of-salivary-gland",
       "title": "Salivary Glands and Tumours of Salivary Gland",
       "description": "Diagnosis and surgical management of salivary gland tumors.",
-      "read_more_url": "expertise/salivary-glands-and-tumours-of-salivary-gland.html"
+      "read_more_url": "expertise-detail.html?slug=salivary-glands-and-tumours-of-salivary-gland"
     },
     {
+      "slug": "parotid-surgery",
       "title": "Parotid Surgery",
       "description": "Specialized surgical techniques for parotid gland tumors with nerve preservation.",
-      "read_more_url": "expertise/parotid-surgery.html"
+      "read_more_url": "expertise-detail.html?slug=parotid-surgery"
     },
     {
+      "slug": "what-is-cancer",
       "title": "What is Cancer? Symptoms and risk factors of oral cancer",
       "description": "Understanding cancer fundamentals and early warning signs.",
-      "read_more_url": "expertise/what-is-cancer.html"
+      "read_more_url": "expertise-detail.html?slug=what-is-cancer"
     },
     {
+      "slug": "why-oral-cancer",
       "title": "Why do people who have never used tobacco or alcohol get oral cancer",
       "description": "Non-traditional risk factors and emerging causes of oral cancer.",
-      "read_more_url": "expertise/why-oral-cancer.html"
+      "read_more_url": "expertise-detail.html?slug=why-oral-cancer"
     },
     {
+      "slug": "thyroid-cancer",
       "title": "Thyroid Cancer",
       "description": "Comprehensive thyroid cancer diagnosis and surgical treatment.",
-      "read_more_url": "expertise/thyroid-cancer.html"
+      "read_more_url": "expertise-detail.html?slug=thyroid-cancer"
     },
     {
+      "slug": "skull-base-surgery",
       "title": "Skull Base Surgery",
       "description": "Advanced endoscopic and open surgical approaches for skull base tumors.",
-      "read_more_url": "expertise/skull-base-surgery.html"
+      "read_more_url": "expertise-detail.html?slug=skull-base-surgery"
     },
     {
+      "slug": "minimally-invasive",
       "title": "Minimally invasive and Cosmetically Superior Surgeries",
       "description": "Endoscopic and robotic surgical techniques for better cosmetic outcomes.",
-      "read_more_url": "expertise/minimally-invasive.html"
+      "read_more_url": "expertise-detail.html?slug=minimally-invasive"
     },
     {
+      "slug": "laryngeal-and-hypopharyngeal-cancer",
       "title": "Laryngeal and Hypopharyngeal Cancer",
       "description": "Surgical management of larynx and hypopharynx cancers with voice rehabilitation.",
-      "read_more_url": "expertise/laryngeal-and-hypopharyngeal-cancer.html"
+      "read_more_url": "expertise-detail.html?slug=laryngeal-and-hypopharyngeal-cancer"
+    }
+  ],
+
+  "expertise_items_homepage": [
+    {
+      "slug": "oral-cancer-overview",
+      "title": "Oral Cancer Overview",
+      "description": "Complete overview of oral cancer types, stages, and treatment approaches.",
+      "read_more_url": "expertise-detail.html?slug=oral-cancer-overview"
+    },
+    {
+      "slug": "thyroid-cancer",
+      "title": "Thyroid Cancer",
+      "description": "Comprehensive thyroid cancer diagnosis and surgical treatment.",
+      "read_more_url": "expertise-detail.html?slug=thyroid-cancer"
+    },
+    {
+      "slug": "parotid-surgery",
+      "title": "Parotid Surgery",
+      "description": "Specialized surgical techniques for parotid gland tumors with nerve preservation.",
+      "read_more_url": "expertise-detail.html?slug=parotid-surgery"
+    },
+    {
+      "slug": "skull-base-surgery",
+      "title": "Skull Base Surgery",
+      "description": "Advanced endoscopic and open surgical approaches for skull base tumors.",
+      "read_more_url": "expertise-detail.html?slug=skull-base-surgery"
     }
   ],
 
   "expertise": [
     {
-      "slug": "oral-cancer-surgery",
-      "title": "Oral Cancer Surgery",
-      "summary": "Diagnosis and surgical treatment planning for oral cavity cancers.",
-      "hero_image": "assets/images/dr-prashant-case-01.jpeg",
+      "slug": "head-and-neck-cancer",
+      "title": "Head and Neck Cancer",
+      "summary": "Comprehensive surgical management of all head and neck cancers.",
       "content_blocks": [
         {
           "type": "paragraph",
           "heading": "Overview",
-          "body": "This placeholder content is rendered on the reusable expertise detail template. Replace with final doctor-approved text."
-        },
-        {
-          "type": "list",
-          "heading": "Key Coverage",
-          "items": [
-            "Tongue and buccal mucosa lesions",
-            "Surgical planning and reconstruction",
-            "Follow-up and rehabilitation"
-          ]
+          "body": "See detailed content in expertise detail page."
         }
-      ],
-      "related_slugs": [
-        "reconstruction-surgery"
       ]
     },
     {
-      "slug": "reconstruction-surgery",
-      "title": "Reconstruction Surgery",
-      "summary": "Functional and cosmetic reconstruction after complex head and neck procedures.",
-      "hero_image": "assets/images/dr-prashant-case-02.jpeg",
+      "slug": "diagnosing-head-and-neck-cancer",
+      "title": "Diagnosing Head and Neck Cancer",
+      "summary": "Advanced diagnostic techniques for early detection and staging.",
       "content_blocks": [
         {
           "type": "paragraph",
-          "heading": "Approach",
-          "body": "Customize this section with flap options, recovery expectations, and case suitability notes."
+          "heading": "Overview",
+          "body": "See detailed content in expertise detail page."
         }
-      ],
-      "related_slugs": [
-        "oral-cancer-surgery"
+      ]
+    },
+    {
+      "slug": "types-of-treatment-for-head-and-neck-cancer",
+      "title": "Types of Treatment for Head and Neck Cancer",
+      "summary": "Multimodality treatment options including surgery, radiation and chemotherapy.",
+      "content_blocks": [
+        {
+          "type": "paragraph",
+          "heading": "Overview",
+          "body": "See detailed content in expertise detail page."
+        }
+      ]
+    },
+    {
+      "slug": "how-cancer-spreads-in-the-body",
+      "title": "How does Cancer spread in the body",
+      "summary": "Understanding cancer metastasis and spread pathways.",
+      "content_blocks": [
+        {
+          "type": "paragraph",
+          "heading": "Overview",
+          "body": "See detailed content in expertise detail page."
+        }
+      ]
+    },
+    {
+      "slug": "oral-precancerous-lesions-and-treatment",
+      "title": "Oral Precancerous lesions and treatment",
+      "summary": "Identification and management of leukoplakia, erythroplakia, and submucous fibrosis.",
+      "content_blocks": [
+        {
+          "type": "paragraph",
+          "heading": "Overview",
+          "body": "See detailed content in expertise detail page."
+        }
+      ]
+    },
+    {
+      "slug": "oral-cancer-in-india",
+      "title": "Oral Cancer in India",
+      "summary": "Understanding the epidemiology and risk factors of oral cancer in India.",
+      "content_blocks": [
+        {
+          "type": "paragraph",
+          "heading": "Overview",
+          "body": "See detailed content in expertise detail page."
+        }
+      ]
+    },
+    {
+      "slug": "oral-cancer-overview",
+      "title": "Oral Cancer Overview",
+      "summary": "Complete overview of oral cancer types, stages, and treatment approaches.",
+      "content_blocks": [
+        {
+          "type": "paragraph",
+          "heading": "Overview",
+          "body": "See detailed content in expertise detail page."
+        }
+      ]
+    },
+    {
+      "slug": "human-papilloma-virus-and-oral-cancer",
+      "title": "Human Papilloma Virus and Oral Cancer",
+      "summary": "Role of HPV in head and neck cancer development and prevention.",
+      "content_blocks": [
+        {
+          "type": "paragraph",
+          "heading": "Overview",
+          "body": "See detailed content in expertise detail page."
+        }
       ]
     }
   ],

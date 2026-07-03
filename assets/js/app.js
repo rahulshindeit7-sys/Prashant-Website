@@ -126,6 +126,7 @@
 
     homeAnchors.forEach(function (anchor) {
       if (!anchor || !anchor.id || !anchor.label) return;
+      if (anchor.id === 'contact' && pages.contact && pages.contact.enabled) return;
       navItems.push('<a href="index.html#' + escHtml(anchor.id) + '">' + escHtml(anchor.label) + '</a>');
     });
 
@@ -164,28 +165,7 @@
   function initRoutePageContent(C, ctx) {
     var doc = C.doctor || {};
     var clinic = C.clinic || {};
-    var expertise = Array.isArray(C.expertise) ? C.expertise : [];
-    var fallbackItems = Array.isArray(C.expertise_items) ? C.expertise_items : [];
-
-    if (!expertise.length && fallbackItems.length) {
-      expertise = fallbackItems.map(function (item) {
-        var title = item.title || '';
-        return {
-          slug: slugify(title),
-          title: title,
-          summary: item.description || '',
-          hero_image: '',
-          content_blocks: [
-            {
-              type: 'paragraph',
-              heading: 'Overview',
-              body: item.description || ''
-            }
-          ],
-          related_slugs: []
-        };
-      });
-    }
+    var expertise = getExpertiseRouteItems(C);
 
     if (ctx.page === 'profile') {
       setTextById('profile-summary', (doc.degree || '') + (doc.specialization ? ' · ' + doc.specialization : ''));
@@ -227,24 +207,32 @@
     }
 
     if (ctx.page === 'expertise-list') {
+      var expertiseSection = C.expertise_section || {};
+      setTextById('expertise-heading', expertiseSection.title || 'Expertise');
+      setTextById('expertise-summary', expertiseSection.subtitle || 'Explore available treatment and surgical expertise areas.');
+
       var expertiseHero = document.getElementById('expertise-hero-image');
       if (expertiseHero) {
         var firstImage = expertise.length && expertise[0].hero_image ? expertise[0].hero_image : '';
-        setImgById('expertise-hero-image', firstImage, 'Expertise highlight image');
+        if (firstImage) {
+          setImgById('expertise-hero-image', firstImage, 'Expertise highlight image');
+          var heroWrap = document.querySelector('.expertise-hero-wrap');
+          if (heroWrap) heroWrap.style.display = 'block';
+        } else {
+          var heroWrap = document.querySelector('.expertise-hero-wrap');
+          if (heroWrap) heroWrap.style.display = 'none';
+        }
       }
 
       var list = document.getElementById('expertise-list');
       if (list) {
         list.innerHTML = expertise.map(function (item) {
           var slug = escHtml(item.slug || '');
-          var waMessage = 'Hello ' + (doc.name || 'Doctor') + ', I want consultation for ' + (item.title || 'this expertise area') + '.';
-          var waLink = buildWhatsAppUrl(clinic.whatsapp || '', waMessage);
           return (
             '<article class="service-card">' +
               '<h2 class="service-card__name">' + escHtml(item.title || '') + '</h2>' +
               '<p class="service-card__desc">' + escHtml(item.summary || '') + '</p>' +
-              '<a class="btn btn--primary" href="expertise-detail.html?slug=' + slug + '">Read More</a> ' +
-              '<a class="btn btn--whatsapp" href="' + escHtml(waLink) + '" target="_blank" rel="noopener noreferrer">WhatsApp</a>' +
+              '<a class="btn btn--primary" href="expertise-detail.html?slug=' + slug + '">Read More</a>' +
             '</article>'
           );
         }).join('');
@@ -479,9 +467,9 @@
       result.description = pageMap.contact.meta_description || result.description;
       result.canonical = toAbsolute(pageMap.contact.canonical) || result.canonical;
     } else if (ctx.page === 'expertise-detail' && pageMap.expertise_detail) {
-      var detailItem = Array.isArray(C.expertise) ? C.expertise.find(function (item) {
+      var detailItem = getExpertiseRouteItems(C).find(function (item) {
         return (item.slug || '') === ctx.slug;
-      }) : null;
+      });
       var titleTemplate = pageMap.expertise_detail.meta_title_template || '{title}';
       var descTemplate = pageMap.expertise_detail.meta_description_template || '{summary}';
       var canonicalTemplate = pageMap.expertise_detail.canonical_template || '/expertise/{slug}';
@@ -497,6 +485,41 @@
     }
 
     return result;
+  }
+
+  function getExpertiseRouteItems(C) {
+    var configuredItems = Array.isArray(C.expertise) ? C.expertise : [];
+    var fallbackItems = Array.isArray(C.expertise_items) ? C.expertise_items : [];
+    var seen = {};
+    var expertise = configuredItems.map(function (item) {
+      var title = item && item.title ? item.title : '';
+      var slug = item && item.slug ? item.slug : slugify(title);
+      if (slug) seen[slug] = true;
+      return Object.assign({}, item, { slug: slug });
+    });
+
+    fallbackItems.forEach(function (item) {
+      var title = item && item.title ? item.title : '';
+      var slug = slugify(title);
+      if (!title || !slug || seen[slug]) return;
+      seen[slug] = true;
+      expertise.push({
+        slug: slug,
+        title: title,
+        summary: item.description || '',
+        hero_image: '',
+        content_blocks: [
+          {
+            type: 'paragraph',
+            heading: 'Overview',
+            body: item.description || 'Details for this expertise area will be updated soon.'
+          }
+        ],
+        related_slugs: []
+      });
+    });
+
+    return expertise;
   }
 
   function getExcludedRouteSet(C) {
@@ -700,11 +723,11 @@
     var grid = document.getElementById('expertise-grid');
     var gallery = document.getElementById('expertise-gallery');
     var clinic = C.clinic || {};
-    var items = Array.isArray(C.expertise_items) ? C.expertise_items : [];
+    var items = Array.isArray(C.expertise_items_homepage) ? C.expertise_items_homepage : (Array.isArray(C.expertise_items) ? C.expertise_items : []);
     var expertiseImages = Array.isArray(clinic.expertise_images) ? clinic.expertise_images : [];
     var sectionConfig = C.expertise_section || {};
 
-    if (!section || !grid || !gallery || (items.length === 0 && expertiseImages.length === 0)) {
+    if (!section || !grid || (items.length === 0 && expertiseImages.length === 0)) {
       if (section) section.hidden = true;
       return;
     }
@@ -725,24 +748,18 @@
 
     if (items.length) {
       grid.innerHTML = items.map(function (item, idx) {
-        var imgSrc = validExpertiseImages.length
-          ? validExpertiseImages[Math.min(validExpertiseImages.length - 1, idx)]
-          : '';
         var title = escHtml(item.title || 'Expertise Area');
         var desc = escHtml(item.description || '');
-        var link = safeExternalUrl(item.read_more_url || '');
-
-        var mediaHtml = imgSrc
-          ? '<div class="expertise-card__media"><img loading="lazy" src="' + escHtml(imgSrc) + '" alt="Clinical image for ' + title + '" /></div>'
-          : '';
+        var externalLink = safeExternalUrl(item.read_more_url || '');
+        var detailLink = 'expertise-detail.html?slug=' + encodeURIComponent(slugify(item.title || ''));
+        var link = externalLink || detailLink;
 
         var linkHtml = link
-          ? '<a class="expertise-card__link" href="' + escHtml(link) + '" target="_blank" rel="noopener noreferrer">Read more</a>'
+          ? '<a class="expertise-card__link" href="' + escHtml(link) + '"' + (externalLink ? ' target="_blank" rel="noopener noreferrer"' : '') + '>Read more</a>'
           : '';
 
         return (
           '<article class="expertise-card" role="listitem">' +
-            mediaHtml +
             '<h3 class="expertise-card__title">' + title + '</h3>' +
             '<p class="expertise-card__desc">' + desc + '</p>' +
             linkHtml +
@@ -751,13 +768,15 @@
       }).join('');
       grid.hidden = false;
 
-      gallery.innerHTML = '';
-      gallery.hidden = true;
+      if (gallery) {
+        gallery.innerHTML = '';
+        gallery.hidden = true;
+      }
     } else {
       grid.innerHTML = '';
       grid.hidden = true;
 
-      if (validExpertiseImages.length) {
+      if (gallery && validExpertiseImages.length) {
         gallery.innerHTML = validExpertiseImages.map(function (src, idx) {
           var imageNo = idx + 1;
           return (
@@ -768,8 +787,10 @@
         }).join('');
         gallery.hidden = false;
       } else {
-        gallery.innerHTML = '';
-        gallery.hidden = true;
+        if (gallery) {
+          gallery.innerHTML = '';
+          gallery.hidden = true;
+        }
       }
     }
 

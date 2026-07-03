@@ -4,23 +4,102 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Expertise Detail</title>
-  <meta name="description" content="Expertise detail" />
-  <link rel="stylesheet" href="assets/css/style.css" />
+  <meta name="description" content="Expertise detail" />  <link rel="canonical" href="" id="canonical-url" />  <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body data-page="expertise-detail">
   <header id="shared-header"></header>
-  <main id="page-expertise-detail" class="section" aria-labelledby="expertise-detail-heading">
-    <div class="container">
-      <h1 id="expertise-detail-heading">Expertise Detail</h1>
-      <p id="expertise-detail-summary">Loading expertise details...</p>
-      <figure class="expertise-detail-hero-wrap">
-        <img id="expertise-detail-hero" loading="lazy" src="" alt="Expertise detail image" />
-      </figure>
-      <section id="expertise-detail-content"></section>
-      <p><a href="expertise.html">Back to Expertise</a></p>
-    </div>
+  
+  <main id="page-expertise-detail">
+    <!-- Breadcrumb Navigation -->
+    <nav class="breadcrumb-section" aria-label="Breadcrumb">
+      <div class="container">
+        <div id="breadcrumb" class="breadcrumb">
+          <a href="index.html">Home</a>
+          <span class="breadcrumb-sep">/</span>
+          <a href="expertise.html">Expertise</a>
+          <span class="breadcrumb-sep">/</span>
+          <span id="breadcrumbCurrent" class="breadcrumb-current">Topic</span>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section with Title and Subtitle -->
+    <section class="expertise-hero-section">
+      <div class="container">
+        <h1 id="expertiseDetailTitle" class="expertise-hero-title">Loading...</h1>
+        <p id="expertiseDetailSubtitle" class="expertise-hero-subtitle">Loading...</p>
+      </div>
+    </section>
+
+    <!-- Main Content Area -->
+    <article class="expertise-content section">
+      <div class="container">
+        
+        <!-- Overview Section -->
+        <section id="expertiseOverview" class="expertise-section overview-section">
+          <!-- Populated by expertise-detail.js -->
+        </section>
+
+        <!-- Key Points Section -->
+        <section id="expertiseKeyPoints" class="expertise-section key-points-section">
+          <h2>Key Points</h2>
+          <!-- Populated by expertise-detail.js -->
+        </section>
+
+        <!-- Main Content Sections -->
+        <section id="expertiseSections" class="expertise-section main-sections">
+          <!-- Populated by expertise-detail.js -->
+        </section>
+
+        <!-- When to Consult Section -->
+        <section id="expertiseWhenToConsult" class="expertise-section consultation-section">
+          <h2>When to Consult a Specialist</h2>
+          <!-- Populated by expertise-detail.js -->
+        </section>
+
+        <!-- Treatment/Management Section -->
+        <section id="expertiseTreatment" class="expertise-section treatment-section">
+          <h2>Treatment & Management Options</h2>
+          <!-- Populated by expertise-detail.js -->
+        </section>
+
+        <!-- FAQs Section -->
+        <section id="expertiseFaqs" class="expertise-section faq-section">
+          <h2>Frequently Asked Questions</h2>
+          <!-- Populated by expertise-detail.js -->
+        </section>
+
+        <!-- Related Topics Section -->
+        <section id="expertiseRelated" class="expertise-section related-section">
+          <h2>Related Expertise Topics</h2>
+          <!-- Populated by expertise-detail.js -->
+        </section>
+
+        <!-- CTA Section -->
+        <section id="expertiseCTA" class="expertise-section cta-section">
+          <!-- Populated by expertise-detail.js -->
+        </section>
+
+        <!-- Disclaimer -->
+        <section id="expertiseDisclaimer" class="expertise-section disclaimer-section">
+          <!-- Populated by expertise-detail.js -->
+        </section>
+
+        <!-- Back Button -->
+        <div class="back-button-wrap">
+          <a href="expertise.html" class="btn btn--secondary">← Back to Expertise</a>
+        </div>
+
+      </div>
+    </article>
+
   </main>
+
   <footer id="shared-footer"></footer>
+
+  <!-- Load expertise data and rendering script -->
+  <script src="scripts/expertise-details.js" defer></script>
+  <script src="scripts/expertise-detail.js" defer></script>
   <script src="assets/js/routes.js" defer></script>
   <script src="assets/js/app.js" defer></script>
 </body>
