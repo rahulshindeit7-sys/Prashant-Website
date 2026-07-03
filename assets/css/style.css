@@ -119,6 +119,64 @@ button {
   margin-bottom: 2.5rem;
 }
 
+/* Route-page shared shell primitives */
+#shared-header .navbar,
+#shared-footer .footer {
+  width: 100%;
+}
+
+.route-nav-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  justify-content: flex-end;
+}
+
+.route-nav-links a {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.route-nav-links a:hover,
+.route-nav-links a:focus-visible {
+  color: var(--primary);
+}
+
+.route-nav-links a:focus-visible,
+#expertise-list .btn:focus-visible,
+#page-contact a:focus-visible {
+  outline: 2px solid var(--primary-light);
+  outline-offset: 2px;
+}
+
+.profile-photo-wrap,
+.expertise-hero-wrap,
+.expertise-detail-hero-wrap {
+  margin-top: 1rem;
+  margin-bottom: 1.25rem;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+#profile-photo,
+#expertise-hero-image,
+#expertise-detail-hero {
+  width: 100%;
+  max-height: 420px;
+  object-fit: cover;
+  object-position: center;
+  background: #eaf1f8;
+}
+
+#profile-credentials {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 0.6rem;
+}
+
 /* ---- 4. BUTTONS ---- */
 .btn {
   display: inline-flex;
@@ -195,7 +253,7 @@ button {
   display: flex;
   align-items: center;
   gap: 1.5rem;
-  min-height: 88px;
+  min-height: 112px;
 }
 
 .navbar__logo {
@@ -215,9 +273,9 @@ button {
 }
 
 .navbar__logo-mark {
-  width: 360px;
+  width: 430px;
   height: auto;
-  max-height: 72px;
+  max-height: 98px;
   display: block;
   object-fit: contain;
   border-radius: 14px;
@@ -442,55 +500,29 @@ button {
 .hero__image-wrap {
   display: flex;
   justify-content: center;
-  align-items: flex-end;
+  align-items: center;
   position: relative;
 }
 
 .hero__image-wrap::before {
-  content: '';
-  position: absolute;
-  width: min(88%, 372px);
-  height: min(90%, 452px);
-  border-radius: calc(var(--radius-lg) + 6px);
-  pointer-events: none;
-  background: linear-gradient(145deg, rgba(255, 255, 255, 0.7), rgba(226, 236, 248, 0.32));
-  box-shadow:
-    0 14px 34px rgba(21, 68, 103, 0.11),
-    0 0 0 1px rgba(207, 221, 239, 0.6);
-  filter: blur(0.2px);
-  opacity: 0.9;
-  transition: transform 360ms ease, opacity 360ms ease, box-shadow 360ms ease;
-}
-
-.hero__image-wrap:hover::before {
-  transform: translateY(-1px) scale(1.006);
-  opacity: 0.95;
+  display: none;
 }
 
 .hero__photo {
   width: 100%;
   max-width: 400px;
   aspect-ratio: 4 / 5;
-  object-fit: contain;
-  object-position: center;
-  background: #eaf1f8;
-  border: 1px solid rgba(255, 255, 255, 0.9);
+  object-fit: cover;
+  object-position: top center;
   border-radius: var(--radius-lg);
-  clip-path: inset(2px 0 0 0 round var(--radius-lg));
-  box-shadow:
-    0 2px 8px rgba(255, 255, 255, 0.6),
-    0 14px 32px rgba(27, 79, 114, 0.16),
-    0 0 0 1px rgba(214, 224, 238, 0.65);
+  box-shadow: 0 16px 40px rgba(27, 79, 114, 0.18);
   transition: transform 360ms ease, box-shadow 360ms ease;
 }
 
 .hero__photo:hover,
 .hero__photo:focus-visible {
-  transform: translateY(-1px);
-  box-shadow:
-    0 3px 10px rgba(255, 255, 255, 0.7),
-    0 18px 38px rgba(27, 79, 114, 0.18),
-    0 0 0 1px rgba(204, 218, 236, 0.8);
+  transform: translateY(-2px);
+  box-shadow: 0 20px 48px rgba(27, 79, 114, 0.22);
 }
 
 /* ---- 7. ABOUT ---- */
@@ -1552,6 +1584,15 @@ button {
 
 /* ---- 17. RESPONSIVE ---- */
 @media (max-width: 1024px) {
+  .navbar__inner {
+    min-height: 98px;
+  }
+
+  .navbar__logo-mark {
+    width: 350px;
+    max-height: 82px;
+  }
+
   .why-us__grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -1559,10 +1600,14 @@ button {
 
 @media (max-width: 768px) {
   /* Navbar mobile */
+  .navbar__inner {
+    min-height: 82px;
+  }
+
   .navbar__links {
     display: none;
     position: fixed;
-    top: 88px;
+    top: 82px;
     left: 0;
     right: 0;
     background: var(--white);
@@ -1575,8 +1620,8 @@ button {
     z-index: 999;
   }
   .navbar__logo-mark {
-    width: 250px;
-    max-height: 54px;
+    width: 260px;
+    max-height: 64px;
   }
   .navbar__logo-text {
     display: none;
@@ -1595,6 +1640,35 @@ button {
   }
   .navbar__burger {
     display: flex;
+  }
+
+  .route-nav-links {
+    width: 100%;
+    justify-content: flex-start;
+    gap: 0.65rem 1rem;
+    margin-top: 0.5rem;
+  }
+
+  .route-nav-links a {
+    font-size: 0.92rem;
+  }
+
+  #page-profile .container,
+  #page-expertise .container,
+  #page-expertise-detail .container,
+  #page-contact .container {
+    padding-inline: 1rem;
+  }
+
+  #expertise-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  #page-contact p,
+  #contact-route-timing p {
+    margin-bottom: 0.5rem;
   }
 
   /* Hero */
@@ -1661,10 +1735,7 @@ button {
 
   /* WhatsApp float */
   .whatsapp-float {
-    bottom: 1.25rem;
-    right: 1.25rem;
-    padding: 0.8rem;
-    border-radius: 50%;
+    display: none;
   }
   .whatsapp-float__label {
     display: none !important;
@@ -1696,6 +1767,16 @@ button {
 
   .services__grid {
     grid-template-columns: 1fr;
+  }
+
+  .route-nav-links {
+    gap: 0.5rem 0.8rem;
+  }
+
+  #profile-photo,
+  #expertise-hero-image,
+  #expertise-detail-hero {
+    max-height: 260px;
   }
 
   .testimonials__grid {

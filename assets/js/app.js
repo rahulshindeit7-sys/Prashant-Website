@@ -8,6 +8,7 @@
 
   // Default no-op analytics handler; overwritten when GA is configured.
   window.trackDoctorEvent = window.trackDoctorEvent || function () {};
+  var razorpayLoaderPromise = null;
 
   /* ============================================================
      BOOTSTRAP — fetch config then initialise everything
@@ -66,37 +67,278 @@
      MAIN INIT
   ============================================================ */
   function init(C) {
-    initSEO(C);
-    initNavbar(C);
-    initHero(C);
-    initAbout(C);
-    initServices(C);
-    initExpertise(C);
-    initCounters(C);
-    initAppointmentForm(C);
-    initTestimonials(C);
-    initCaseArchive(C);
-    initFAQ(C);
-    initContact(C);
-    initFooter(C);
-    initWhatsAppFloat(C);
-    initEngagementTracking(C);
+    var ctx = getPageContext();
+    initSEO(C, ctx);
+    initExclusionGuards(C);
+
+    if (ctx.page === 'home') {
+      initNavbar(C);
+      initHero(C);
+      initAbout(C);
+      initServices(C);
+      initExpertise(C);
+      initCounters(C);
+      initAppointmentForm(C);
+      initTestimonials(C);
+      initCaseArchive(C);
+      initFAQ(C);
+      initContact(C);
+      initFooter(C);
+      initWhatsAppFloat(C);
+      initEngagementTracking(C);
+    } else {
+      initSharedPageShell(C, ctx);
+      initRoutePageContent(C, ctx);
+      initWhatsAppFloat(C);
+      initEngagementTracking(C);
+    }
+
     initScrollRevealEffects();
     initLazyImages();
+  }
+
+  function getPageContext() {
+    var routes = window.doctorRoutes || {};
+    var page = typeof routes.detectPage === 'function' ? routes.detectPage() : 'home';
+    var slug = typeof routes.readSlug === 'function' ? routes.readSlug() : '';
+    return { page: page || 'home', slug: slug || '' };
+  }
+
+  function initSharedPageShell(C, ctx) {
+    var header = document.getElementById('shared-header');
+    var footer = document.getElementById('shared-footer');
+    var clinic = C.clinic || {};
+    var doc = C.doctor || {};
+    var pages = C.pages || {};
+    var excluded = getExcludedRouteSet(C);
+
+    var navItems = [];
+    var homeAnchors = pages.home && Array.isArray(pages.home.anchors)
+      ? pages.home.anchors
+      : [
+          { id: 'about', label: 'About' },
+          { id: 'services', label: 'Services' },
+          { id: 'why-us', label: 'Why Us' },
+          { id: 'testimonials', label: 'Testimonials' },
+          { id: 'faq', label: 'FAQ' },
+          { id: 'contact', label: 'Contact' }
+        ];
+
+    homeAnchors.forEach(function (anchor) {
+      if (!anchor || !anchor.id || !anchor.label) return;
+      navItems.push('<a href="index.html#' + escHtml(anchor.id) + '">' + escHtml(anchor.label) + '</a>');
+    });
+
+    if (pages.profile && pages.profile.enabled && !excluded.profile) {
+      navItems.push('<a href="' + escHtml(pages.profile.path || 'profile.html') + '">' + escHtml(pages.profile.nav_label || 'Profile') + '</a>');
+    }
+    if (pages.expertise && pages.expertise.enabled && !excluded.expertise) {
+      navItems.push('<a href="' + escHtml(pages.expertise.path || 'expertise.html') + '">' + escHtml(pages.expertise.nav_label || 'Expertise') + '</a>');
+    }
+    if (pages.contact && pages.contact.enabled && !excluded.contact) {
+      navItems.push('<a href="' + escHtml(pages.contact.path || 'contact.html') + '">' + escHtml(pages.contact.nav_label || 'Contact') + '</a>');
+    }
+
+    if (header) {
+      header.innerHTML =
+        '<nav class="navbar" role="navigation" aria-label="Main Navigation">' +
+          '<div class="container navbar__inner">' +
+            '<a href="index.html" class="navbar__logo" aria-label="Home">' +
+              '<span class="navbar__logo-text">' + escHtml(doc.name || clinic.name || 'Doctor Website') + '</span>' +
+            '</a>' +
+            '<div class="route-nav-links">' + navItems.join('') + '</div>' +
+          '</div>' +
+        '</nav>';
+    }
+
+    if (footer) {
+      footer.innerHTML =
+        '<footer class="footer">' +
+          '<div class="container footer__bottom">' +
+            '<p>© ' + new Date().getFullYear() + ' ' + escHtml(clinic.name || doc.name || 'Doctor Website') + '. All rights reserved.</p>' +
+          '</div>' +
+        '</footer>';
+    }
+  }
+
+  function initRoutePageContent(C, ctx) {
+    var doc = C.doctor || {};
+    var clinic = C.clinic || {};
+    var expertise = Array.isArray(C.expertise) ? C.expertise : [];
+    var fallbackItems = Array.isArray(C.expertise_items) ? C.expertise_items : [];
+
+    if (!expertise.length && fallbackItems.length) {
+      expertise = fallbackItems.map(function (item) {
+        var title = item.title || '';
+        return {
+          slug: slugify(title),
+          title: title,
+          summary: item.description || '',
+          hero_image: '',
+          content_blocks: [
+            {
+              type: 'paragraph',
+              heading: 'Overview',
+              body: item.description || ''
+            }
+          ],
+          related_slugs: []
+        };
+      });
+    }
+
+    if (ctx.page === 'profile') {
+      setTextById('profile-summary', (doc.degree || '') + (doc.specialization ? ' · ' + doc.specialization : ''));
+      setImgById('profile-photo', doc.photo_about || doc.photo || doc.photo_logo || '', doc.name || 'Doctor profile photo');
+
+      var profileContent = document.getElementById('profile-content');
+      if (profileContent) {
+        var aboutParas = String(doc.about || 'Profile details will be loaded from config.')
+          .split('\n')
+          .filter(function (line) { return line.trim(); })
+          .map(function (line) { return '<p>' + escHtml(line) + '</p>'; })
+          .join('');
+        profileContent.innerHTML = aboutParas;
+      }
+
+      var profileCreds = document.getElementById('profile-credentials');
+      if (profileCreds) {
+        var chips = [];
+        if (doc.registration_number && doc.registration_number.indexOf('ADD_') === -1) {
+          chips.push('Registration: ' + doc.registration_number);
+        }
+        if (Array.isArray(doc.certifications)) {
+          chips = chips.concat(doc.certifications.filter(Boolean));
+        }
+        if (Array.isArray(doc.awards)) {
+          chips = chips.concat(doc.awards.filter(Boolean));
+        }
+        if (Array.isArray(doc.languages) && doc.languages.length) {
+          chips.push('Languages: ' + doc.languages.join(', '));
+        }
+
+        profileCreds.innerHTML = chips.map(function (entry) {
+          return '<span class="about__chip">' + escHtml(entry) + '</span>';
+        }).join('');
+
+        profileCreds.innerHTML += '<p><a class="btn btn--whatsapp" id="profile-whatsapp" href="#">WhatsApp Consultation</a></p>';
+      }
+      return;
+    }
+
+    if (ctx.page === 'expertise-list') {
+      var expertiseHero = document.getElementById('expertise-hero-image');
+      if (expertiseHero) {
+        var firstImage = expertise.length && expertise[0].hero_image ? expertise[0].hero_image : '';
+        setImgById('expertise-hero-image', firstImage, 'Expertise highlight image');
+      }
+
+      var list = document.getElementById('expertise-list');
+      if (list) {
+        list.innerHTML = expertise.map(function (item) {
+          var slug = escHtml(item.slug || '');
+          var waMessage = 'Hello ' + (doc.name || 'Doctor') + ', I want consultation for ' + (item.title || 'this expertise area') + '.';
+          var waLink = buildWhatsAppUrl(clinic.whatsapp || '', waMessage);
+          return (
+            '<article class="service-card">' +
+              '<h2 class="service-card__name">' + escHtml(item.title || '') + '</h2>' +
+              '<p class="service-card__desc">' + escHtml(item.summary || '') + '</p>' +
+              '<a class="btn btn--primary" href="expertise-detail.html?slug=' + slug + '">Read More</a> ' +
+              '<a class="btn btn--whatsapp" href="' + escHtml(waLink) + '" target="_blank" rel="noopener noreferrer">WhatsApp</a>' +
+            '</article>'
+          );
+        }).join('');
+      }
+      return;
+    }
+
+    if (ctx.page === 'expertise-detail') {
+      var detail = expertise.find(function (item) {
+        return (item.slug || '') === ctx.slug;
+      });
+      setTextById('expertise-detail-heading', detail ? detail.title : 'Expertise Detail Not Found');
+      setTextById('expertise-detail-summary', detail ? (detail.summary || '') : 'No content found for this topic.');
+      setImgById('expertise-detail-hero', detail ? (detail.hero_image || '') : '', detail ? (detail.title || 'Expertise image') : 'Expertise detail image');
+      var detailContent = document.getElementById('expertise-detail-content');
+      if (detailContent) {
+        if (!detail) {
+          detailContent.innerHTML = '<p>Please return to the expertise listing and choose a valid topic.</p>';
+        } else {
+          var blocks = Array.isArray(detail.content_blocks) ? detail.content_blocks : [];
+          detailContent.innerHTML = blocks.map(function (block) {
+            var heading = block && block.heading ? '<h2>' + escHtml(block.heading) + '</h2>' : '';
+            if (block && block.type === 'list' && Array.isArray(block.items)) {
+              var items = block.items.map(function (entry) {
+                return '<li>' + escHtml(entry) + '</li>';
+              }).join('');
+              return '<section>' + heading + '<ul>' + items + '</ul></section>';
+            }
+            return '<section>' + heading + '<p>' + escHtml(block && block.body ? block.body : '') + '</p></section>';
+          }).join('');
+        }
+      }
+      return;
+    }
+
+    if (ctx.page === 'contact') {
+      var contactContent = document.getElementById('contact-content');
+      if (contactContent) {
+        var contactWa = buildWhatsAppUrl(clinic.whatsapp || '', 'Hello ' + (doc.name || 'Doctor') + ', I want to book an appointment.');
+        contactContent.innerHTML =
+          '<p><strong>Address:</strong> ' + escHtml((clinic.address || '') + ', ' + (clinic.city || '')) + '</p>' +
+          '<p><strong>Phone:</strong> ' + escHtml(clinic.phone || '') + '</p>' +
+          '<p><strong>Email:</strong> ' + escHtml(clinic.email || '') + '</p>' +
+          '<p><a class="btn btn--whatsapp" id="contact-route-whatsapp" href="' + escHtml(contactWa) + '" target="_blank" rel="noopener noreferrer">Chat on WhatsApp</a></p>';
+      }
+
+      var routeTiming = document.getElementById('contact-route-timing');
+      var timing = clinic.timing || {};
+      if (routeTiming) {
+        var showTimingRaw = clinic.show_timing;
+        var showTiming = !(showTimingRaw === false || showTimingRaw === 0 ||
+          (typeof showTimingRaw === 'string' && /^(false|off|no|0)$/i.test(showTimingRaw.trim())));
+        if (!showTiming) {
+          routeTiming.innerHTML = '';
+        } else {
+          routeTiming.innerHTML =
+            '<p><strong>Mon - Fri:</strong> ' + escHtml(timing.weekdays || '') + '</p>' +
+            '<p><strong>Saturday:</strong> ' + escHtml(timing.saturday || '') + '</p>' +
+            '<p><strong>Sunday:</strong> ' + escHtml(timing.sunday || 'Closed') + '</p>';
+        }
+      }
+
+      var routeMap = document.getElementById('contact-route-map');
+      if (routeMap) {
+        var mapUrl = getEmbeddableMapUrl(clinic);
+        if (mapUrl) {
+          routeMap.innerHTML = '';
+          var iframe = document.createElement('iframe');
+          iframe.src = mapUrl;
+          iframe.loading = 'lazy';
+          iframe.allowFullscreen = true;
+          iframe.referrerPolicy = 'no-referrer-when-downgrade';
+          iframe.title = (clinic.name || 'Clinic') + ' Location';
+          routeMap.appendChild(iframe);
+        } else {
+          routeMap.innerHTML = '<div class="contact__map--placeholder"><span style="font-size:2rem">📍</span><span>Add location config to display map</span></div>';
+        }
+      }
+    }
   }
 
   /* ============================================================
      1. SEO — meta tags + Schema.org JSON-LD
   ============================================================ */
-  function initSEO(C) {
+  function initSEO(C, ctx) {
     var seo    = C.seo    || {};
     var clinic = C.clinic || {};
     var doc    = C.doctor || {};
     var siteId = C.site_id || '';
+    var pageSeo = resolvePageSeo(C, ctx || { page: 'home', slug: '' });
 
     // Title & basic meta
-    document.title = seo.meta_title || clinic.name || 'Doctor Website';
-    setMetaName('description', seo.meta_description || '');
+    document.title = pageSeo.title || seo.meta_title || clinic.name || 'Doctor Website';
+    setMetaName('description', pageSeo.description || seo.meta_description || '');
     var combinedKeywords = [];
     if (Array.isArray(seo.keywords)) {
       combinedKeywords = combinedKeywords.concat(seo.keywords);
@@ -111,20 +353,20 @@
     setMetaName('robots', 'index, follow');
 
     // Canonical
-    var canonicalUrl = (clinic.website && /^https?:\/\//i.test(clinic.website))
+    var canonicalUrl = pageSeo.canonical || ((clinic.website && /^https?:\/\//i.test(clinic.website))
       ? clinic.website
-      : window.location.href;
+      : window.location.href);
     setAttrById('canonical-url', 'href', canonicalUrl);
 
     // Open Graph
-    setMetaProp('og:title',       seo.meta_title       || '');
-    setMetaProp('og:description', seo.meta_description || '');
+    setMetaProp('og:title',       pageSeo.title || seo.meta_title       || '');
+    setMetaProp('og:description', pageSeo.description || seo.meta_description || '');
     setMetaProp('og:image',       absoluteUrl(seo.og_image || ''));
     setMetaProp('og:url',         window.location.href);
 
     // Twitter Card
-    setMetaName('twitter:title',       seo.meta_title       || '');
-    setMetaName('twitter:description', seo.meta_description || '');
+    setMetaName('twitter:title',       pageSeo.title || seo.meta_title       || '');
+    setMetaName('twitter:description', pageSeo.description || seo.meta_description || '');
     setMetaName('twitter:image',       absoluteUrl(seo.og_image || ''));
 
     // Schema.org — MedicalBusiness / Dentist
@@ -205,6 +447,95 @@
           window.gtag('event', eventName, params || {});
         }
       };
+    }
+  }
+
+  function resolvePageSeo(C, ctx) {
+    var seo = C.seo || {};
+    var pageMap = seo.pages || {};
+    var origin = window.location.origin;
+    var result = {
+      title: seo.meta_title || '',
+      description: seo.meta_description || '',
+      canonical: window.location.href
+    };
+
+    function toAbsolute(path) {
+      if (!path) return '';
+      if (/^https?:\/\//i.test(path)) return path;
+      return origin + '/' + String(path).replace(/^\//, '');
+    }
+
+    if (ctx.page === 'profile' && pageMap.profile) {
+      result.title = pageMap.profile.meta_title || result.title;
+      result.description = pageMap.profile.meta_description || result.description;
+      result.canonical = toAbsolute(pageMap.profile.canonical) || result.canonical;
+    } else if (ctx.page === 'expertise-list' && pageMap.expertise) {
+      result.title = pageMap.expertise.meta_title || result.title;
+      result.description = pageMap.expertise.meta_description || result.description;
+      result.canonical = toAbsolute(pageMap.expertise.canonical) || result.canonical;
+    } else if (ctx.page === 'contact' && pageMap.contact) {
+      result.title = pageMap.contact.meta_title || result.title;
+      result.description = pageMap.contact.meta_description || result.description;
+      result.canonical = toAbsolute(pageMap.contact.canonical) || result.canonical;
+    } else if (ctx.page === 'expertise-detail' && pageMap.expertise_detail) {
+      var detailItem = Array.isArray(C.expertise) ? C.expertise.find(function (item) {
+        return (item.slug || '') === ctx.slug;
+      }) : null;
+      var titleTemplate = pageMap.expertise_detail.meta_title_template || '{title}';
+      var descTemplate = pageMap.expertise_detail.meta_description_template || '{summary}';
+      var canonicalTemplate = pageMap.expertise_detail.canonical_template || '/expertise/{slug}';
+      if (detailItem) {
+        result.title = titleTemplate
+          .replace('{title}', detailItem.title || '')
+          .replace('{slug}', detailItem.slug || '');
+        result.description = descTemplate
+          .replace('{summary}', detailItem.summary || '')
+          .replace('{title}', detailItem.title || '');
+        result.canonical = toAbsolute(canonicalTemplate.replace('{slug}', detailItem.slug || '')) || result.canonical;
+      }
+    }
+
+    return result;
+  }
+
+  function getExcludedRouteSet(C) {
+    var sections = C.sections || {};
+    return {
+      knowledgebase: !!(sections.knowledgebase && sections.knowledgebase.enabled === false),
+      research_publications: !!(sections.research_publications && sections.research_publications.enabled === false)
+    };
+  }
+
+  function initExclusionGuards(C) {
+    var excluded = getExcludedRouteSet(C);
+    if (!excluded.knowledgebase && !excluded.research_publications) return;
+
+    var blocked = ['knowledgebase', 'research', 'publication'];
+    document.querySelectorAll('a').forEach(function (link) {
+      var href = (link.getAttribute('href') || '').toLowerCase();
+      var text = (link.textContent || '').toLowerCase();
+      var shouldHide = blocked.some(function (word) {
+        return href.indexOf(word) !== -1 || text.indexOf(word) !== -1;
+      });
+      if (shouldHide) {
+        var li = link.closest('li');
+        if (li) {
+          li.remove();
+        } else {
+          link.remove();
+        }
+      }
+    });
+
+    if (excluded.research_publications) {
+      var researchSection = document.getElementById('research');
+      if (researchSection) researchSection.hidden = true;
+    }
+
+    if (excluded.knowledgebase) {
+      var kbSection = document.getElementById('knowledgebase');
+      if (kbSection) kbSection.hidden = true;
     }
   }
 
@@ -645,19 +976,56 @@
       submitBtn.textContent  = 'Processing…';
     }
 
-    // If Razorpay not loaded (dev/offline) → fallback to WhatsApp only
-    if (typeof Razorpay === 'undefined') {
-      console.warn('[DoctorSite] Razorpay not available — falling back to WhatsApp.');
-      fallbackWhatsApp(formData, clinic, doc, submitBtn);
-      return;
-    }
-
     var key = payment.razorpay_key_id || '';
     if (!key || key === 'rzp_live_XXXXXXXXXXXXXXXXXX') {
       console.warn('[DoctorSite] Razorpay key not configured — falling back to WhatsApp.');
       fallbackWhatsApp(formData, clinic, doc, submitBtn);
       return;
     }
+
+    ensureRazorpayLoaded()
+      .then(function () {
+        openRazorpayCheckout(formData, payment, clinic, doc, submitBtn, key);
+      })
+      .catch(function (err) {
+        console.warn('[DoctorSite] Razorpay not available — falling back to WhatsApp.', err);
+        fallbackWhatsApp(formData, clinic, doc, submitBtn);
+      });
+  }
+
+  function ensureRazorpayLoaded() {
+    if (typeof Razorpay !== 'undefined') {
+      return Promise.resolve();
+    }
+
+    if (razorpayLoaderPromise) {
+      return razorpayLoaderPromise;
+    }
+
+    razorpayLoaderPromise = new Promise(function (resolve, reject) {
+      var script = document.createElement('script');
+      script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+      script.async = true;
+      script.onload = function () {
+        if (typeof Razorpay !== 'undefined') {
+          resolve();
+          return;
+        }
+
+        razorpayLoaderPromise = null;
+        reject(new Error('Razorpay script loaded but SDK was unavailable.'));
+      };
+      script.onerror = function () {
+        razorpayLoaderPromise = null;
+        reject(new Error('Razorpay script failed to load.'));
+      };
+      document.head.appendChild(script);
+    });
+
+    return razorpayLoaderPromise;
+  }
+
+  function openRazorpayCheckout(formData, payment, clinic, doc, submitBtn, key) {
 
     var options = {
       key:         key,
@@ -1126,6 +1494,16 @@
     var doc    = C.doctor || {};
 
     var el = document.getElementById('whatsapp-float');
+    if (!el && document.body) {
+      el = document.createElement('a');
+      el.id = 'whatsapp-float';
+      el.className = 'whatsapp-float';
+      el.target = '_blank';
+      el.rel = 'noopener noreferrer';
+      el.setAttribute('aria-label', 'Chat on WhatsApp');
+      el.innerHTML = '<span class="whatsapp-float__icon" aria-hidden="true">💬</span><span class="whatsapp-float__label">Chat with us</span>';
+      document.body.appendChild(el);
+    }
     var whatsappHref = buildWhatsAppUrl(
       clinic.whatsapp || '',
       'Hello ' + (doc.name || '') + ', I would like to book an appointment.'
@@ -1182,6 +1560,18 @@
         trackDoctorEvent('phone_call_click', { source: 'contact', phone: clinic.phone });
       });
     }
+
+    document.querySelectorAll('a[href^="https://wa.me/"]').forEach(function (link) {
+      link.addEventListener('click', function () {
+        trackDoctorEvent('whatsapp_click', { source: 'route' });
+      });
+    });
+
+    document.querySelectorAll('a[href^="tel:"]').forEach(function (link) {
+      link.addEventListener('click', function () {
+        trackDoctorEvent('phone_call_click', { source: 'tel-link' });
+      });
+    });
   }
 
   /* ============================================================
@@ -1330,6 +1720,15 @@
     } catch (e) {
       return dateStr;
     }
+  }
+
+  function slugify(value) {
+    return String(value || '')
+      .trim()
+      .toLowerCase()
+      .replace(/[^a-z0-9\s-]/g, '')
+      .replace(/\s+/g, '-')
+      .replace(/-+/g, '-');
   }
 
   function trackDoctorEvent(eventName, params) {

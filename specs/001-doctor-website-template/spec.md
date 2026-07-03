@@ -152,6 +152,11 @@ A patient visiting the site wants to quickly message the doctor on WhatsApp with
 - **FR-026**: System MUST include production Nginx config with SSL, Gzip, security headers, and cache policies.
 - **FR-027**: System MUST track click-to-call and WhatsApp button clicks as GA4 custom events (event names: `phone_call_click`, `whatsapp_click`, `appointment_submit`) when Google Analytics is configured.
 - **FR-028**: System MUST serve `doctor-profile.json` at a predictable URL path (`/config/doctor-profile.json`) on deployed sites to enable external tooling (admin dashboard) to read site configuration via HTTP. Nginx MUST restrict this path to GET requests only (no write access via HTTP) and include CORS headers allowing access only from the admin dashboard domain.
+- **FR-029**: System MUST support a multi-page information architecture aligned to the reference pattern, with dedicated pages for Profile, Expertise listing, Expertise detail pages, and Contact.
+- **FR-030**: System MUST preserve the existing homepage design and behavior as-is while adding the new pages.
+- **FR-031**: System MUST exclude Knowledgebase and Research & Publications from navigation, routing, and page generation.
+- **FR-032**: System MUST implement expertise detail content using one reusable detail page template resolved by expertise slug/ID from config, while preserving SEO-friendly unique URLs per expertise topic.
+- **FR-033**: System MUST use hybrid navigation: retain existing anchor-based section navigation on Home, and add route-based navigation for Profile, Expertise listing/detail, and Contact pages.
 
 ### Key Entities
 
@@ -159,6 +164,7 @@ A patient visiting the site wants to quickly message the doctor on WhatsApp with
 - **Clinic**: Name, address, city, phone, WhatsApp, email, website, timings, Google Maps embed, geo-coordinates (latitude, longitude), areaServed (list of 5-10 nearby localities)
 - **Site Metadata**: site_id (UUID or slug — unique per deployed instance, used by admin dashboard for identification)
 - **Service**: Name, icon, description, price range
+- **Expertise**: slug (unique), title, summary, detail content blocks, hero image, related expertise links
 - **Testimonial**: Patient name, location, rating (1-5), text, date
 - **FAQ**: Question, answer (both used for display and Schema.org)
 - **Appointment**: Patient name, phone, date, time, service, message, payment ID
@@ -191,7 +197,7 @@ A patient visiting the site wants to quickly message the doctor on WhatsApp with
 - Standard v1 update strategy is versioned release folders per site with atomic symlink switch for deploys and rollbacks.
 - Standard v1 admin write access model uses a single shared SSH key for all managed sites.
 - Standard v1 failure policy is immediate automatic rollback to the previous release for the affected site.
-- Single-page design (no routing) — all content on one page with anchor-based navigation.
+- Multi-page design with explicit routing/navigation for homepage, Profile, Expertise listing, Expertise detail pages, and Contact.
 - Google Fonts CDN is accessible to all target users (not blocked in India).
 - Doctor/staff will follow a simple text guide (CONFIG-GUIDE.md) to edit JSON — no CLI or git knowledge assumed.
 - Images are provided by the doctor in standard web formats (JPEG/PNG/WebP) and reasonable file sizes.
@@ -218,3 +224,9 @@ A patient visiting the site wants to quickly message the doctor on WhatsApp with
 - Q: For SaaS admin updates, what should be the official deployment/update strategy per doctor site? → A: Versioned release folders per site with symlink switch (atomic deploy + easy rollback).
 - Q: For admin-to-server authentication in v1, what should be the required standard for write operations (deploy/config update)? → A: Single shared SSH key for all sites.
 - Q: When a config/deploy update fails for one doctor site, what should the required v1 rollback policy be? → A: Immediate automatic rollback to previous release for that site.
+
+### Session 2026-07-03
+
+- Q: Which page scope should be followed for alignment with the reference website while preserving prior work? → A: Keep existing homepage unchanged; add Profile, Expertise listing, Expertise detail pages, and Contact; exclude Knowledgebase and Research & Publications.
+- Q: How should expertise detail pages be implemented while keeping the template maintainable? → A: Use one reusable expertise detail template with slug-based routing/lookup from config.
+- Q: Which navigation model should be used so homepage remains unchanged while adding new pages? → A: Hybrid navigation: keep homepage anchor links as-is and add route-based links for new pages.

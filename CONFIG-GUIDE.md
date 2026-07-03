@@ -132,6 +132,37 @@ You can also control section heading text via `expertise_section`:
 
 This section is optional and auto-hides if `expertise_items` is empty.
 
+### Hybrid Multi-Page Keys (New)
+
+Use these keys to power additional pages while keeping homepage behavior unchanged:
+
+- `pages.home.anchors[]`: existing homepage section anchors (keep these aligned with section IDs)
+- `pages.profile`, `pages.expertise`, `pages.contact`: each has:
+  - `enabled` (true/false)
+  - `path` (for example `profile.html`)
+  - `nav_label`
+
+For expertise detail pages, use `expertise[]` (not `expertise_items[]`):
+
+- `slug`: required, unique, lowercase URL-safe value (`[a-z0-9-]+`)
+- `title`
+- `summary`
+- `hero_image` (optional)
+- `content_blocks[]` where each block can be paragraph/list style content
+- `related_slugs[]` (optional)
+
+SEO keys for route pages:
+
+- `seo.pages.profile`
+- `seo.pages.expertise`
+- `seo.pages.contact`
+- `seo.pages.expertise_detail` (template fields)
+
+Excluded sections policy (must remain disabled for this scope):
+
+- `sections.knowledgebase.enabled` = `false`
+- `sections.research_publications.enabled` = `false`
+
 ### SEO and Identity
 
 - site_id: unique per deployed site, do not change after deployment
