@@ -991,7 +991,6 @@
         name:    form.elements['name'].value.trim(),
         phone:   form.elements['phone'].value.trim(),
         date:    form.elements['date'].value,
-        time:    form.elements['time'].value,
         service: form.elements['service'].value,
         message: form.elements['message'].value.trim()
       };
@@ -1010,7 +1009,6 @@
       { name: 'name',    label: 'Full name is required.' },
       { name: 'phone',   label: 'Phone number is required.' },
       { name: 'date',    label: 'Please select a date.' },
-      { name: 'time',    label: 'Please select a time slot.' },
       { name: 'service', label: 'Please select a service.' }
     ];
 
@@ -1057,14 +1055,19 @@
     }
 
     var key = payment.razorpay_key_id || '';
+    console.log('[DoctorSite] Razorpay Key:', key);
+    console.log('[DoctorSite] Payment Config:', payment);
+    
     if (!key || key === 'rzp_live_XXXXXXXXXXXXXXXXXX') {
       console.warn('[DoctorSite] Razorpay key not configured — falling back to WhatsApp.');
       fallbackWhatsApp(formData, clinic, doc, submitBtn);
       return;
     }
 
+    console.log('[DoctorSite] Attempting to load Razorpay...');
     ensureRazorpayLoaded()
       .then(function () {
+        console.log('[DoctorSite] Razorpay loaded successfully, opening checkout...');
         openRazorpayCheckout(formData, payment, clinic, doc, submitBtn, key);
       })
       .catch(function (err) {
@@ -1074,7 +1077,9 @@
   }
 
   function ensureRazorpayLoaded() {
+    console.log('[DoctorSite] Checking Razorpay availability...');
     if (typeof Razorpay !== 'undefined') {
+      console.log('[DoctorSite] Razorpay already loaded');
       return Promise.resolve();
     }
 
@@ -1106,6 +1111,7 @@
   }
 
   function openRazorpayCheckout(formData, payment, clinic, doc, submitBtn, key) {
+    console.log('[DoctorSite] Opening Razorpay checkout with key:', key);
 
     var options = {
       key:         key,
@@ -1119,6 +1125,7 @@
       },
       theme: { color: '#1B4F72' },
       handler: function (response) {
+        console.log('[DoctorSite] Payment successful:', response.razorpay_payment_id);
         sendWhatsApp(formData, clinic, doc, response.razorpay_payment_id);
         showConfirmation(formData, response.razorpay_payment_id);
         resetSubmitBtn(submitBtn);
@@ -1126,15 +1133,20 @@
       },
       modal: {
         ondismiss: function () {
+          console.log('[DoctorSite] Razorpay modal dismissed');
           resetSubmitBtn(submitBtn);
         },
         escape: true
       }
     };
 
+    console.log('[DoctorSite] Razorpay options:', options);
+    
     try {
       var rzp = new Razorpay(options);
+      console.log('[DoctorSite] Razorpay instance created, opening modal...');
       rzp.on('payment.failed', function (resp) {
+        console.log('[DoctorSite] Payment failed:', resp);
         var desc = (resp.error && resp.error.description) ? resp.error.description : 'Unknown error.';
         alert('⚠️ Payment failed: ' + desc + '\nPlease try again or contact the clinic directly.');
         resetSubmitBtn(submitBtn);
@@ -1179,7 +1191,6 @@
       '📞 Phone   : ' + formData.phone,
       '🦷 Service : ' + formData.service,
       '📅 Date    : ' + formatDate(formData.date),
-      '🕐 Time    : ' + formData.time,
       paymentId ? '💳 Payment : ' + paymentId : '💳 Payment : Pending',
       formData.message ? '💬 Message : ' + formData.message : '',
       '━━━━━━━━━━━━━━━━━━━━',
@@ -1201,7 +1212,6 @@
       ['Phone',      formData.phone],
       ['Service',    formData.service],
       ['Date',       formatDate(formData.date)],
-      ['Time',       formData.time],
       ['Payment ID', paymentId || 'N/A']
     ];
 
@@ -1704,7 +1714,7 @@
       el.id = 'call-float';
       el.className = 'call-float';
       el.setAttribute('aria-label', 'Call us directly');
-      el.innerHTML = '<span class="call-float__icon" aria-hidden="true">📞</span><span class="call-float__label">Call us</span>';
+      el.innerHTML = '<span class="call-float__icon" aria-hidden="true">☎️</span><span class="call-float__label">Call us</span>';
       document.body.appendChild(el);
     }
 
