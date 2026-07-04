@@ -257,6 +257,36 @@
             <span class="form__error" id="apt-service-error" role="alert" aria-live="polite"></span>
           </div>
         </div>
+        <div class="form__row">
+          <fieldset class="form__group form__group--full">
+            <legend>Payment Option <span aria-hidden="true">*</span></legend>
+            <div class="form__radio-group">
+              <div class="form__radio-option">
+                <input
+                  type="radio"
+                  id="apt-pay-now"
+                  name="payment_option"
+                  value="pay_now"
+                  checked
+                  required
+                  aria-required="true"
+                />
+                <label for="apt-pay-now">Pay Now (₹500)</label>
+              </div>
+              <div class="form__radio-option">
+                <input
+                  type="radio"
+                  id="apt-pay-later"
+                  name="payment_option"
+                  value="pay_later"
+                  required
+                  aria-required="true"
+                />
+                <label for="apt-pay-later">Pay After Consultation</label>
+              </div>
+            </div>
+          </fieldset>
+        </div>
         <div class="form__group">
           <label for="apt-message">Message (Optional)</label>
           <textarea

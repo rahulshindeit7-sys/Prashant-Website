@@ -950,6 +950,35 @@ button {
   margin-bottom: 1.5rem;
 }
 
+.form__radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  margin-top: 0.6rem;
+}
+
+.form__radio-option {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.form__radio-option input[type="radio"] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  accent-color: var(--primary);
+}
+
+.form__radio-option label {
+  cursor: pointer;
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  font-weight: 400;
+}
+}
+
 /* ---- 11. TESTIMONIALS ---- */
 .testimonials {
   background: var(--white);

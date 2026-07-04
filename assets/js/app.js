@@ -962,6 +962,27 @@
         ' — paid securely online via Razorpay to confirm your slot.';
     }
 
+    // Update fee note based on payment option
+    var paymentRadios = document.querySelectorAll('input[name="payment_option"]');
+    if (feeNote && paymentRadios.length > 0) {
+      paymentRadios.forEach(function (radio) {
+        radio.addEventListener('change', function () {
+          if (this.value === 'pay_later') {
+            feeNote.textContent = '⏳ You can pay after the consultation. The doctor will confirm your appointment details via WhatsApp.';
+            feeNote.style.backgroundColor = '#E8F8F5';
+            feeNote.style.borderLeftColor = '#27AE60';
+            feeNote.style.color = '#27AE60';
+          } else {
+            feeNote.textContent = '💳 Consultation fee: ₹' + (payment.consultation_fee || 500) +
+              ' — paid securely online via Razorpay to confirm your slot.';
+            feeNote.style.backgroundColor = '#EBF5FB';
+            feeNote.style.borderLeftColor = 'var(--primary)';
+            feeNote.style.color = 'var(--primary)';
+          }
+        });
+      });
+    }
+
     // Populate service dropdown from config
     var serviceSelect = document.getElementById('apt-service');
     if (serviceSelect && Array.isArray(C.services)) {
@@ -992,14 +1013,22 @@
         phone:   form.elements['phone'].value.trim(),
         date:    form.elements['date'].value,
         service: form.elements['service'].value,
-        message: form.elements['message'].value.trim()
+        message: form.elements['message'].value.trim(),
+        payment_option: form.elements['payment_option'].value
       };
 
       trackDoctorEvent('appointment_submit', {
-        service: formData.service
+        service: formData.service,
+        payment_option: formData.payment_option
       });
 
-      initiatePayment(formData, payment, clinic, doc);
+      // If pay_later, skip Razorpay and go directly to WhatsApp
+      if (formData.payment_option === 'pay_later') {
+        console.log('[DoctorSite] Payment option: Pay Later - skipping Razorpay');
+        fallbackWhatsApp(formData, clinic, doc, document.getElementById('submit-btn'), true);
+      } else {
+        initiatePayment(formData, payment, clinic, doc);
+      }
     });
   }
 
@@ -1158,8 +1187,18 @@
     }
   }
 
-  function fallbackWhatsApp(formData, clinic, doc, submitBtn) {
+  function fallbackWhatsApp(formData, clinic, doc, submitBtn, skipConfirm) {
     resetSubmitBtn(submitBtn);
+    
+    // If skipConfirm is true (pay_later), send directly without asking
+    if (skipConfirm) {
+      sendWhatsApp(formData, clinic, doc, null);
+      showConfirmation(formData, null, formData.payment_option);
+      document.getElementById('appointment-form').reset();
+      return;
+    }
+    
+    // Otherwise show confirmation dialog (fallback due to payment error)
     if (confirm(
       'Online payment is currently unavailable.\n\n' +
       'Click OK to send your appointment request via WhatsApp instead.'
@@ -1184,6 +1223,9 @@
   }
 
   function sendWhatsApp(formData, clinic, doc, paymentId) {
+    var paymentStatus = paymentId ? '💳 Payment : ' + paymentId : 
+                       (formData.payment_option === 'pay_later' ? '💳 Payment : To be paid after consultation' : '💳 Payment : Pending');
+    
     var lines = [
       '🏥 *New Appointment Request*',
       '━━━━━━━━━━━━━━━━━━━━',
@@ -1191,7 +1233,7 @@
       '📞 Phone   : ' + formData.phone,
       '🦷 Service : ' + formData.service,
       '📅 Date    : ' + formatDate(formData.date),
-      paymentId ? '💳 Payment : ' + paymentId : '💳 Payment : Pending',
+      paymentStatus,
       formData.message ? '💬 Message : ' + formData.message : '',
       '━━━━━━━━━━━━━━━━━━━━',
       'Sent via ' + (clinic.name || 'Clinic') + ' website'
@@ -1202,17 +1244,20 @@
   }
 
   /* ---- Confirmation Modal ---- */
-  function showConfirmation(formData, paymentId) {
+  function showConfirmation(formData, paymentId, paymentOption) {
     var modal   = document.getElementById('confirmation-modal');
     var details = document.getElementById('modal-details');
     if (!modal || !details) return;
+
+    var paymentStatus = paymentId ? paymentId : 
+                       (paymentOption === 'pay_later' ? 'To be paid after consultation' : 'N/A');
 
     var rows = [
       ['Patient',    formData.name],
       ['Phone',      formData.phone],
       ['Service',    formData.service],
       ['Date',       formatDate(formData.date)],
-      ['Payment ID', paymentId || 'N/A']
+      ['Payment',    paymentStatus]
     ];
 
     details.innerHTML = rows.map(function (r) {
