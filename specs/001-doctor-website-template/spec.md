@@ -140,10 +140,11 @@ A patient visiting the site wants to quickly message the doctor on WhatsApp with
 - **FR-014**: System MUST render an FAQ accordion that is Schema.org FAQPage-compliant for rich results in Google.
 - **FR-015**: System MUST render Google Maps embed and contact information (address, phone, email, timings) from config.
 - **FR-016**: System MUST render a footer with clinic branding, navigation links, and social media links from config.
-- **FR-017**: System MUST display a floating WhatsApp button (fixed bottom-right) with pulse animation that opens WhatsApp with pre-filled message.
+- **FR-017**: System MUST display a floating WhatsApp button (fixed bottom-right) with pulse animation that opens WhatsApp with pre-filled message. On mobile devices in portrait orientation (detected via `@media (orientation: portrait)`), the button MUST be visible and positioned as a sticky element without covering critical content.
+- **FR-017a**: System MUST include a prominent WhatsApp contact section in the Contact page/section (hybrid approach) alongside the floating button, displaying the doctor's WhatsApp number and a brief "Message us on WhatsApp" CTA. This section is required for discoverable contact options and credibility.
 - **FR-018**: System MUST inject complete SEO meta tags (title, description, keywords including local_keywords, OG, Twitter Card, canonical) from config.
 - **FR-019**: System MUST inject Schema.org JSON-LD (Dentist/Physician + FAQPage) generated from config data, including GeoCoordinates (lat/long) and areaServed (list of localities) for local "near me" search optimization.
-- **FR-020**: System MUST be fully responsive with mobile-first CSS (breakpoints: 480px, 768px, 1024px).
+- **FR-020**: System MUST be fully responsive with mobile-first CSS (breakpoints: 480px, 768px, 1024px). Portrait mode specific: WhatsApp button and contact section MUST be visible and accessible on all portrait-mode devices (phones and tablets) using orientation-based CSS media queries (`@media (orientation: portrait)`), not viewport-width breakpoints, to ensure proper behavior when devices rotate.
 - **FR-021**: System MUST lazy-load all images except the hero image using `loading="lazy"` attribute.
 - **FR-022**: System MUST use CSS custom properties for all colors and fonts, enabling rebranding by changing only `:root` variables.
 - **FR-023**: System MUST escape all config-derived content before DOM insertion to prevent XSS attacks.
@@ -183,6 +184,8 @@ A patient visiting the site wants to quickly message the doctor on WhatsApp with
 - **SC-006**: 100% of website content updates achievable by editing only `doctor-profile.json` (zero HTML/CSS/JS changes for content).
 - **SC-007**: Appointment booking flow completable in under 2 minutes (from form fill to WhatsApp confirmation).
 - **SC-008**: Site renders correctly without horizontal scrolling on viewports from 320px to 1920px.
+- **SC-008a**: WhatsApp floating button and contact section are visible and accessible on mobile devices in portrait orientation, tested via DevTools device emulation (`iPhone 12 portrait`, `iPad portrait`). Button does not overlap critical content such as form inputs or CTAs. Content has adequate bottom padding to account for sticky footer positioning (minimum 60px clearance).
+- **SC-008b**: WhatsApp button remains sticky and accessible when user scrolls on mobile portrait, and can be dismissed/hidden via CSS (`display: none` or slide animation) without breaking page layout.
 - **SC-009**: All interactive elements accessible via keyboard navigation (Tab, Enter, Escape).
 - **SC-010**: Template deployable to a new VPS in under 10 minutes using deploy.sh (excluding DNS propagation).
 
@@ -232,3 +235,11 @@ A patient visiting the site wants to quickly message the doctor on WhatsApp with
 - Q: Which navigation model should be used so homepage remains unchanged while adding new pages? → A: Hybrid navigation: keep homepage anchor links as-is and add route-based links for new pages.
 - Q: What should happen when a user accesses the expertise detail page without specifying a slug? → A: Display a default/featured expertise topic ("Head and Neck Cancer") with a "Browse All Expertise" link to the expertise listing page, providing valuable default content while maintaining graceful fallback behavior.
 - Q: What should happen when a patient clicks "Book Appointment" or "WhatsApp" buttons on non-homepage pages (expertise detail, profile, contact)? → A: Navigate to homepage and scroll to appointment form section for Book Appointment; WhatsApp button opens wa.me link from current page (same behavior as homepage). This ensures consistent appointment booking experience from a single configured form, avoiding duplicate forms and maintaining config-first principle.
+
+### Session 2026-07-04
+
+- Q: Should WhatsApp messaging feature be available in portrait mode only, both orientations, or smart positioning? → A: Both portrait and landscape orientations. The feature must adapt responsively but remain accessible regardless of device orientation.
+- Q: How should WhatsApp contact/messaging visually appear in portrait mode on mobile? → A: Hybrid approach (Option E): Display a prominent WhatsApp contact section in the main Contact page/section for credibility and discovery, PLUS a floating button (fixed bottom-right) for quick one-tap access from anywhere on the site without scrolling.
+- Q: What does "WhatsApp message is available on portrait mode" mean? → A: Feature must be BOTH enabled in config (doctor has configured WhatsApp number) AND prominently visible on portrait mobile devices (≤768px width in portrait orientation). Patients must be able to immediately see and access WhatsApp without friction.
+- Q: At what viewport widths should WhatsApp portrait mode feature apply? → A: Use CSS media query for device orientation detection (`@media (orientation: portrait)`) rather than fixed pixel breakpoints. This works across all device types (phones, tablets) and respects actual device orientation, providing better mobile UX than viewport-width-based rules.
+- Q: When viewport space is very narrow in portrait mode, should WhatsApp button cover content or be repositioned? → A: Use sticky bottom positioning (Option D). Floating WhatsApp button fixed to bottom-right as sticky footer with modest padding/margin on main content. Users can always scroll, but WhatsApp remains one-tap away without obscuring critical page content. Ensures accessibility and readability are never compromised.

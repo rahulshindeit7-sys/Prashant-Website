@@ -1,0 +1,20 @@
+{
+  "doctors": [
+    {
+      "id": "deepali",
+      "name": "Dr. Deepali Shinde",
+      "username": "deepali",
+      "password_hash": "$2a$10$LT4W/OcmXLEgaNdRBFNYpeLC6dhD7fqOidlUNpIC3OZ73y6DMoHSm",
+      "specialty": "Dental Surgery",
+      "config_file": "config/deepali-profile.json"
+    },
+    {
+      "id": "prashant",
+      "name": "Dr. Prashant Pawar",
+      "username": "prashant",
+      "password_hash": "$2a$10$LT4W/OcmXLEgaNdRBFNYpeLC6dhD7fqOidlUNpIC3OZ73y6DMoHSm",
+      "specialty": "General Medicine",
+      "config_file": "config/prashant-profile.json"
+    }
+  ]
+}

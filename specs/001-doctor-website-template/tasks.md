@@ -1,12 +1,12 @@
-# Tasks: Doctor Website Template (Hybrid Multi-Page)
+# Tasks: Doctor Website Template - Hybrid Multi-Page Implementation
 
-**Input**: Design documents from `/specs/001-doctor-website-template/`
+**Input**: Design documents from `specs/001-doctor-website-template/`
 
-**Prerequisites**: `plan.md` (required), `spec.md` (required), `research.md`, `data-model.md`, `contracts/`, `quickstart.md`
+**Prerequisites**: plan.md ✅, spec.md ✅ (with WhatsApp clarifications), research.md ✅, data-model.md ✅, contracts/ ✅, quickstart.md ✅, constitution.md ✅
 
-**Tests**: Tests are optional for this feature and were not explicitly requested as a TDD workflow. Validation tasks are included via `quickstart.md` and Lighthouse/Rich Results checks.
+**Tests**: Not included in this scope (business decision: validation through quickstart.md manual scenarios and Lighthouse audits instead of automated test suite)
 
-**Organization**: Tasks are grouped by user story to enable independent implementation and validation.
+**Organization**: Tasks organized by user story (US1–US6) to enable independent implementation and testing. All foundational multi-page infrastructure is prerequisite and blocks user story work.
 
 ## Phase 1: Setup (Project Initialization)
 

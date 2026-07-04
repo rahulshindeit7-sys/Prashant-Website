@@ -1,0 +1,27 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Dr. Prashant S. Pawar Icon Logo</title>
+  <desc id="desc">Icon logo with a clear head and neck treatment motif.</desc>
+  <defs>
+    <linearGradient id="g1" x1="0" y1="0" x2="512" y2="512" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#1B4F72"/>
+      <stop offset="1" stop-color="#2A7FB1"/>
+    </linearGradient>
+    <linearGradient id="g2" x1="145" y1="151" x2="367" y2="386" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#2ECC71"/>
+      <stop offset="1" stop-color="#27AE60"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="24" y="24" width="464" height="464" rx="108" fill="#F8FAFF"/>
+
+  <path d="M252 54C153 54 75 119 55 211C38 294 78 374 148 419L145 504L238 461C268 480 306 491 349 491H450C404 456 382 416 382 369V319C414 280 430 233 427 186C421 106 344 54 252 54Z" fill="#F7FBFF" stroke="url(#g1)" stroke-width="28" stroke-linejoin="round"/>
+  <path d="M237 124C183 124 139 159 130 207C122 252 143 292 181 313C214 331 232 362 235 408" stroke="#1B4F72" stroke-width="27" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M131 208C102 226 97 267 124 294" stroke="#1B4F72" stroke-width="24" stroke-linecap="round"/>
+  <path d="M236 408C279 439 329 451 382 443" stroke="url(#g2)" stroke-width="31" stroke-linecap="round"/>
+  <path d="M291 263C323 299 339 346 333 402" stroke="url(#g2)" stroke-width="20" stroke-linecap="round"/>
+  <circle cx="286" cy="251" r="20" fill="url(#g2)"/>
+
+  <rect x="333" y="82" width="128" height="128" rx="32" fill="url(#g2)" stroke="#F8FAFF" stroke-width="16"/>
+  <rect x="385" y="112" width="25" height="70" rx="7" fill="#F8FAFF"/>
+  <rect x="362" y="135" width="70" height="25" rx="7" fill="#F8FAFF"/>
+</svg>

@@ -1,0 +1,667 @@
+{
+  "_instructions": {
+    "HOW_TO_USE": "Edit ONLY this file to customize the website. No coding needed.",
+    "STEPS": [
+      "1. Replace placeholder values with final clinic data",
+      "2. Add doctor photo to assets/images/doctor.jpg",
+      "3. Add OG image to assets/images/og-image.jpg (1200x630)",
+      "4. Update clinic.google_maps_embed from Google Maps",
+      "5. Replace Razorpay key in payment.razorpay_key_id",
+      "6. Refresh browser after saving this file"
+    ]
+  },
+
+  "site_id": "dr-prashant-pawar-narhe-pune",
+
+  "pages": {
+    "home": {
+      "anchors": [
+        { "id": "about", "label": "About" },
+        { "id": "services", "label": "Treatments" },
+        { "id": "testimonials", "label": "Testimonials" },
+        { "id": "faq", "label": "FAQ" },
+        { "id": "contact", "label": "Contact" }
+      ]
+    },
+    "profile": {
+      "enabled": true,
+      "path": "profile.html",
+      "nav_label": "Profile"
+    },
+    "expertise": {
+      "enabled": true,
+      "path": "expertise.html",
+      "nav_label": "Expertise"
+    },
+    "contact": {
+      "enabled": true,
+      "path": "contact.html",
+      "nav_label": "Contact"
+    }
+  },
+
+  "doctor": {
+    "name": "Dr. Prashant Pawar",
+    "degree": "MS (ENT), DNB, Fellowship in Head & Neck Oncosurgery",
+    "specialization": "Head and Neck Surgical Oncologist, Skull Base Surgeon",
+    "secondary_specializations": [
+      "Head & Neck Oncosurgery",
+      "Oral Cancer Surgery",
+      "Skull Base Surgery",
+      "Thyroid Cancer Surgery",
+      "Parotid Surgery"
+    ],
+    "experience_years": 8,
+    "registration_number": "[ADD_REGISTRATION_NUMBER]",
+    "certifications": [
+      "Fellowship in Head & Neck Oncosurgery (Tata Memorial Hospital)"
+    ],
+    "awards": [
+      "Indian Patent on Novel Tracheoesophageal Voice Prosthesis Device"
+    ],
+    "tagline": "Complete Expertise in Head and Neck Cancer Treatment. Early Treatment. Evidence Based Management.",
+    "languages": [
+      "Marathi",
+      "Hindi",
+      "English"
+    ],
+    "photo_logo": "assets/images/dr-prashant-hero-clean.png",
+    "photo_about": "assets/images/Dr Prashant 2.png",
+    "about": "Dr. Prashant Pawar is a leading Head and Neck Cancer Surgeon and Skull Base Surgeon. He is an expert in surgical management of all types of head and neck cancers like mouth cancer (Tongue cancer, Cheek cancer, lip cancer etc), Thyroid Cancer, Larynx Cancer, Nose and Sinonasal cancer, Salivary Gland Tumors and complex tumours involving the skull base region.\n\nDr. Prashant Pawar always strives to give his patients better outcomes not only in terms of Cancer cure but also with regards to cosmetic and functional outcomes after treatment.\n\nDue to his specialized and unique experience in the field and having performed over 2000 surgeries, he is one amongst the top head and neck cancer surgeons in India."
+  },
+
+  "clinic": {
+    "name": "Silverbirch Multispeciality Hospital",
+    "address": "Narhe-Ambegaon, Pune",
+    "city": "Pune, Maharashtra",
+    "pincode": "",
+    "phone": "+91 9762334583",
+    "whatsapp": "+919762334583",
+    "email": "prashantpawar7788@gmail.com",
+    "website": "",
+    "show_timing": false,
+    "timing": {
+      "weekdays": "10:00 AM - 2:00 PM, 5:00 PM - 8:00 PM",
+      "saturday": "10:00 AM - 2:00 PM",
+      "sunday": "Closed",
+      "day_wise": {
+        "monday": "10:00 AM - 2:00 PM, 5:00 PM - 8:00 PM",
+        "tuesday": "10:00 AM - 2:00 PM, 5:00 PM - 8:00 PM",
+        "wednesday": "10:00 AM - 2:00 PM, 5:00 PM - 8:00 PM",
+        "thursday": "10:00 AM - 2:00 PM, 5:00 PM - 8:00 PM",
+        "friday": "10:00 AM - 2:00 PM, 5:00 PM - 8:00 PM",
+        "saturday": "10:00 AM - 2:00 PM",
+        "sunday": "Closed"
+      }
+    },
+    "google_maps_embed": "https://maps.app.goo.gl/72sqsMThFwZGygK38",
+    "geo": {
+      "latitude": 18.4481464,
+      "longitude": 73.8319694
+    },
+    "area_served": [
+      "Narhe",
+      "Ambegaon",
+      "Dhayari",
+      "Bhumkar Bridge",
+      "Sinhgad Road",
+      "Vadgaon Budruk",
+      "Katraj"
+    ],
+    "appointment_only": false,
+    "branches_note": "Consultation availability may extend to Pune and Satara by appointment.",
+    "photos": [
+      "assets/images/dr-prashant-case-01.jpeg",
+      "assets/images/dr-prashant-case-02.jpeg",
+      "assets/images/dr-prashant-case-03.jpeg",
+      "assets/images/dr-prashant-case-04.jpeg",
+      "assets/images/dr-prashant-case-05.jpeg",
+      "assets/images/dr-prashant-case-06.jpeg",
+      "assets/images/dr-prashant-case-07.jpeg",
+      "assets/images/dr-prashant-case-08.jpeg",
+      "assets/images/dr-prashant-case-09.jpeg",
+      "assets/images/dr-prashant-case-10.jpeg",
+      "assets/images/dr-prashant-case-11.jpeg",
+      "assets/images/dr-prashant-case-12.jpeg",
+      "assets/images/dr-prashant-case-13.jpeg",
+      "assets/images/dr-prashant-case-14.jpeg",
+      "assets/images/dr-prashant-case-15.jpeg",
+      "assets/images/dr-prashant-case-16.jpeg",
+      "assets/images/dr-prashant-case-17.jpeg",
+      "assets/images/dr-prashant-case-18.jpeg",
+      "assets/images/dr-prashant-case-19.jpeg",
+      "assets/images/dr-prashant-case-20.jpeg",
+      "assets/images/dr-prashant-case-21.jpeg",
+      "assets/images/dr-prashant-case-22.jpeg"
+    ],
+    "images": [
+      "assets/images/dr-prashant-case-01.jpeg",
+      "assets/images/dr-prashant-case-02.jpeg",
+      "assets/images/dr-prashant-case-03.jpeg",
+      "assets/images/dr-prashant-case-04.jpeg",
+      "assets/images/dr-prashant-case-05.jpeg",
+      "assets/images/dr-prashant-case-06.jpeg",
+      "assets/images/dr-prashant-case-07.jpeg",
+      "assets/images/dr-prashant-case-08.jpeg",
+      "assets/images/dr-prashant-case-09.jpeg",
+      "assets/images/dr-prashant-case-10.jpeg",
+      "assets/images/dr-prashant-case-11.jpeg",
+      "assets/images/dr-prashant-case-12.jpeg",
+      "assets/images/dr-prashant-case-13.jpeg",
+      "assets/images/dr-prashant-case-14.jpeg",
+      "assets/images/dr-prashant-case-15.jpeg",
+      "assets/images/dr-prashant-case-16.jpeg",
+      "assets/images/dr-prashant-case-17.jpeg",
+      "assets/images/dr-prashant-case-18.jpeg",
+      "assets/images/dr-prashant-case-19.jpeg",
+      "assets/images/dr-prashant-case-20.jpeg",
+      "assets/images/dr-prashant-case-21.jpeg",
+      "assets/images/dr-prashant-case-22.jpeg"
+    ],
+    "homepage_images": [
+      "assets/images/dr-prashant-case-19.jpeg",
+      "assets/images/dr-prashant-case-07.jpeg",
+      "assets/images/dr-prashant-case-11.jpeg",
+      "assets/images/dr-prashant-case-13.jpeg",
+      "assets/images/dr-prashant-case-09.jpeg"
+    ],
+    "expertise_images": [
+      "assets/images/dr-prashant-case-01.jpeg",
+      "assets/images/dr-prashant-case-03.jpeg",
+      "assets/images/dr-prashant-case-06.jpeg",
+      "assets/images/dr-prashant-case-09.jpeg",
+      "assets/images/dr-prashant-case-04.jpeg"
+    ],
+    "case_archive_images": [
+      "assets/images/dr-prashant-case-02.jpeg",
+      "assets/images/dr-prashant-case-05.jpeg",
+      "assets/images/dr-prashant-case-08.jpeg",
+      "assets/images/dr-prashant-case-15.jpeg",
+      "assets/images/dr-prashant-case-16.jpeg",
+      "assets/images/dr-prashant-case-17.jpeg",
+      "assets/images/dr-prashant-case-18.jpeg",
+      "assets/images/dr-prashant-case-20.jpeg",
+      "assets/images/dr-prashant-case-22.jpeg"
+    ]
+  },
+
+  "services": [
+    {
+      "name": "Oral Cancer Surgery",
+      "icon": "🩺",
+      "description": "Includes Cancer involving the Tongue, Buccal mucosa (cheeks), Gums, Teeth, Jaw, Palate, Floor of Mouth and Lip Cancers.",
+      "price_range": "On Consultation"
+    },
+    {
+      "name": "Thyroid Surgery",
+      "icon": "🫁",
+      "description": "Hemi-thyroidectomy, Total Thyroidectomy.",
+      "price_range": "On Consultation"
+    },
+    {
+      "name": "Reconstruction Surgery",
+      "icon": "🏥",
+      "description": "Reconstruction following Head and Neck Cancer Treatment: Local flaps as well as Microvascular free flaps.",
+      "price_range": "On Consultation"
+    },
+    {
+      "name": "Salivary Gland Tumor Surgery",
+      "icon": "🔬",
+      "description": "Parotid Gland (Superficial and Total/Radical Parotidectomy) and Submandibular Salivary Gland Tumor Surgery.",
+      "price_range": "On Consultation"
+    },
+    {
+      "name": "Skull Base Surgery",
+      "icon": "🧠",
+      "description": "Open Craniofacial Resection and Endoscopic Surgery for Skull base and Sinonasal tumours.",
+      "price_range": "On Consultation"
+    },
+    {
+      "name": "Larynx Cancer Surgery",
+      "icon": "🗣️",
+      "description": "Total Laryngectomy, Partial Laryngectomy for laryngeal and hypopharyngeal cancers.",
+      "price_range": "On Consultation"
+    }
+  ],
+
+  "expertise_items": [
+    {
+      "slug": "head-and-neck-cancer",
+      "title": "Head and Neck Cancer",
+      "description": "Comprehensive surgical management of all head and neck cancers.",
+      "read_more_url": "expertise-detail.html?slug=head-and-neck-cancer"
+    },
+    {
+      "slug": "diagnosing-head-and-neck-cancer",
+      "title": "Diagnosing Head and Neck Cancer",
+      "description": "Advanced diagnostic techniques for early detection and staging.",
+      "read_more_url": "expertise-detail.html?slug=diagnosing-head-and-neck-cancer"
+    },
+    {
+      "slug": "types-of-treatment-for-head-and-neck-cancer",
+      "title": "Types of Treatment for Head and Neck Cancer",
+      "description": "Multimodality treatment options including surgery, radiation and chemotherapy.",
+      "read_more_url": "expertise-detail.html?slug=types-of-treatment-for-head-and-neck-cancer"
+    },
+    {
+      "slug": "how-cancer-spreads-in-the-body",
+      "title": "How does Cancer spread in the body",
+      "description": "Understanding cancer metastasis and spread pathways.",
+      "read_more_url": "expertise-detail.html?slug=how-cancer-spreads-in-the-body"
+    },
+    {
+      "slug": "oral-precancerous-lesions-and-treatment",
+      "title": "Oral Precancerous lesions and treatment",
+      "description": "Identification and management of leukoplakia, erythroplakia, and submucous fibrosis.",
+      "read_more_url": "expertise-detail.html?slug=oral-precancerous-lesions-and-treatment"
+    },
+    {
+      "slug": "oral-cancer-in-india",
+      "title": "Oral Cancer in India",
+      "description": "Understanding the epidemiology and risk factors of oral cancer in India.",
+      "read_more_url": "expertise-detail.html?slug=oral-cancer-in-india"
+    },
+    {
+      "slug": "oral-cancer-overview",
+      "title": "Oral Cancer Overview",
+      "description": "Complete overview of oral cancer types, stages, and treatment approaches.",
+      "read_more_url": "expertise-detail.html?slug=oral-cancer-overview"
+    },
+    {
+      "slug": "human-papilloma-virus-and-oral-cancer",
+      "title": "Human Papilloma Virus and Oral Cancer",
+      "description": "Role of HPV in head and neck cancer development and prevention.",
+      "read_more_url": "expertise-detail.html?slug=human-papilloma-virus-and-oral-cancer"
+    },
+    {
+      "slug": "reconstruction-or-plastic-surgery-for-head-neck-cancer",
+      "title": "Reconstruction or Plastic Surgery for Head Neck Cancer",
+      "description": "Advanced reconstructive techniques following cancer surgery.",
+      "read_more_url": "expertise-detail.html?slug=reconstruction-or-plastic-surgery-for-head-neck-cancer"
+    },
+    {
+      "slug": "salivary-glands-and-tumours-of-salivary-gland",
+      "title": "Salivary Glands and Tumours of Salivary Gland",
+      "description": "Diagnosis and surgical management of salivary gland tumors.",
+      "read_more_url": "expertise-detail.html?slug=salivary-glands-and-tumours-of-salivary-gland"
+    },
+    {
+      "slug": "parotid-surgery",
+      "title": "Parotid Surgery",
+      "description": "Specialized surgical techniques for parotid gland tumors with nerve preservation.",
+      "read_more_url": "expertise-detail.html?slug=parotid-surgery"
+    },
+    {
+      "slug": "what-is-cancer",
+      "title": "What is Cancer? Symptoms and risk factors of oral cancer",
+      "description": "Understanding cancer fundamentals and early warning signs.",
+      "read_more_url": "expertise-detail.html?slug=what-is-cancer"
+    },
+    {
+      "slug": "why-oral-cancer",
+      "title": "Why do people who have never used tobacco or alcohol get oral cancer",
+      "description": "Non-traditional risk factors and emerging causes of oral cancer.",
+      "read_more_url": "expertise-detail.html?slug=why-oral-cancer"
+    },
+    {
+      "slug": "thyroid-cancer",
+      "title": "Thyroid Cancer",
+      "description": "Comprehensive thyroid cancer diagnosis and surgical treatment.",
+      "read_more_url": "expertise-detail.html?slug=thyroid-cancer"
+    },
+    {
+      "slug": "skull-base-surgery",
+      "title": "Skull Base Surgery",
+      "description": "Advanced endoscopic and open surgical approaches for skull base tumors.",
+      "read_more_url": "expertise-detail.html?slug=skull-base-surgery"
+    },
+    {
+      "slug": "minimally-invasive",
+      "title": "Minimally invasive and Cosmetically Superior Surgeries",
+      "description": "Endoscopic and robotic surgical techniques for better cosmetic outcomes.",
+      "read_more_url": "expertise-detail.html?slug=minimally-invasive"
+    },
+    {
+      "slug": "laryngeal-and-hypopharyngeal-cancer",
+      "title": "Laryngeal and Hypopharyngeal Cancer",
+      "description": "Surgical management of larynx and hypopharynx cancers with voice rehabilitation.",
+      "read_more_url": "expertise-detail.html?slug=laryngeal-and-hypopharyngeal-cancer"
+    }
+  ],
+
+  "expertise_items_homepage": [
+    {
+      "slug": "oral-cancer-overview",
+      "title": "Oral Cancer Overview",
+      "description": "Complete overview of oral cancer types, stages, and treatment approaches.",
+      "read_more_url": "expertise-detail.html?slug=oral-cancer-overview"
+    },
+    {
+      "slug": "thyroid-cancer",
+      "title": "Thyroid Cancer",
+      "description": "Comprehensive thyroid cancer diagnosis and surgical treatment.",
+      "read_more_url": "expertise-detail.html?slug=thyroid-cancer"
+    },
+    {
+      "slug": "parotid-surgery",
+      "title": "Parotid Surgery",
+      "description": "Specialized surgical techniques for parotid gland tumors with nerve preservation.",
+      "read_more_url": "expertise-detail.html?slug=parotid-surgery"
+    },
+    {
+      "slug": "skull-base-surgery",
+      "title": "Skull Base Surgery",
+      "description": "Advanced endoscopic and open surgical approaches for skull base tumors.",
+      "read_more_url": "expertise-detail.html?slug=skull-base-surgery"
+    }
+  ],
+
+  "expertise": [
+    {
+      "slug": "head-and-neck-cancer",
+      "title": "Head and Neck Cancer",
+      "summary": "Comprehensive surgical management of all head and neck cancers.",
+      "content_blocks": [
+        {
+          "type": "paragraph",
+          "heading": "Overview",
+          "body": "See detailed content in expertise detail page."
+        }
+      ]
+    },
+    {
+      "slug": "diagnosing-head-and-neck-cancer",
+      "title": "Diagnosing Head and Neck Cancer",
+      "summary": "Advanced diagnostic techniques for early detection and staging.",
+      "content_blocks": [
+        {
+          "type": "paragraph",
+          "heading": "Overview",
+          "body": "See detailed content in expertise detail page."
+        }
+      ]
+    },
+    {
+      "slug": "types-of-treatment-for-head-and-neck-cancer",
+      "title": "Types of Treatment for Head and Neck Cancer",
+      "summary": "Multimodality treatment options including surgery, radiation and chemotherapy.",
+      "content_blocks": [
+        {
+          "type": "paragraph",
+          "heading": "Overview",
+          "body": "See detailed content in expertise detail page."
+        }
+      ]
+    },
+    {
+      "slug": "how-cancer-spreads-in-the-body",
+      "title": "How does Cancer spread in the body",
+      "summary": "Understanding cancer metastasis and spread pathways.",
+      "content_blocks": [
+        {
+          "type": "paragraph",
+          "heading": "Overview",
+          "body": "See detailed content in expertise detail page."
+        }
+      ]
+    },
+    {
+      "slug": "oral-precancerous-lesions-and-treatment",
+      "title": "Oral Precancerous lesions and treatment",
+      "summary": "Identification and management of leukoplakia, erythroplakia, and submucous fibrosis.",
+      "content_blocks": [
+        {
+          "type": "paragraph",
+          "heading": "Overview",
+          "body": "See detailed content in expertise detail page."
+        }
+      ]
+    },
+    {
+      "slug": "oral-cancer-in-india",
+      "title": "Oral Cancer in India",
+      "summary": "Understanding the epidemiology and risk factors of oral cancer in India.",
+      "content_blocks": [
+        {
+          "type": "paragraph",
+          "heading": "Overview",
+          "body": "See detailed content in expertise detail page."
+        }
+      ]
+    },
+    {
+      "slug": "oral-cancer-overview",
+      "title": "Oral Cancer Overview",
+      "summary": "Complete overview of oral cancer types, stages, and treatment approaches.",
+      "content_blocks": [
+        {
+          "type": "paragraph",
+          "heading": "Overview",
+          "body": "See detailed content in expertise detail page."
+        }
+      ]
+    },
+    {
+      "slug": "human-papilloma-virus-and-oral-cancer",
+      "title": "Human Papilloma Virus and Oral Cancer",
+      "summary": "Role of HPV in head and neck cancer development and prevention.",
+      "content_blocks": [
+        {
+          "type": "paragraph",
+          "heading": "Overview",
+          "body": "See detailed content in expertise detail page."
+        }
+      ]
+    }
+  ],
+
+  "sections": {
+    "knowledgebase": { "enabled": false },
+    "research_publications": { "enabled": false }
+  },
+
+  "expertise_section": {
+    "label": "Our Expertise",
+    "title": "Complete Expertise in Head and Neck Cancer Treatment",
+    "subtitle": "Since its founding, providing patients with full medical care encompassing outpatient services, diagnostics, and advanced surgical treatment."
+  },
+
+  "treatments": {
+    "heading": "Treatments Offered",
+    "subtitle": "Comprehensive Head & Neck Cancer Management – with special interest in Cosmetically Aesthetic Cancer treatment.",
+    "categories": [
+      {
+        "name": "Open Surgery",
+        "items": [
+          "Oral Cancer surgery: Includes Cancer involving the Tongue, Buccal mucosa (cheeks), Gums, Teeth, Jaw, Palate, Floor of Mouth and Lip Cancers.",
+          "Thyroid surgery: Hemi-thyroidectomy, Total Thyroidectomy.",
+          "Reconstruction following Head and Neck Cancer Treatment: Local flaps as well as Microvascular free flaps.",
+          "Salivary Gland Tumor Surgery: Parotid Gland (Superficial and Total/Radical Parotidectomy) and Submandibular Salivary Gland Tumor Surgery.",
+          "Surgery for Precancerous Lesions: Leukoplakia, Erythroplakia, Submucous Fibrosis.",
+          "Surgery for improving the mouth opening in patient with Severe Trismus due to Oral Submucous fibrosis.",
+          "Open Craniofacial Resection for Skull base tumors.",
+          "Larynx Cancer Surgery: Total Laryngectomy, Partial Laryngectomy."
+        ]
+      },
+      {
+        "name": "Laser Surgery",
+        "items": [
+          "Laser Treatment for Early Laryngeal lesions and cancers.",
+          "Laser Treatment for Early Oral Precancerous lesions.",
+          "Surgery for Precancerous Lesions: Leukoplakia, Erythroplakia, Submucous Fibrosis."
+        ]
+      },
+      {
+        "name": "Endoscopic & Minimally Invasive Surgery",
+        "items": [
+          "Endoscopic Thyroid and Parathyroid surgery.",
+          "Endoscopic Submandibular Gland Excision.",
+          "Endoscopic Neck Dissection.",
+          "Skull Base Surgery: Endoscopic and Open Surgery for Skull base and Sinonasal tumours.",
+          "Trans Oral Endoscopic and Robotic Surgery."
+        ]
+      }
+    ]
+  },
+
+  "research_publications": [
+    {
+      "title": "Comparative study of outcome of type I tympanoplasty in dry and wet ear Grant Medical College.",
+      "journal": "Indian Journal of Otolaryngology and Head & Neck Surgery. Volume 61.",
+      "date": "June 2009",
+      "url": ""
+    },
+    {
+      "title": "Gross examination by the surgeon as an alternative to frozen section for assessment of adequacy of surgical margin in head and neck squamous cell carcinoma.",
+      "journal": "Pankaj Chaturvedi, Sourav Datta, Sudhir Nair, Deepa Nair, Prashant Pawar, Sagar Vaishampayan, Asawari Patil, Shubhada Kane.",
+      "date": "June 2013",
+      "url": "https://www.researchgate.net/directory/profiles"
+    },
+    {
+      "title": "A clinical survey of laryngectomy patients to detect presence of the false perception of an intact larynx or the phantom larynx phenomenon.",
+      "journal": "Indian journal of medical and paediatric oncology; 34(1):3-7",
+      "date": "March 2013",
+      "url": "https://www.researchgate.net/publication/251235969"
+    },
+    {
+      "title": "A Novel Obturator Device for Management of Dilated Trachea-esophageal Puncture Tract Fistulas.",
+      "journal": "Indian Journal of Otolaryngology and Head & Neck Surgery; 65(1):3-5",
+      "date": "January 2013",
+      "url": "https://www.researchgate.net/directory/profiles"
+    },
+    {
+      "title": "Routine removal of the carotid sheath as part of neck dissection is unnecessary if grossly uninvolved as seen intra-operatively.",
+      "journal": "International Journal of Oral and Maxillofacial Surgery. Accepted 5 January 2012.",
+      "date": "February 2012",
+      "url": "https://www.ijoms.com/article/S0901-5027(12)00007-0/abstract"
+    },
+    {
+      "title": "Current status and future prospects in prosthetic voice rehabilitation following laryngectomy.",
+      "journal": "Prashant Pawar, Suhail Sayed, Rehan Kazi, Mohan Jagade.",
+      "date": "",
+      "url": "https://www.researchgate.net/directory/profiles"
+    },
+    {
+      "title": "Oral squamous cell carcinoma arising in background of oral submucous fibrosis: A clinicopathologically distinct disease.",
+      "journal": "Pankaj Chaturvedi, Sagar S Vaishampayan, Sudhir Nair, Deepa Nair, J P Agarwal, S V Kane, Prashant Pawar, Sourav Datta.",
+      "date": "September 2012",
+      "url": "https://www.researchgate.net/publication/230843215"
+    }
+  ],
+
+  "testimonials": [
+    {
+      "name": "Patient Review",
+      "location": "Pune",
+      "rating": 5,
+      "text": "Very clear explanation of treatment options and excellent surgical care.",
+      "date": "2026-05"
+    },
+    {
+      "name": "Patient Review",
+      "location": "Narhe",
+      "rating": 5,
+      "text": "Professional team and smooth recovery support throughout treatment.",
+      "date": "2026-04"
+    },
+    {
+      "name": "Patient Review",
+      "location": "Ambegaon",
+      "rating": 5,
+      "text": "Detailed diagnosis and confident surgical approach. Highly recommended.",
+      "date": "2026-03"
+    }
+  ],
+
+  "faqs": [
+    {
+      "question": "How can I book an appointment?",
+      "answer": "Use the appointment form on this website, call the clinic, or message on WhatsApp."
+    },
+    {
+      "question": "Do you treat oral cancer and tongue cancer cases?",
+      "answer": "Yes, diagnosis and surgical management for oral cavity, tongue, and buccal mucosa cancers are available."
+    },
+    {
+      "question": "Do you perform facial trauma surgeries?",
+      "answer": "Yes, facial trauma and facial bone fracture surgeries are provided with reconstruction planning as needed."
+    },
+    {
+      "question": "Is wisdom tooth surgery available?",
+      "answer": "Yes, impacted wisdom tooth assessment and surgical removal are available."
+    },
+    {
+      "question": "Do you provide thyroid surgery consultation?",
+      "answer": "Yes, thyroid surgical consultations and treatment planning are available."
+    },
+    {
+      "question": "What should I bring for first consultation?",
+      "answer": "Bring prior reports, scans, biopsy reports (if any), and a list of current medications."
+    }
+  ],
+
+  "payment": {
+    "razorpay_key_id": "rzp_live_XXXXXXXXXXXXXXXXXX",
+    "consultation_fee": 500,
+    "currency": "INR"
+  },
+
+  "seo": {
+    "meta_title": "Head & Neck Surgical Oncologist in Mumbai | Dr. Prashant Pawar",
+    "meta_description": "Dr. Prashant Pawar is a leading Head and Neck Cancer Surgeon and Skull Base Surgeon in Mumbai. Expert in oral cancer, thyroid cancer, larynx cancer, skull base tumors surgery.",
+    "keywords": [
+      "head and neck cancer surgeon",
+      "oral cancer surgeon mumbai",
+      "skull base surgeon",
+      "thyroid cancer surgeon",
+      "head neck oncosurgeon",
+      "parotid surgery",
+      "larynx cancer surgery",
+      "tongue cancer surgery",
+      "oral cancer treatment"
+    ],
+    "local_keywords": [
+      "head neck cancer surgeon mumbai",
+      "oral cancer surgeon mumbai",
+      "skull base surgeon mumbai",
+      "thyroid cancer surgeon mumbai",
+      "best head neck surgeon india",
+      "oral cancer treatment mumbai"
+    ],
+    "og_image": "assets/images/og-image.jpg",
+    "schema_type": "Physician",
+    "google_analytics_id": "G-VQSXXS0DYY",
+    "pages": {
+      "profile": {
+        "meta_title": "Dr. Prashant Pawar Profile | Head and Neck Oncosurgeon",
+        "meta_description": "Profile of Dr. Prashant Pawar, Head and Neck Surgical Oncologist.",
+        "canonical": "/profile"
+      },
+      "expertise": {
+        "meta_title": "Expertise | Dr. Prashant Pawar",
+        "meta_description": "Comprehensive expertise in head and neck cancer treatment and advanced surgery.",
+        "canonical": "/expertise"
+      },
+      "contact": {
+        "meta_title": "Contact | Dr. Prashant Pawar",
+        "meta_description": "Contact clinic, call, or message on WhatsApp for consultation.",
+        "canonical": "/contact"
+      },
+      "expertise_detail": {
+        "meta_title_template": "{title} | Dr. Prashant Pawar",
+        "meta_description_template": "{summary}",
+        "canonical_template": "/expertise/{slug}"
+      }
+    }
+  },
+
+  "social": {
+    "google_business": "",
+    "instagram": "https://instagram.com/dr.prashant_oncomax_7788",
+    "facebook": "https://facebook.com/prashant.pawar.31508"
+  },
+
+  "media": {
+    "videos": []
+  }
+}

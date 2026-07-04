@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Doctor CMS — Dashboard</title>
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+  <div class="cms-container">
+    <!-- Sidebar Navigation -->
+    <nav class="cms-sidebar">
+      <div class="sidebar-header">
+        <h2>Doctor CMS</h2>
+        <p id="lastSaved" class="last-saved">Initializing...</p>
+      </div>
+
+      <ul class="tab-list" id="tabList">
+        <li><a href="#tab-home" class="tab-link active">🏠 Home</a></li>
+        <li><a href="#tab-about" class="tab-link">👤 About/Profile</a></li>
+        <li><a href="#tab-contact" class="tab-link">📞 Contact</a></li>
+        <li><a href="#tab-treatments" class="tab-link">💊 Treatments</a></li>
+        <li><a href="#tab-expertise" class="tab-link">🏥 Expertise</a></li>
+        <li><a href="#tab-testimonials" class="tab-link">⭐ Testimonials</a></li>
+        <li><a href="#tab-gallery" class="tab-link">🖼️ Gallery</a></li>
+        <li><a href="#tab-seo" class="tab-link">🔍 SEO</a></li>
+        <li><a href="#tab-preview" class="tab-link">👁️ Preview & Publish</a></li>
+      </ul>
+
+      <div class="sidebar-footer">
+        <button id="logoutBtn" class="btn-logout">🚪 Logout</button>
+      </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="cms-main">
+      <!-- Tab Panels -->
+      <div class="tab-panel" id="tab-home">
+        <h1>Home Section</h1>
+        <div id="homeForm"></div>
+      </div>
+
+      <div class="tab-panel" id="tab-about">
+        <h1>About / Profile</h1>
+        <div id="aboutForm"></div>
+      </div>
+
+      <div class="tab-panel" id="tab-contact">
+        <h1>Contact Information</h1>
+        <div id="contactForm"></div>
+      </div>
+
+      <div class="tab-panel" id="tab-treatments">
+        <h1>Treatments / Services</h1>
+        <div id="treatmentsForm"></div>
+      </div>
+
+      <div class="tab-panel" id="tab-expertise">
+        <h1>Expertise / Specializations</h1>
+        <div id="expertiseForm"></div>
+      </div>
+
+      <div class="tab-panel" id="tab-testimonials">
+        <h1>Testimonials</h1>
+        <div id="testimonialsForm"></div>
+      </div>
+
+      <div class="tab-panel" id="tab-gallery">
+        <h1>Gallery / Photos</h1>
+        <div id="galleryForm"></div>
+      </div>
+
+      <div class="tab-panel" id="tab-seo">
+        <h1>SEO Settings</h1>
+        <div id="seoForm"></div>
+      </div>
+
+      <div class="tab-panel" id="tab-preview">
+        <h1>Preview & Publish</h1>
+        <div id="previewPanel"></div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="action-buttons">
+        <button id="saveDraftBtn" class="btn-primary">💾 Save Draft</button>
+        <button id="previewBtn" class="btn-secondary">👁️ Preview</button>
+        <button id="publishBtn" class="btn-success">📤 Publish</button>
+      </div>
+    </main>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="toast"></div>
+
+  <!-- Confirm Dialog -->
+  <div id="confirmDialog" class="modal" style="display: none;">
+    <div class="modal-content">
+      <p id="confirmMessage"></p>
+      <div class="modal-actions">
+        <button id="confirmYes" class="btn-primary">Yes</button>
+        <button id="confirmNo" class="btn-secondary">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="js/dashboard.js"></script>
+</body>
+</html>
