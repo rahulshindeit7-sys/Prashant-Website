@@ -994,6 +994,36 @@
       });
     }
 
+    // Render service cards with SVG icons
+    var servicesContainer = document.getElementById('services-grid');
+    if (servicesContainer && Array.isArray(C.services)) {
+      // Clear existing content
+      servicesContainer.innerHTML = '';
+      console.log('[DEBUG] Rendering ' + C.services.length + ' services to container:', servicesContainer);
+      
+      C.services.forEach(function (s) {
+        var card = document.createElement('div');
+        card.className = 'service-card';
+        card.setAttribute('role', 'listitem');
+        
+        var iconHTML = '';
+        if (s.icon && (s.icon.endsWith('.svg') || s.icon.endsWith('.png') || s.icon.endsWith('.jpg') || s.icon.endsWith('.jpeg'))) {
+          // Use path from config (supports both SVG and image files)
+          var iconPath = s.icon;
+          console.log('[DEBUG] Creating img tag with src:', iconPath);
+          iconHTML = '<img src="' + iconPath + '" alt="' + s.name + '" class="service-icon" loading="lazy" style="width: 80px; height: 80px; object-fit: contain;">';
+        } else {
+          iconHTML = '<div class="service-icon" style="font-size: 2.5rem;">' + (s.icon || '✓') + '</div>';
+        }
+        
+        card.innerHTML = iconHTML + '<h3>' + s.name + '</h3><p>' + s.description + '</p>';
+        servicesContainer.appendChild(card);
+      });
+      console.log('[DEBUG] Service cards rendered successfully');
+    } else {
+      console.warn('[DEBUG] Services container not found or services not an array');
+    }
+
     // Block past dates
     var dateInput = document.getElementById('apt-date');
     if (dateInput) {

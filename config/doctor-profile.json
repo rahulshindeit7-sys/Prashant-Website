@@ -42,8 +42,8 @@
 
   "doctor": {
     "name": "Dr. Prashant Pawar",
-    "degree": "MS (ENT), DNB, Fellowship in Head & Neck Oncosurgery",
-    "specialization": "Head and Neck Surgical Oncologist, Skull Base Surgeon",
+    "degree": "BDS,MDS,FHNO",
+    "specialization": "Head and Neck Surgical Oncologist, Skull Base Surgeon, Oral and Maxillofacial Surgeon, Orthognathic Surgeon",
     "secondary_specializations": [
       "Head & Neck Oncosurgery",
       "Oral Cancer Surgery",
@@ -52,9 +52,9 @@
       "Parotid Surgery"
     ],
     "experience_years": 8,
-    "registration_number": "[A-37758 OLCC/TL/SO/001/2024]",
+    "registration_number": "[A-37758] [OLCC/TL/SO/001/2024]",
     "certifications": [
-      "Fellowship in Head & Neck Oncosurgery (Tata Memorial Hospital)"
+      "Master in oral and maxillofacial surgery Fellowship in head and neck cancer surgery"
     ],
     "awards": [
       "Indian Patent on Novel Tracheoesophageal Voice Prosthesis Device"
@@ -65,7 +65,7 @@
       "Hindi",
       "English"
     ],
-    "photo_logo": "assets/images/dr-prashant-hero-clean.png",
+    "photo_logo": "assets/images/Dr Prashant.png",
     "photo_about": "assets/images/Dr Prashant 2.png",
     "about": "Dr. Prashant Pawar is a leading Head and Neck Cancer Surgeon and Skull Base Surgeon. He is an expert in surgical management of all types of head and neck cancers like mouth cancer (Tongue cancer, Cheek cancer, lip cancer etc), Thyroid Cancer, Larynx Cancer, Nose and Sinonasal cancer, Salivary Gland Tumors and complex tumours involving the skull base region.\n\nDr. Prashant Pawar always strives to give his patients better outcomes not only in terms of Cancer cure but also with regards to cosmetic and functional outcomes after treatment.\n\nDue to his specialized and unique experience in the field and having performed over 2000 surgeries, he is one amongst the top head and neck cancer surgeons in India."
   },
@@ -188,37 +188,37 @@
   "services": [
     {
       "name": "Oral Cancer Surgery",
-      "icon": "🩺",
+      "icon": "assets/icons/oral cancel.png",
       "description": "Includes Cancer involving the Tongue, Buccal mucosa (cheeks), Gums, Teeth, Jaw, Palate, Floor of Mouth and Lip Cancers.",
       "price_range": "On Consultation"
     },
     {
       "name": "Thyroid Surgery",
-      "icon": "🫁",
+      "icon": "assets/icons/Thyroid.png",
       "description": "Hemi-thyroidectomy, Total Thyroidectomy.",
       "price_range": "On Consultation"
     },
     {
       "name": "Reconstruction Surgery",
-      "icon": "🏥",
+      "icon": "assets/icons/Reconstruction.png",
       "description": "Reconstruction following Head and Neck Cancer Treatment: Local flaps as well as Microvascular free flaps.",
       "price_range": "On Consultation"
     },
     {
       "name": "Salivary Gland Tumor Surgery",
-      "icon": "🔬",
+      "icon": "assets/icons/Salivary Gland.png",
       "description": "Parotid Gland (Superficial and Total/Radical Parotidectomy) and Submandibular Salivary Gland Tumor Surgery.",
       "price_range": "On Consultation"
     },
     {
       "name": "Skull Base Surgery",
-      "icon": "🧠",
+      "icon": "assets/icons/Skull_base.png",
       "description": "Open Craniofacial Resection and Endoscopic Surgery for Skull base and Sinonasal tumours.",
       "price_range": "On Consultation"
     },
     {
       "name": "Larynx Cancer Surgery",
-      "icon": "🗣️",
+      "icon": "assets/icons/Laryngel.png",
       "description": "Total Laryngectomy, Partial Laryngectomy for laryngeal and hypopharyngeal cancers.",
       "price_range": "On Consultation"
     }
@@ -597,6 +597,10 @@
     {
       "question": "What should I bring for first consultation?",
       "answer": "Bring prior reports, scans, biopsy reports (if any), and a list of current medications."
+    },
+    {
+      "question": "What are the chances of survival with oral cancer?",
+      "answer": "5-year survival is ~65% overall. Stage I has ~80-90% survival, while stage IV has ~30-40%. Survival depends on tumor stage, patient health, and treatment adherence. Early detection dramatically improves survival. Our team will discuss prognosis based on your specific cancer characteristics."
     }
   ],
 
