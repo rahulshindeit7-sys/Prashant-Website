@@ -1923,12 +1923,13 @@
 
   function initScrollRevealEffects() {
     var targets = document.querySelectorAll(
-      '.section, .service-card, .why-card, .testimonial-card, .expertise-card, .case-archive-card'
+      '.section, .profile-card, .service-card, .why-card, .testimonial-card, .testimonial-gallery-card, .expertise-card, .case-archive-card, .faq__item, .contact__card, .contact__map, .key-point-card, .consultation-item, .treatment-item, .faq-item, .cta-box'
     );
     if (!targets.length) return;
 
-    targets.forEach(function (el) {
+    targets.forEach(function (el, index) {
       el.classList.add('reveal-on-scroll');
+      el.style.transitionDelay = Math.min(index % 6, 5) * 55 + 'ms';
     });
 
     if (!('IntersectionObserver' in window)) {
@@ -1942,6 +1943,7 @@
       entries.forEach(function (entry) {
         if (entry.isIntersecting) {
           entry.target.classList.add('is-visible');
+          entry.target.style.transitionDelay = '';
           observer.unobserve(entry.target);
         }
       });
