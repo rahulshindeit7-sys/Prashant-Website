@@ -23,6 +23,14 @@
     var params = new URLSearchParams(window.location.search || '');
     var slug = (params.get('slug') || '').trim().toLowerCase();
     slug = slug ? slug.replace(/[^a-z0-9-]/g, '') : '';
+    if (!slug) {
+      try {
+        slug = (sessionStorage.getItem('selectedExpertiseSlug') || '').trim().toLowerCase();
+        slug = slug ? slug.replace(/[^a-z0-9-]/g, '') : '';
+      } catch (err) {
+        slug = '';
+      }
+    }
     return slug;  // Return empty string if no slug provided
   }
 

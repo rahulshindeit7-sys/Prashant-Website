@@ -14,11 +14,11 @@
     // Try query param first (works with ?slug=... format)
     var params = new URLSearchParams(window.location.search || '');
     var slug = (params.get('slug') || '').trim().toLowerCase();
-    if (slug) return slug.replace(/[^a-z0-9-]/g, '');
+    if (slug) return decodeURIComponent(slug).replace(/[^a-z0-9-]/g, '');
 
     // Try clean URL: /expertise/{slug}
     var match = window.location.pathname.match(/\/expertise\/([a-z0-9-]+)\/?$/i);
-    if (match) return match[1].toLowerCase().replace(/[^a-z0-9-]/g, '');
+    if (match) return decodeURIComponent(match[1]).toLowerCase().replace(/[^a-z0-9-]/g, '');
 
     return '';
   }

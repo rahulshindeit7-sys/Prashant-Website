@@ -160,6 +160,13 @@
     var routes = window.doctorRoutes || {};
     var page = typeof routes.detectPage === 'function' ? routes.detectPage() : 'home';
     var slug = typeof routes.readSlug === 'function' ? routes.readSlug() : '';
+    if (!slug && page === 'expertise-detail') {
+      try {
+        slug = sessionStorage.getItem('selectedExpertiseSlug') || '';
+      } catch (err) {
+        slug = '';
+      }
+    }
     return { page: page || 'home', slug: slug || '' };
   }
 
@@ -286,26 +293,37 @@
       var list = document.getElementById('expertise-list');
       if (list) {
         list.innerHTML = expertise.map(function (item) {
-          var slug = escHtml(item.slug || '');
+          var slug = (item.slug || slugify(item.title || '')).toLowerCase();
           return (
             '<article class="service-card">' +
               '<h2 class="service-card__name">' + escHtml(item.title || '') + '</h2>' +
               '<p class="service-card__desc">' + escHtml(item.summary || '') + '</p>' +
-              '<a class="btn btn--primary" href="expertise-detail.html?slug=' + slug + '">Read More</a>' +
+              '<a class="btn btn--primary" data-expertise-slug="' + escHtml(slug) + '" href="expertise-detail.html?slug=' + encodeURIComponent(slug) + '">Read More</a>' +
             '</article>'
           );
         }).join('');
+
+        list.addEventListener('click', function (event) {
+          var link = event.target && event.target.closest ? event.target.closest('[data-expertise-slug]') : null;
+          if (!link) return;
+
+          try {
+            sessionStorage.setItem('selectedExpertiseSlug', link.getAttribute('data-expertise-slug') || '');
+          } catch (err) {
+            // Continue normal navigation if storage is unavailable.
+          }
+        });
       }
       return;
     }
 
     if (ctx.page === 'expertise-detail') {
       var detail = expertise.find(function (item) {
-        return (item.slug || '') === ctx.slug;
+        return (item.slug || '').toLowerCase() === (ctx.slug || '').toLowerCase();
       });
       setTextById('expertise-detail-heading', detail ? detail.title : 'Expertise Detail Not Found');
       setTextById('expertise-detail-summary', detail ? (detail.summary || '') : 'No content found for this topic.');
-      setImgById('expertise-detail-hero', detail ? (detail.hero_image || '') : '', detail ? (detail.title || 'Expertise image') : 'Expertise detail image');
+      setTextById('breadcrumbCurrent', detail ? detail.title : 'Not Found');
       var detailContent = document.getElementById('expertise-detail-content');
       if (detailContent) {
         if (!detail) {
@@ -527,7 +545,7 @@
       result.canonical = toAbsolute(pageMap.contact.canonical) || result.canonical;
     } else if (ctx.page === 'expertise-detail' && pageMap.expertise_detail) {
       var detailItem = getExpertiseRouteItems(C).find(function (item) {
-        return (item.slug || '') === ctx.slug;
+        return (item.slug || '').toLowerCase() === (ctx.slug || '').toLowerCase();
       });
       var titleTemplate = pageMap.expertise_detail.meta_title_template || '{title}';
       var descTemplate = pageMap.expertise_detail.meta_description_template || '{summary}';
@@ -552,14 +570,14 @@
     var seen = {};
     var expertise = configuredItems.map(function (item) {
       var title = item && item.title ? item.title : '';
-      var slug = item && item.slug ? item.slug : slugify(title);
+      var slug = (item && item.slug ? item.slug : slugify(title)).toLowerCase();
       if (slug) seen[slug] = true;
       return Object.assign({}, item, { slug: slug });
     });
 
     fallbackItems.forEach(function (item) {
       var title = item && item.title ? item.title : '';
-      var slug = slugify(title);
+      var slug = ((item && item.slug) ? item.slug : slugify(title)).toLowerCase();
       if (!title || !slug || seen[slug]) return;
       seen[slug] = true;
       expertise.push({
@@ -810,11 +828,12 @@
         var title = escHtml(item.title || 'Expertise Area');
         var desc = escHtml(item.description || '');
         var externalLink = safeExternalUrl(item.read_more_url || '');
-        var detailLink = 'expertise-detail.html?slug=' + encodeURIComponent(slugify(item.title || ''));
+        var slug = ((item && item.slug) ? item.slug : slugify(item.title || '')).toLowerCase();
+        var detailLink = buildExpertiseDetailUrl(slug);
         var link = externalLink || detailLink;
 
         var linkHtml = link
-          ? '<a class="expertise-card__link" href="' + escHtml(link) + '"' + (externalLink ? ' target="_blank" rel="noopener noreferrer"' : '') + '>Read more</a>'
+          ? '<a class="expertise-card__link" data-expertise-slug="' + escHtml(slug) + '" href="' + escHtml(link) + '"' + (externalLink ? ' target="_blank" rel="noopener noreferrer"' : '') + '>Read more</a>'
           : '';
 
         return (
@@ -825,6 +844,11 @@
           '</article>'
         );
       }).join('');
+      grid.addEventListener('click', function (event) {
+        var link = event.target && event.target.closest ? event.target.closest('[data-expertise-slug]') : null;
+        if (!link) return;
+        storeSelectedExpertiseSlug(link.getAttribute('data-expertise-slug') || '');
+      });
       grid.hidden = false;
 
       if (gallery) {
@@ -1994,6 +2018,18 @@
     }
 
     return '';
+  }
+
+  function buildExpertiseDetailUrl(slug) {
+    return 'expertise-detail?slug=' + encodeURIComponent(slug || '');
+  }
+
+  function storeSelectedExpertiseSlug(slug) {
+    try {
+      sessionStorage.setItem('selectedExpertiseSlug', slug || '');
+    } catch (err) {
+      // Continue normal navigation if storage is unavailable.
+    }
   }
 
   function formatDate(dateStr) {
