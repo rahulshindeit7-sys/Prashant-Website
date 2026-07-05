@@ -2038,7 +2038,7 @@
   }
 
   function buildExpertiseDetailUrl(slug) {
-    return 'expertise-detail?slug=' + encodeURIComponent(slug || '');
+    return 'expertise-detail.html?slug=' + encodeURIComponent(slug || '');
   }
 
   function storeSelectedExpertiseSlug(slug) {
