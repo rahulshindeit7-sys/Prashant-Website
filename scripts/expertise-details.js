@@ -74,7 +74,7 @@ window.EXPERTISE_DETAILS = {
       },
       {
         question: "What are the long-term effects of head and neck cancer treatment?",
-        answer: "Side effects can include dry mouth, difficulty swallowing, speech changes, appearance changes, and limited neck movement. Many improve with rehabilitation. Your team will provide support for managing these effects."
+        answer: "Side effects can include dry mouth, difficulty swallowing, speech changes, appearance changes, and limited neck movement. Many improve with rehabilitation. Our team will provide support for managing these effects."
       }
     ],
     related: [
@@ -149,7 +149,7 @@ window.EXPERTISE_DETAILS = {
       },
       {
         question: "How long does diagnosis take?",
-        answer: "Initial evaluation might take 1-2 visits. Biopsy results typically available within 3-5 days. Complete staging including imaging might take 1-2 weeks. Your team will prioritize timely diagnosis and treatment planning."
+        answer: "Initial evaluation might take 1-2 visits. Biopsy results typically available within 3-5 days. Complete staging including imaging might take 1-2 weeks. Our team will prioritize timely diagnosis and treatment planning."
       },
       {
         question: "What does the staging mean for my treatment?",
@@ -230,11 +230,11 @@ window.EXPERTISE_DETAILS = {
       },
       {
         question: "How long is the treatment course?",
-        answer: "Surgery is typically one procedure. Radiation is usually 5-7 weeks of daily treatments. Chemotherapy varies by protocol. Total treatment from diagnosis to completion might be 2-4 months. Your team provides a detailed timeline."
+        answer: "Surgery is typically one procedure. Radiation is usually 5-7 weeks of daily treatments. Chemotherapy varies by protocol. Total treatment from diagnosis to completion might be 2-4 months. Our team provides a detailed timeline."
       },
       {
         question: "Can function be preserved?",
-        answer: "Modern techniques increasingly preserve speech, swallowing, and appearance. Minimally invasive surgery, function-preserving radiation, and reconstruction all aim to maintain quality of life. Goals are discussed with your team before treatment starts."
+        answer: "Modern techniques increasingly preserve speech, swallowing, and appearance. Minimally invasive surgery, function-preserving radiation, and reconstruction all aim to maintain quality of life. Goals are discussed with our team before treatment starts."
       }
     ],
     related: [
@@ -315,7 +315,7 @@ window.EXPERTISE_DETAILS = {
       },
       {
         question: "How is spread detected?",
-        answer: "Physical examination detects enlarged lymph nodes. Imaging studies (CT/MRI/PET-CT) assess local invasion, nodal disease, and distant metastases. PET-CT is particularly good at detecting distant metastases. Your team will perform appropriate studies based on cancer type and risk."
+        answer: "Physical examination detects enlarged lymph nodes. Imaging studies (CT/MRI/PET-CT) assess local invasion, nodal disease, and distant metastases. PET-CT is particularly good at detecting distant metastases. Our team will perform appropriate studies based on cancer type and risk."
       }
     ],
     related: [
@@ -552,7 +552,7 @@ window.EXPERTISE_DETAILS = {
     faqs: [
       {
         question: "What are the chances of survival with oral cancer?",
-        answer: "5-year survival is ~65% overall. Stage I has ~80-90% survival, while stage IV has ~30-40%. Survival depends on tumor stage, patient health, and treatment adherence. Early detection dramatically improves survival. Your team will discuss prognosis based on your specific cancer characteristics."
+        answer: "5-year survival is ~65% overall. Stage I has ~80-90% survival, while stage IV has ~30-40%. Survival depends on tumor stage, patient health, and treatment adherence. Early detection dramatically improves survival. Our team will discuss prognosis based on your specific cancer characteristics."
       },
       {
         question: "Will I need all teeth removed?",

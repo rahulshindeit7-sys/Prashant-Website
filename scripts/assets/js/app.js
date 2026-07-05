@@ -154,6 +154,24 @@
 
     initScrollRevealEffects();
     initLazyImages();
+    scrollToCurrentHashTarget();
+  }
+
+  function scrollToCurrentHashTarget() {
+    if (!window.location.hash) return;
+
+    window.setTimeout(function () {
+      var id = decodeURIComponent(window.location.hash.slice(1));
+      if (!id) return;
+
+      var target = document.getElementById(id);
+      if (!target) return;
+
+      var navbar = document.querySelector('.navbar');
+      var offset = navbar ? navbar.getBoundingClientRect().height + 24 : 24;
+      var top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+      window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+    }, 150);
   }
 
   function getPageContext() {
@@ -186,7 +204,7 @@
     homeAnchors.forEach(function (anchor) {
       if (!anchor || !anchor.id || !anchor.label) return;
       if (anchor.id === 'contact' && pages.contact && pages.contact.enabled) return;
-      navItems.push('<a href="index.html#' + escHtml(anchor.id) + '">' + escHtml(anchor.label) + '</a>');
+      navItems.push('<a href="./#' + escHtml(anchor.id) + '">' + escHtml(anchor.label) + '</a>');
     });
 
     if (pages.profile && pages.profile.enabled && !excluded.profile) {
@@ -259,8 +277,6 @@
         profileCreds.innerHTML = chips.map(function (entry) {
           return '<span class="about__chip">' + escHtml(entry) + '</span>';
         }).join('');
-
-        profileCreds.innerHTML += '<p><a class="btn btn--whatsapp" id="profile-whatsapp" href="#">WhatsApp Consultation</a></p>';
       }
       return;
     }
@@ -330,12 +346,10 @@
     if (ctx.page === 'contact') {
       var contactContent = document.getElementById('contact-content');
       if (contactContent) {
-        var contactWa = buildWhatsAppUrl(clinic.whatsapp || '', 'Hello ' + (doc.name || 'Doctor') + ', I want to book an appointment.');
         contactContent.innerHTML =
           '<p><strong>Address:</strong> ' + escHtml((clinic.address || '') + ', ' + (clinic.city || '')) + '</p>' +
           '<p><strong>Phone:</strong> ' + escHtml(clinic.phone || '') + '</p>' +
-          '<p><strong>Email:</strong> ' + escHtml(clinic.email || '') + '</p>' +
-          '<p><a class="btn btn--whatsapp" id="contact-route-whatsapp" href="' + escHtml(contactWa) + '" target="_blank" rel="noopener noreferrer">Chat on WhatsApp</a></p>';
+          '<p><strong>Email:</strong> ' + escHtml(clinic.email || '') + '</p>';
       }
 
       var routeTiming = document.getElementById('contact-route-timing');

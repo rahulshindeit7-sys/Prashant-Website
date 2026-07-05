@@ -12,13 +12,18 @@
   <header id="shared-header"></header>
   <main id="page-profile" class="section" aria-labelledby="profile-heading">
     <div class="container">
-      <h1 id="profile-heading">Doctor Profile</h1>
-      <p id="profile-summary">Loading profile details...</p>
-      <section id="profile-content"></section>
-      <figure class="profile-photo-wrap">
-        <img id="profile-photo" loading="lazy" src="" alt="Doctor profile photo" />
-      </figure>
-      <section id="profile-credentials"></section>
+      <article class="profile-card">
+        <figure class="profile-photo-wrap">
+          <img id="profile-photo" loading="lazy" src="" alt="Doctor profile photo" />
+        </figure>
+        <div class="profile-card__body">
+          <p class="section__label">Doctor Profile</p>
+          <h1 id="profile-heading">Doctor Profile</h1>
+          <p id="profile-summary" class="profile-summary">Loading profile details...</p>
+          <section id="profile-content" class="profile-content"></section>
+          <section id="profile-credentials" class="profile-credentials"></section>
+        </div>
+      </article>
     </div>
   </main>
   <footer id="shared-footer"></footer>

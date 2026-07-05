@@ -243,19 +243,9 @@
 
   function renderRelatedTopics(related) {
     var container = document.getElementById('expertiseRelated');
-    if (!container || !Array.isArray(related) || related.length === 0) return;
-
-    var html = '<div class="related-topics">';
-    related.forEach(function (topic) {
-      if (topic && topic.slug && topic.title) {
-        html += '<a href="expertise-detail.html?slug=' + escHtml(topic.slug) + '" class="related-topic-card">' +
-          '<span class="related-topic-title">' + escHtml(topic.title) + '</span>' +
-          '<span class="related-topic-arrow">→</span>' +
-          '</a>';
-      }
-    });
-    html += '</div>';
-    container.innerHTML = html;
+    if (!container) return;
+    container.innerHTML = '';
+    container.style.display = 'none';
   }
 
   function renderCTA(topicTitle) {

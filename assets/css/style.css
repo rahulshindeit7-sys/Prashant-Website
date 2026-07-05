@@ -149,6 +149,55 @@ button {
   outline-offset: 2px;
 }
 
+.profile-card {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.8fr) minmax(0, 1.2fr);
+  align-items: stretch;
+  gap: clamp(1.5rem, 4vw, 3rem);
+  padding: clamp(1rem, 3vw, 2rem);
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow);
+}
+
+.profile-card__body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+}
+
+#page-profile .section__label {
+  margin-bottom: 0.7rem;
+}
+
+#profile-heading {
+  margin: 0 0 0.85rem;
+  font-size: clamp(2rem, 4vw, 3.4rem);
+  line-height: 1.05;
+}
+
+.profile-summary {
+  margin: 0 0 1.25rem;
+  color: var(--primary);
+  font-size: clamp(0.95rem, 1.3vw, 1.08rem);
+  font-weight: 700;
+  line-height: 1.7;
+}
+
+.profile-content {
+  display: grid;
+  gap: 0.85rem;
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+.profile-content p {
+  margin: 0;
+}
+
 .profile-photo-wrap,
 .expertise-hero-wrap,
 .expertise-detail-hero-wrap {
@@ -170,11 +219,31 @@ button {
   background: #eaf1f8;
 }
 
+.profile-photo-wrap {
+  margin: 0;
+  min-height: 100%;
+}
+
+#profile-photo {
+  display: block;
+  height: 100%;
+  min-height: 520px;
+  max-height: none;
+  object-fit: contain;
+  object-position: center top;
+  background: linear-gradient(180deg, #fffaf2 0%, #eef6fb 100%);
+}
+
 #profile-credentials {
   display: flex;
   flex-wrap: wrap;
   gap: 0.6rem;
-  margin-top: 0.6rem;
+  margin-top: 1.4rem;
+  align-items: center;
+}
+
+.profile-credentials p {
+  margin: 0;
 }
 
 /* ---- 4. BUTTONS ---- */
@@ -1768,6 +1837,16 @@ button {
     padding-inline: 1rem;
   }
 
+  .profile-card {
+    grid-template-columns: 1fr;
+    padding: 1rem;
+  }
+
+  #profile-photo {
+    min-height: 360px;
+    max-height: none;
+  }
+
   #expertise-list {
     display: grid;
     grid-template-columns: 1fr;
@@ -1919,6 +1998,10 @@ button {
   #expertise-hero-image,
   #expertise-detail-hero {
     max-height: 260px;
+  }
+
+  #profile-photo {
+    max-height: none;
   }
 
   .testimonials__grid {
