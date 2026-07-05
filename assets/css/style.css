@@ -127,6 +127,12 @@ button {
   50% { transform: translateY(-6px); }
 }
 
+@keyframes logo-coin-flip {
+  0% { transform: perspective(900px) rotateY(0deg); }
+  50% { transform: perspective(900px) rotateY(180deg); }
+  100% { transform: perspective(900px) rotateY(360deg); }
+}
+
 .navbar {
   animation: page-rise 0.65s var(--motion-ease) both;
 }
@@ -468,9 +474,10 @@ button {
 
 .navbar__logo {
   display: inline-flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0;
+  gap: 0.3rem;
   position: relative;
   font-family: var(--font-display);
   font-size: 1rem;
@@ -483,33 +490,50 @@ button {
   color: var(--primary-light);
 }
 
-.navbar__logo-mark {
+.navbar__logo-orbit {
   width: 130px;
   height: 130px;
-  max-height: 130px;
-  display: block;
-  object-fit: contain;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
   border-radius: 50%;
   border: 2px solid rgba(27, 79, 114, 0.15);
+  background: var(--white);
   box-shadow:
     0 2px 8px rgba(255, 255, 255, 0.65),
     0 8px 18px rgba(15, 58, 90, 0.1),
     0 0 0 1px rgba(207, 220, 236, 0.55);
-  transition: transform 320ms ease, box-shadow 320ms ease;
+  transition: box-shadow 320ms ease;
   flex-shrink: 0;
+}
+
+.navbar__logo-mark {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+  border-radius: 50%;
   image-rendering: crisp-edges;
   image-rendering: -webkit-optimize-contrast;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transform-origin: center;
+  transform-style: preserve-3d;
+  animation: logo-coin-flip 2.4s linear infinite;
+  will-change: transform;
 }
 
-.navbar__logo:hover .navbar__logo-mark,
-.navbar__logo:focus-visible .navbar__logo-mark {
-  transform: translateY(-1px);
+.navbar__logo:hover .navbar__logo-orbit,
+.navbar__logo:focus-visible .navbar__logo-orbit {
   box-shadow:
     0 3px 10px rgba(255, 255, 255, 0.76),
     0 12px 24px rgba(15, 58, 90, 0.14),
     0 0 0 1px rgba(198, 216, 238, 0.72);
+}
+
+.navbar__logo:hover .navbar__logo-mark,
+.navbar__logo:focus-visible .navbar__logo-mark {
+  animation-duration: 1.45s;
 }
 
 .navbar__logo-text {
@@ -531,6 +555,45 @@ button {
   color: var(--text-light);
   font-family: var(--font-body);
   font-weight: 600;
+}
+
+.navbar__logo-caption {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.1rem;
+  width: max-content;
+  max-width: 260px;
+  padding-bottom: 0.15rem;
+  font-family: var(--font-body);
+  font-size: 0.58rem;
+  font-weight: 700;
+  line-height: 1.18;
+  letter-spacing: 0.18em;
+  text-align: center;
+  text-transform: uppercase;
+  color: #087f91;
+  animation: none;
+  transform: none;
+}
+
+.navbar__logo-caption span:nth-child(2) {
+  color: var(--primary);
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+}
+
+.navbar__logo-caption span:nth-child(3) {
+  margin-top: 0.06rem;
+  padding-top: 0.18rem;
+  border-top: 1px solid rgba(8, 127, 145, 0.65);
+  font-size: 0.5rem;
+  letter-spacing: 0.2em;
+}
+
+.navbar__logo-caption b {
+  padding-inline: 0.35em;
+  font-weight: 700;
 }
 
 .navbar__links {
@@ -1894,9 +1957,9 @@ button {
     min-height: 98px;
   }
 
-  .navbar__logo-mark {
-    width: 350px;
-    max-height: 82px;
+  .navbar__logo-orbit {
+    width: 82px;
+    height: 82px;
   }
 
   .why-us__grid {
@@ -1925,11 +1988,9 @@ button {
     gap: 1rem;
     z-index: 999;
   }
-  .navbar__logo-mark {
+  .navbar__logo-orbit {
     width: 100px;
     height: 100px;
-    max-height: 100px;
-    border-radius: 50%;
   }
   .navbar__logo-text {
     display: none;

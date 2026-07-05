@@ -229,7 +229,14 @@
         '<nav class="navbar" role="navigation" aria-label="Main Navigation">' +
           '<div class="container navbar__inner">' +
             '<a href="index.html" class="navbar__logo" aria-label="Home">' +
-              '<img src="assets/images/Dr Prashant Logo.png" alt="' + escHtml(doc.name || clinic.name || 'Doctor Website') + ' logo" class="navbar__logo-mark" loading="eager" />' +
+              '<span class="navbar__logo-orbit">' +
+                '<img src="assets/images/Dr Prashant Logo.png" alt="' + escHtml(doc.name || clinic.name || 'Doctor Website') + ' logo" class="navbar__logo-mark" loading="eager" />' +
+              '</span>' +
+              '<span class="navbar__logo-caption" aria-hidden="true">' +
+                '<span>Oral &amp; Maxillofacial Surgeon</span>' +
+                '<span>Head &amp; Neck Surgical Care</span>' +
+                '<span>Expertise <b>&middot;</b> Precision <b>&middot;</b> Compassion</span>' +
+              '</span>' +
             '</a>' +
             '<div class="route-nav-links">' + navItems.join('') + '</div>' +
           '</div>' +
