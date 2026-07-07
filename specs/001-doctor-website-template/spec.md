@@ -119,6 +119,9 @@ A patient visiting the site wants to quickly message the doctor on WhatsApp with
 - What happens when Razorpay key is invalid or not configured? → Payment gracefully falls back to WhatsApp-only booking.
 - What happens when images referenced in config don't exist? → Placeholder/fallback behavior (no broken image icons).
 - What happens when the page is accessed without a web server (file:// protocol)? → Clear error message explaining HTTP server is required.
+- What happens when the admin dashboard API is unavailable during feedback submission? → Graceful error message displayed with option to retry submission.
+- What happens when a patient submits feedback without selecting a service? → Inline validation prevents submission (service field is required).
+- What happens when multiple feedback submissions come from the same user? → Each submission is treated independently (no deduplication in v1).
 
 ## Requirements *(mandatory)*
 
@@ -158,6 +161,12 @@ A patient visiting the site wants to quickly message the doctor on WhatsApp with
 - **FR-031**: System MUST exclude Knowledgebase and Research & Publications from navigation, routing, and page generation.
 - **FR-032**: System MUST implement expertise detail content using one reusable detail page template resolved by expertise slug/ID from config, while preserving SEO-friendly unique URLs per expertise topic.
 - **FR-033**: System MUST use hybrid navigation: retain existing anchor-based section navigation on Home, and add route-based navigation for Profile, Expertise listing/detail, and Contact pages.
+- **FR-034**: System MUST render a patient feedback form directly on the website page with fields: patient name (required), star rating 1-5 (required), feedback text (required), and service received (required, dropdown populated from config services array).
+- **FR-035**: System MUST validate all required feedback form fields client-side with inline error messages before submission (same validation pattern as appointment booking form).
+- **FR-036**: System MUST submit feedback data to the admin dashboard API (spec 002) for processing and storage.
+- **FR-037**: System MUST auto-publish feedback with star rating ≥4 to the testimonials section alongside manually-added testimonials, displaying publicly on the website without requiring manual approval.
+- **FR-038**: System MUST route feedback with star rating <4 to the doctor via WhatsApp notification message (including patient name, rating, and feedback text) without displaying it publicly on the website.
+- **FR-039**: System MUST display approved patient feedback in the existing testimonials section with the same visual treatment as manually-added testimonials (star rating, patient name, feedback text, service received).
 
 ### Key Entities
 
@@ -167,6 +176,7 @@ A patient visiting the site wants to quickly message the doctor on WhatsApp with
 - **Service**: Name, icon, description, price range
 - **Expertise**: slug (unique), title, summary, detail content blocks, hero image, related expertise links
 - **Testimonial**: Patient name, location, rating (1-5), text, date
+- **Feedback**: Patient name, star rating (1-5), feedback text, service received, submission date, status (approved/pending/rejected), source ("patient-form")
 - **FAQ**: Question, answer (both used for display and Schema.org)
 - **Appointment**: Patient name, phone, date, time, service, message, payment ID
 - **Payment Config**: Razorpay key, consultation fee, currency
@@ -243,3 +253,11 @@ A patient visiting the site wants to quickly message the doctor on WhatsApp with
 - Q: What does "WhatsApp message is available on portrait mode" mean? → A: Feature must be BOTH enabled in config (doctor has configured WhatsApp number) AND prominently visible on portrait mobile devices (≤768px width in portrait orientation). Patients must be able to immediately see and access WhatsApp without friction.
 - Q: At what viewport widths should WhatsApp portrait mode feature apply? → A: Use CSS media query for device orientation detection (`@media (orientation: portrait)`) rather than fixed pixel breakpoints. This works across all device types (phones, tablets) and respects actual device orientation, providing better mobile UX than viewport-width-based rules.
 - Q: When viewport space is very narrow in portrait mode, should WhatsApp button cover content or be repositioned? → A: Use sticky bottom positioning (Option D). Floating WhatsApp button fixed to bottom-right as sticky footer with modest padding/margin on main content. Users can always scroll, but WhatsApp remains one-tap away without obscuring critical page content. Ensures accessibility and readability are never compromised.
+
+### Session 2026-07-06
+
+- Q: How should patients submit feedback? → A: On-page feedback form directly on the website (no navigation away required), making it convenient and user-friendly.
+- Q: How should feedback be classified as positive or negative? → A: Star rating threshold — ≥4 stars = positive (auto-published to testimonials), <4 stars = negative (sent to doctor for review, not displayed publicly).
+- Q: How should the doctor be notified of negative feedback? → A: WhatsApp message to doctor with patient name, rating, and feedback text.
+- Q: Where should approved positive feedback be displayed? → A: Merged into existing testimonials section (unified social proof alongside manually-added testimonials).
+- Q: What fields should the feedback form collect? → A: Name, star rating (1-5), feedback text, and service received (dropdown populated from config services).

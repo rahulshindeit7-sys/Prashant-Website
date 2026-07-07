@@ -137,6 +137,7 @@
       initCounters(C);
       initAppointmentForm(C);
       initTestimonials(C);
+      initFeedbackForm(C);
       initCaseArchive(C);
       initFAQ(C);
       initContact(C);
@@ -2078,6 +2079,248 @@
   function trackDoctorEvent(eventName, params) {
     if (window.trackDoctorEvent) {
       window.trackDoctorEvent(eventName, params || {});
+    }
+  }
+
+  /* ============================================================
+     PATIENT FEEDBACK FORM (FR-034 to FR-039)
+  ============================================================ */
+  function initFeedbackForm(C) {
+    var section = document.getElementById('feedback');
+    var feedbackCfg = C.feedback || {};
+
+    // T063: Hide section when feedback.enabled is false or missing
+    if (!feedbackCfg.enabled) {
+      if (section) section.hidden = true;
+      return;
+    }
+
+    if (!section) return;
+    section.hidden = false;
+
+    // Set custom form title if provided
+    var heading = document.getElementById('feedback-heading');
+    if (heading && feedbackCfg.form_title) {
+      heading.textContent = feedbackCfg.form_title;
+    }
+
+    // Populate services dropdown from config
+    var serviceSelect = document.getElementById('feedback-service');
+    var services = Array.isArray(C.services) ? C.services : [];
+    if (serviceSelect && feedbackCfg.services_dropdown !== false) {
+      services.forEach(function (svc) {
+        var opt = document.createElement('option');
+        opt.value = svc.name;
+        opt.textContent = svc.name;
+        serviceSelect.appendChild(opt);
+      });
+    } else if (serviceSelect && feedbackCfg.services_dropdown === false) {
+      // Hide service field if dropdown is disabled
+      var serviceGroup = serviceSelect.closest('.feedback-form__group');
+      if (serviceGroup) serviceGroup.hidden = true;
+    }
+
+    // Interactive star rating
+    var starsContainer = document.getElementById('feedback-stars');
+    var ratingInput = document.getElementById('feedback-rating');
+    var currentRating = 0;
+
+    if (starsContainer) {
+      var starButtons = starsContainer.querySelectorAll('.feedback-star');
+
+      function updateStarDisplay(value) {
+        starButtons.forEach(function (btn) {
+          var btnVal = parseInt(btn.getAttribute('data-value'), 10);
+          btn.innerHTML = btnVal <= value ? '&#9733;' : '&#9734;';
+          btn.classList.toggle('feedback-star--active', btnVal <= value);
+        });
+      }
+
+      starButtons.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          currentRating = parseInt(btn.getAttribute('data-value'), 10);
+          ratingInput.value = currentRating;
+          updateStarDisplay(currentRating);
+          clearError('feedback-rating-error');
+        });
+
+        btn.addEventListener('mouseenter', function () {
+          var hoverVal = parseInt(btn.getAttribute('data-value'), 10);
+          updateStarDisplay(hoverVal);
+        });
+      });
+
+      starsContainer.addEventListener('mouseleave', function () {
+        updateStarDisplay(currentRating);
+      });
+
+      // Keyboard navigation for stars
+      starsContainer.addEventListener('keydown', function (e) {
+        if (e.key === 'ArrowRight' || e.key === 'ArrowUp') {
+          e.preventDefault();
+          currentRating = Math.min(5, currentRating + 1);
+          ratingInput.value = currentRating;
+          updateStarDisplay(currentRating);
+          clearError('feedback-rating-error');
+        } else if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') {
+          e.preventDefault();
+          currentRating = Math.max(1, currentRating - 1);
+          ratingInput.value = currentRating;
+          updateStarDisplay(currentRating);
+        }
+      });
+    }
+
+    // Character count for text area
+    var textArea = document.getElementById('feedback-text');
+    var charCount = document.getElementById('feedback-charcount');
+    if (textArea && charCount) {
+      textArea.addEventListener('input', function () {
+        charCount.textContent = textArea.value.length + '/500';
+      });
+    }
+
+    // Form submission
+    var form = document.getElementById('feedback-form');
+    var submitBtn = document.getElementById('feedback-submit');
+    var successDiv = document.getElementById('feedback-success');
+    var errorDiv = document.getElementById('feedback-error');
+    var retryBtn = document.getElementById('feedback-retry');
+
+    if (form) {
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        if (!validateFeedbackForm()) return;
+        submitFeedback(feedbackCfg, C);
+      });
+    }
+
+    if (retryBtn) {
+      retryBtn.addEventListener('click', function () {
+        errorDiv.hidden = true;
+        form.hidden = false;
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Submit Feedback';
+      });
+    }
+
+    function validateFeedbackForm() {
+      var valid = true;
+      var nameInput = document.getElementById('feedback-name');
+      var serviceInput = document.getElementById('feedback-service');
+
+      // Name validation
+      var nameVal = (nameInput.value || '').trim();
+      if (!nameVal) {
+        showError('feedback-name-error', 'Please enter your name.');
+        valid = false;
+      } else if (nameVal.length > 100) {
+        showError('feedback-name-error', 'Name must be 100 characters or less.');
+        valid = false;
+      } else {
+        clearError('feedback-name-error');
+      }
+
+      // Rating validation
+      if (!currentRating || currentRating < 1 || currentRating > 5) {
+        showError('feedback-rating-error', 'Please select a rating.');
+        valid = false;
+      } else {
+        clearError('feedback-rating-error');
+      }
+
+      // Service validation (only if dropdown is enabled)
+      if (feedbackCfg.services_dropdown !== false) {
+        var serviceVal = (serviceInput.value || '').trim();
+        if (!serviceVal) {
+          showError('feedback-service-error', 'Please select a service.');
+          valid = false;
+        } else {
+          clearError('feedback-service-error');
+        }
+      }
+
+      // Text validation
+      var textVal = (textArea.value || '').trim();
+      if (!textVal) {
+        showError('feedback-text-error', 'Please share your feedback.');
+        valid = false;
+      } else if (textVal.length > 500) {
+        showError('feedback-text-error', 'Feedback must be 500 characters or less.');
+        valid = false;
+      } else {
+        clearError('feedback-text-error');
+      }
+
+      return valid;
+    }
+
+    function submitFeedback(cfg, config) {
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Submitting...';
+
+      var payload = {
+        site_id: config.site_id || '',
+        patient_name: document.getElementById('feedback-name').value.trim(),
+        rating: currentRating,
+        text: document.getElementById('feedback-text').value.trim(),
+        service: document.getElementById('feedback-service').value.trim(),
+        submitted_at: new Date().toISOString()
+      };
+
+      var endpoint = (cfg.api_endpoint || '').replace(/\/$/, '') + '/submit';
+      var controller = new AbortController();
+      var timeoutId = setTimeout(function () { controller.abort(); }, 10000);
+
+      fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+        signal: controller.signal
+      })
+        .then(function (res) {
+          clearTimeout(timeoutId);
+          if (!res.ok) throw new Error('HTTP ' + res.status);
+          return res.json();
+        })
+        .then(function (data) {
+          form.hidden = true;
+          successDiv.hidden = false;
+          var msg = document.getElementById('feedback-success-message');
+          if (data.published) {
+            msg.textContent = 'Your feedback has been published. Thank you for sharing your experience!';
+          } else {
+            msg.textContent = 'Thank you! Your feedback has been received and sent to the doctor for review.';
+          }
+        })
+        .catch(function (err) {
+          clearTimeout(timeoutId);
+          form.hidden = true;
+          errorDiv.hidden = false;
+          var errMsg = document.getElementById('feedback-error-message');
+          errMsg.textContent = 'Unable to submit feedback online. You can send your feedback via WhatsApp instead.';
+
+          // Build WhatsApp fallback URL
+          var whatsappLink = document.getElementById('feedback-whatsapp-fallback');
+          var clinic = config.clinic || {};
+          var phone = (clinic.whatsapp || clinic.phone || '').replace(/[^0-9+]/g, '').replace(/^\+/, '');
+          var feedbackMsg = 'Patient Feedback:\n' +
+            'Name: ' + payload.patient_name + '\n' +
+            'Rating: ' + payload.rating + '/5 stars\n' +
+            'Service: ' + payload.service + '\n' +
+            'Feedback: ' + payload.text;
+          whatsappLink.href = 'https://wa.me/' + phone + '?text=' + encodeURIComponent(feedbackMsg);
+        });
+    }
+
+    function showError(id, message) {
+      var el = document.getElementById(id);
+      if (el) { el.textContent = message; el.hidden = false; }
+    }
+
+    function clearError(id) {
+      var el = document.getElementById(id);
+      if (el) { el.textContent = ''; el.hidden = true; }
     }
   }
 

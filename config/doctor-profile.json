@@ -664,6 +664,14 @@
     "facebook": "https://facebook.com/prashant.pawar.31508"
   },
 
+  "feedback": {
+    "enabled": true,
+    "form_title": "Share Your Experience",
+    "api_endpoint": "/api/feedback",
+    "rating_threshold": 4,
+    "services_dropdown": true
+  },
+
   "media": {
     "videos": []
   }

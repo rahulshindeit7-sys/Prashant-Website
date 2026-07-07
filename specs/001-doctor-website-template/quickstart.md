@@ -103,6 +103,59 @@ Expected:
 - Homepage remains unchanged in structure/behavior.
 - Excluded sections (Knowledgebase, Research & Publications) are absent from nav/routes.
 
+### 8. Feedback Form Rendering
+
+Steps:
+1. Set `feedback.enabled: true` and `feedback.api_endpoint` in config.
+2. Reload the page.
+3. Locate the feedback form section.
+4. Verify form fields: patient name, star rating (1-5), feedback text, service dropdown.
+5. Set `feedback.enabled: false` and reload.
+
+Expected:
+- Form section visible when enabled, hidden when disabled.
+- Service dropdown populated from `services[]` in config.
+- Star rating is interactive (click to select 1-5).
+- All fields show validation errors if submitted empty.
+
+### 9. Feedback Submission (Happy Path)
+
+Steps:
+1. Fill all feedback fields with valid data (name, 5 stars, positive text, select a service).
+2. Submit the form.
+3. (With mock/real admin dashboard API running.)
+
+Expected:
+- POST request sent to configured `feedback.api_endpoint/submit`.
+- Payload includes `site_id`, `patient_name`, `rating`, `text`, `service`, `submitted_at`.
+- Confirmation message displayed to patient on success.
+- No console errors.
+
+### 10. Feedback Submission (API Unavailable Fallback)
+
+Steps:
+1. Set `feedback.api_endpoint` to an unreachable URL.
+2. Fill and submit the feedback form.
+
+Expected:
+- After timeout (≤10s), error message displays: "Unable to submit feedback online."
+- WhatsApp fallback link/button appears with pre-filled feedback text.
+- Clicking opens `wa.me/{doctor_whatsapp}?text=...` with feedback content.
+
+### 11. Feedback Classification Verification
+
+Steps:
+1. Submit feedback with rating = 5 (positive).
+2. Verify admin dashboard receives it and auto-publishes to config testimonials.
+3. Submit feedback with rating = 2 (negative).
+4. Verify admin dashboard does NOT add to testimonials.
+5. Verify WhatsApp notification triggered for negative feedback.
+
+Expected:
+- Rating ≥4: appears in testimonials array in `doctor-profile.json` after admin dashboard sync.
+- Rating <4: logged in admin dashboard as pending review, WhatsApp notification sent to doctor.
+- Negative feedback never appears publicly on the website.
+
 ## References
 
 - Route contract: `contracts/routes.md`

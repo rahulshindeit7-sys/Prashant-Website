@@ -338,6 +338,62 @@
   </section>
 
   <!-- ================================================
+       7B. PATIENT FEEDBACK FORM
+  ================================================ -->
+  <section id="feedback" class="section feedback" aria-labelledby="feedback-heading" hidden>
+    <div class="container">
+      <span class="section__label">Your Feedback</span>
+      <h2 class="section__title" id="feedback-heading">Share Your Experience</h2>
+      <p class="feedback__subtitle">Your feedback helps us improve our services and helps other patients make informed decisions.</p>
+      <form id="feedback-form" class="feedback-form" novalidate>
+        <div class="feedback-form__group">
+          <label for="feedback-name" class="feedback-form__label">Your Name <span aria-hidden="true">*</span></label>
+          <input type="text" id="feedback-name" name="patient_name" class="feedback-form__input" placeholder="Enter your name" required maxlength="100" autocomplete="name" />
+          <span class="feedback-form__error" id="feedback-name-error" role="alert" aria-live="polite"></span>
+        </div>
+        <div class="feedback-form__group">
+          <label class="feedback-form__label">Rating <span aria-hidden="true">*</span></label>
+          <div class="feedback-form__stars" id="feedback-stars" role="radiogroup" aria-label="Star rating from 1 to 5">
+            <button type="button" class="feedback-star" data-value="1" aria-label="1 star" tabindex="0">&#9734;</button>
+            <button type="button" class="feedback-star" data-value="2" aria-label="2 stars" tabindex="-1">&#9734;</button>
+            <button type="button" class="feedback-star" data-value="3" aria-label="3 stars" tabindex="-1">&#9734;</button>
+            <button type="button" class="feedback-star" data-value="4" aria-label="4 stars" tabindex="-1">&#9734;</button>
+            <button type="button" class="feedback-star" data-value="5" aria-label="5 stars" tabindex="-1">&#9734;</button>
+          </div>
+          <input type="hidden" id="feedback-rating" name="rating" value="" />
+          <span class="feedback-form__error" id="feedback-rating-error" role="alert" aria-live="polite"></span>
+        </div>
+        <div class="feedback-form__group">
+          <label for="feedback-service" class="feedback-form__label">Service Received <span aria-hidden="true">*</span></label>
+          <select id="feedback-service" name="service" class="feedback-form__select" required>
+            <option value="">Select a service</option>
+          </select>
+          <span class="feedback-form__error" id="feedback-service-error" role="alert" aria-live="polite"></span>
+        </div>
+        <div class="feedback-form__group">
+          <label for="feedback-text" class="feedback-form__label">Your Feedback <span aria-hidden="true">*</span></label>
+          <textarea id="feedback-text" name="text" class="feedback-form__textarea" placeholder="Tell us about your experience..." required maxlength="500" rows="4"></textarea>
+          <span class="feedback-form__charcount" id="feedback-charcount">0/500</span>
+          <span class="feedback-form__error" id="feedback-text-error" role="alert" aria-live="polite"></span>
+        </div>
+        <button type="submit" class="feedback-form__submit btn btn--primary" id="feedback-submit">Submit Feedback</button>
+      </form>
+      <div id="feedback-success" class="feedback-success" hidden>
+        <div class="feedback-success__icon" aria-hidden="true">✓</div>
+        <h3 class="feedback-success__title">Thank You!</h3>
+        <p class="feedback-success__message" id="feedback-success-message"></p>
+      </div>
+      <div id="feedback-error" class="feedback-error" hidden>
+        <p class="feedback-error__message" id="feedback-error-message"></p>
+        <div class="feedback-error__actions">
+          <button type="button" class="btn btn--secondary" id="feedback-retry">Try Again</button>
+          <a id="feedback-whatsapp-fallback" class="btn btn--whatsapp" href="#" target="_blank" rel="noopener noreferrer">Send via WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================
        7A. CLINICAL CASE ARCHIVE (OPTIONAL)
   ================================================ -->
   <section id="case-archive" class="section case-archive" aria-labelledby="case-archive-heading" hidden>

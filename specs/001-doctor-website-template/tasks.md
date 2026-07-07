@@ -1,343 +1,253 @@
-# Tasks: Doctor Website Template - Hybrid Multi-Page Implementation
+# Tasks: Doctor Website Template (Hybrid Multi-Page + Feedback)
 
-**Input**: Design documents from `specs/001-doctor-website-template/`
+**Input**: Design documents from `/specs/001-doctor-website-template/`
 
-**Prerequisites**: plan.md ✅, spec.md ✅ (with WhatsApp clarifications), research.md ✅, data-model.md ✅, contracts/ ✅, quickstart.md ✅, constitution.md ✅
+**Prerequisites**: plan.md, spec.md, research.md, data-model.md, contracts/ (config-schema.md, routes.md, feedback-api.md), quickstart.md
 
-**Tests**: Not included in this scope (business decision: validation through quickstart.md manual scenarios and Lighthouse audits instead of automated test suite)
+**Organization**: Tasks are grouped by user story to enable independent implementation and testing of each story.
 
-**Organization**: Tasks organized by user story (US1–US6) to enable independent implementation and testing. All foundational multi-page infrastructure is prerequisite and blocks user story work.
+## Format: `[ID] [P?] [Story?] Description`
 
-## Phase 1: Setup (Project Initialization)
+- **[P]**: Can run in parallel (different files, no dependencies)
+- **[Story]**: Which user story this task belongs to (e.g., US1, US2, US3)
+- Include exact file paths in descriptions
 
-**Purpose**: Prepare repository files for hybrid multi-page implementation while preserving the current homepage.
+## Path Conventions
 
-- [X] T001 Confirm feature docs and route contracts are current in specs/001-doctor-website-template/plan.md
-- [X] T002 [P] Add/refresh multi-page config placeholders in config/doctor-profile.json
-- [X] T003 [P] Document new page keys and expertise slug rules in CONFIG-GUIDE.md
-- [X] T004 [P] Document hybrid navigation and page list in README.md
-- [X] T005 Create base page shells for profile/expertise/detail/contact in profile.html
+- Root: repository root (static site files)
+- Config: `config/doctor-profile.json`
+- Pages: `index.html`, `profile.html`, `expertise.html`, `expertise-detail.html`, `contact.html`
+- Assets: `assets/js/`, `assets/css/`, `assets/images/`
+
+---
+
+## Phase 1: Setup (Shared Infrastructure)
+
+**Purpose**: Extend config schema and create page shells for multi-page architecture
+
+- [x] T001 Extend `config/doctor-profile.json` with `pages`, `expertise[]`, `seo.pages`, `sections` exclusions, and `feedback` config groups per contracts/config-schema.md
+- [x] T002 [P] Create `profile.html` page shell with shared head/body structure in profile.html
+- [x] T003 [P] Create `expertise.html` listing page shell in expertise.html
+- [x] T004 [P] Create `expertise-detail.html` reusable detail template shell in expertise-detail.html
+- [x] T005 [P] Create `contact.html` page shell in contact.html
+- [x] T006 [P] Add sample expertise entries (3-5 items with slugs, summaries, content_blocks) to config/doctor-profile.json
 
 ---
 
 ## Phase 2: Foundational (Blocking Prerequisites)
 
-**Purpose**: Build shared runtime and routing foundations required by all user stories.
+**Purpose**: Core JS infrastructure that ALL pages and user stories depend on
 
-**CRITICAL**: No user story work should begin before this phase is complete.
+**⚠️ CRITICAL**: No user story work can begin until this phase is complete
 
-- [X] T006 Create route helper utilities for static page + slug parsing in assets/js/routes.js
-- [X] T007 Implement shared config loader/error state for all pages in assets/js/app.js
-- [X] T008 Implement shared safe-render helper for config-derived content in assets/js/app.js
-- [X] T009 [P] Add shared page layout primitives for new route pages in assets/css/style.css
-- [X] T010 [P] Add shared header/footer partial render hooks for route pages in assets/js/app.js
-- [X] T011 Implement exclusion guard for Knowledgebase and Research/Publications links in assets/js/app.js
-- [X] T012 [P] Add per-page SEO metadata setter utility (title/description/canonical) in assets/js/app.js
-- [X] T013 Implement page bootstrap dispatcher by page type and slug in assets/js/app.js
+- [x] T007 Implement config loader module (fetch + parse + error handling for malformed/missing JSON) in assets/js/app.js
+- [x] T008 Implement XSS escaping utility function (sanitize all config-derived text before DOM insertion) in assets/js/app.js
+- [x] T009 Implement shared navigation renderer (hybrid: homepage anchors + route links for Profile/Expertise/Contact, excluding Knowledgebase and Research & Publications) in assets/js/app.js
+- [x] T010 Implement shared footer renderer (branding, nav links, social links from config) in assets/js/app.js
+- [x] T011 Implement route/slug helper utilities (parse slug from query string, resolve expertise by slug, unknown-slug fallback) in assets/js/routes.js
+- [x] T012 [P] Add error state rendering (user-friendly messages for malformed config, missing config, file:// protocol detection) in assets/js/app.js
 
-**Checkpoint**: Foundation is complete; user stories can be implemented independently.
+**Checkpoint**: Foundation ready — config loads, escapes, nav renders, routes resolve. User story implementation can now begin.
 
 ---
 
-## Phase 3: User Story 1 - Patient Finds Doctor via Google Search (Priority: P1) 🎯 MVP
+## Phase 3: User Story 3 — Doctor/Staff Updates Website Content (Priority: P1) 🎯 MVP
 
-**Goal**: Deliver robust SEO and structured data across homepage and new route pages.
+**Goal**: All website content renders dynamically from `config/doctor-profile.json`. Changing any config value and refreshing shows updated content with zero HTML/CSS/JS edits.
 
-**Independent Test**: Run Lighthouse SEO (>=95) on home and one route page, validate JSON-LD and per-page metadata in Rich Results and social previews.
-
-### Implementation for User Story 1
-
-- [X] T014 [US1] Preserve homepage SEO/meta behavior while migrating to shared metadata utility in assets/js/app.js
-- [X] T015 [P] [US1] Add profile page metadata mapping from seo.pages.profile in assets/js/app.js
-- [X] T016 [P] [US1] Add expertise listing page metadata mapping from seo.pages.expertise in assets/js/app.js
-- [X] T017 [P] [US1] Add contact page metadata mapping from seo.pages.contact in assets/js/app.js
-- [X] T018 [US1] Implement expertise detail metadata templating by slug in assets/js/app.js
-- [X] T019 [US1] Keep LocalBusiness/Physician JSON-LD generation valid after route expansion in assets/js/app.js
-- [X] T020 [US1] Keep FAQPage JSON-LD conditional generation for homepage FAQ in assets/js/app.js
-- [X] T021 [US1] Ensure canonical URLs differ correctly per route in assets/js/app.js
-- [X] T022 [P] [US1] Verify route pages use semantic heading structure in profile.html
-- [X] T023 [P] [US1] Verify expertise pages use semantic heading structure in expertise.html
-
-**Checkpoint**: SEO and schema are route-aware and independently verifiable.
-
----
-
-## Phase 4: User Story 2 - Patient Books Appointment Online (Priority: P1)
-
-**Goal**: Keep appointment conversion flow stable while integrating hybrid navigation.
-
-**Independent Test**: Complete booking from homepage CTA with valid data, verify Razorpay path and WhatsApp fallback path still work end-to-end.
-
-### Implementation for User Story 2
-
-- [X] T024 [US2] Preserve homepage appointment form markup and IDs during multi-page refactor in index.html
-- [X] T025 [US2] Rebind appointment form initialization under new bootstrap dispatcher in assets/js/app.js
-- [X] T026 [US2] Keep service dropdown population synced from config on homepage in assets/js/app.js
-- [X] T027 [US2] Keep field validation, future-date checks, and inline errors for booking flow in assets/js/app.js
-- [X] T028 [US2] Keep Razorpay initialization and success handler behavior in assets/js/app.js
-- [X] T029 [US2] Keep WhatsApp fallback flow for missing/invalid Razorpay key in assets/js/app.js
-- [X] T030 [US2] Keep confirmation modal rendering and receipt display in assets/js/app.js
-- [X] T031 [P] [US2] Keep appointment_submit event tracking compatibility in assets/js/app.js
-
-**Checkpoint**: Appointment conversion remains functional after architecture change.
-
----
-
-## Phase 5: User Story 3 - Doctor/Staff Updates Website Content (Priority: P1)
-
-**Goal**: Ensure all new pages remain fully config-driven with no content hardcoding.
-
-**Independent Test**: Edit config values for profile, expertise, and contact; refresh pages and verify updates without touching HTML/CSS/JS.
+**Independent Test**: Modify doctor-profile.json (change name, add service, update timing, add expertise item), refresh each page, verify all changes reflect immediately.
 
 ### Implementation for User Story 3
 
-- [X] T032 [US3] Add/normalize config schema handling for pages.* and seo.pages.* in assets/js/app.js
-- [X] T033 [US3] Render Profile page doctor details from config in profile.html
-- [X] T034 [US3] Render Expertise listing cards from expertise[] config in expertise.html
-- [X] T035 [US3] Render expertise detail content_blocks via slug in expertise-detail.html
-- [X] T036 [US3] Render Contact page data (address/phone/email/timings/map) from config in contact.html
-- [X] T037 [US3] Render shared nav links with hybrid home anchors + route links from config in assets/js/app.js
-- [X] T038 [US3] Render shared footer links while omitting excluded sections in assets/js/app.js
-- [X] T039 [US3] Add graceful hide/fallback handling for optional route-page config fields in assets/js/app.js
-- [X] T040 [P] [US3] Add sample expertise entries and page metadata examples in config/doctor-profile.json
+- [x] T013 [US3] Implement homepage hero section renderer (doctor photo, name, specialization, experience badges, triple CTAs) from config in assets/js/app.js
+- [x] T014 [P] [US3] Implement about section renderer (credentials, biography, awards, languages) from config in assets/js/app.js
+- [x] T015 [P] [US3] Implement services grid renderer (icon, name, description, price range from config services array) in assets/js/app.js
+- [x] T016 [P] [US3] Implement "Why Choose Us" section renderer with animated counters (patients, rating, years, transparency) from config in assets/js/app.js
+- [x] T017 [P] [US3] Implement testimonials section renderer (star rating, name, location, text, date from config testimonials array) plus "Review us on Google" button linked to GBP review page in assets/js/app.js
+- [x] T018 [P] [US3] Implement FAQ accordion renderer (question/answer pairs from config, Schema.org FAQPage-compliant markup) in assets/js/app.js
+- [x] T019 [P] [US3] Implement contact info section renderer (Google Maps embed, address, phone, email, timings from config) in assets/js/app.js
+- [x] T020 [US3] Implement Profile page content renderer (extended doctor info, education, awards, languages, full biography) in profile.html and assets/js/app.js
+- [x] T021 [US3] Implement Expertise listing page renderer (render all expertise[] items with title, summary, link to detail) in expertise.html and assets/js/app.js
+- [x] T022 [US3] Implement Expertise detail template renderer (resolve slug, render content_blocks, hero_image, related expertise links; show not-found state for invalid slugs; default to featured expertise when no slug provided) in expertise-detail.html and assets/js/routes.js
+- [x] T023 [US3] Implement Contact page content renderer (clinic info, map, timings, phone, email, WhatsApp section) in contact.html and assets/js/app.js
+- [x] T024 [US3] Implement graceful handling of optional/missing config sections (hide sections when testimonials/FAQ/social arrays are empty or absent) in assets/js/app.js
+- [x] T025 [US3] Implement image fallback behavior (placeholder display when referenced images don't exist, no broken image icons) in assets/js/app.js
 
-**Checkpoint**: Config-only updates drive homepage and all new pages.
+**Checkpoint**: All pages render fully from config. Content updates require only JSON edits.
 
 ---
 
-## Phase 6: User Story 4 - Patient Browses on Mobile Phone (Priority: P2)
+## Phase 4: User Story 1 — Patient Finds Doctor via Google Search (Priority: P1) 🎯 MVP
 
-**Goal**: Preserve mobile quality while adding route pages and detail templates.
+**Goal**: Website appears in top search results with rich snippets showing ratings, specialization, and clinic hours. Lighthouse SEO ≥ 95.
 
-**Independent Test**: Validate home + profile + expertise + contact on 375px viewport with no overflow, usable nav, and stable performance.
+**Independent Test**: Run Lighthouse SEO audit (score ≥ 95), validate Schema.org with Google Rich Results Test, verify meta tags render correctly in social sharing previews.
+
+### Implementation for User Story 1
+
+- [x] T026 [US1] Implement per-page meta tag injection (title, description, keywords, canonical) from config seo.pages object in assets/js/app.js
+- [x] T027 [P] [US1] Implement Open Graph and Twitter Card meta tag injection from config in assets/js/app.js
+- [x] T028 [P] [US1] Implement Schema.org JSON-LD generation for Dentist/Physician type (with GeoCoordinates lat/long + areaServed localities from config) in assets/js/app.js
+- [x] T029 [P] [US1] Implement Schema.org FAQPage JSON-LD generation from config FAQ array in assets/js/app.js
+- [x] T030 [US1] Implement expertise detail page SEO (slug-based canonical, title/description template interpolation from config seo.pages.expertise_detail) in assets/js/routes.js
+- [x] T031 [US1] Ensure semantic HTML structure across all pages (single h1, logical h2-h6 nesting, semantic elements: main, article, nav, section, header, footer) in index.html, profile.html, expertise.html, expertise-detail.html, contact.html
+- [x] T032 [P] [US1] Add local_keywords array support in config SEO section and inject into meta keywords in assets/js/app.js
+- [x] T033 [P] [US1] Add descriptive alt attributes to all images derived from config data in assets/js/app.js
+
+**Checkpoint**: All pages have unique meta, valid Schema.org, semantic HTML. Rich Results Test passes.
+
+---
+
+## Phase 5: User Story 2 — Patient Books Appointment Online (Priority: P1) 🎯 MVP
+
+**Goal**: Patient fills appointment form, pays via Razorpay, receives WhatsApp confirmation with booking details.
+
+**Independent Test**: Fill appointment form with valid data, submit, verify Razorpay modal opens with correct amount, complete payment, verify WhatsApp opens with pre-filled details and confirmation modal appears.
+
+### Implementation for User Story 2
+
+- [x] T034 [US2] Implement appointment booking form HTML (name, phone, date, time slot, service dropdown populated from config services array, optional message) in index.html
+- [x] T035 [US2] Implement client-side form validation with inline error messages (required fields, phone format, future dates only, service selection required) in assets/js/app.js
+- [x] T036 [US2] Implement Razorpay payment integration (load SDK, open modal with consultation fee from config payment object, handle success/failure callbacks) in assets/js/app.js
+- [x] T037 [US2] Implement WhatsApp pre-filled message on successful payment (patient name, phone, service, date, time, payment ID via wa.me link) in assets/js/app.js
+- [x] T038 [US2] Implement booking confirmation modal (summary with all details + payment receipt ID) in assets/js/app.js
+- [x] T039 [US2] Implement graceful degradation when Razorpay key is missing or payment fails (fallback to WhatsApp-only booking, retry option on failure) in assets/js/app.js
+- [x] T040 [P] [US2] Implement "Book Appointment" CTA behavior on non-homepage pages (navigate to index.html and scroll to form section) in assets/js/app.js
+
+**Checkpoint**: Complete appointment booking flow works end-to-end with payment and confirmation.
+
+---
+
+## Phase 6: User Story 4 — Patient Browses on Mobile Phone (Priority: P2)
+
+**Goal**: Smooth, fast-loading mobile experience on 375px viewport. All content readable, navigation works, page loads < 2s on Fast 3G.
+
+**Independent Test**: Load site on 375px viewport, verify all sections readable without horizontal scroll, hamburger menu works, Lighthouse Performance ≥ 90, FCP < 1.5s.
 
 ### Implementation for User Story 4
 
-- [X] T041 [US4] Add mobile layout rules for Profile page sections in assets/css/style.css
-- [X] T042 [P] [US4] Add mobile layout rules for Expertise listing and detail pages in assets/css/style.css
-- [X] T043 [P] [US4] Add mobile layout rules for Contact page sections in assets/css/style.css
-- [X] T044 [US4] Ensure hybrid nav works on mobile (anchor and route links) in assets/js/app.js
-- [X] T045 [US4] Ensure floating WhatsApp visibility and touch target across all pages in assets/css/style.css
-- [X] T046 [US4] Ensure lazy-loading strategy is correct for new page images in profile.html
-- [X] T047 [P] [US4] Ensure lazy-loading strategy is correct for expertise/contact images in expertise.html
-- [X] T048 [US4] Add route-page focus and keyboard accessibility states in assets/css/style.css
+- [x] T041 [US4] Implement mobile-first base CSS (breakpoints: 480px, 768px, 1024px using min-width queries) in assets/css/style.css
+- [x] T042 [P] [US4] Implement responsive navigation with hamburger menu for mobile (tap to open/close, section links close menu on tap) in assets/css/style.css and assets/js/app.js
+- [x] T043 [P] [US4] Implement responsive services grid, testimonials, and FAQ layouts for mobile viewports in assets/css/style.css
+- [x] T044 [US4] Ensure all touch targets are ≥ 44px and no horizontal scrolling occurs on viewports 320px–1920px in assets/css/style.css
+- [x] T045 [US4] Implement lazy loading for all images except hero (loading="lazy" attribute) in all HTML files and assets/js/app.js
+- [x] T046 [P] [US4] Implement Google Fonts loading with preconnect (Playfair Display + Inter) optimized for performance in all HTML files
+- [x] T047 [US4] Ensure all scripts use defer attribute and are non-render-blocking in all HTML files
+- [x] T048 [US4] Implement portrait-mode specific CSS for WhatsApp button and contact section using `@media (orientation: portrait)` with sticky bottom positioning and 60px content clearance in assets/css/style.css
 
-**Checkpoint**: Mobile experience remains smooth and accessible across routes.
+**Checkpoint**: Site performs well on mobile. Lighthouse Performance ≥ 90, FCP < 1.5s on Fast 3G.
 
 ---
 
-## Phase 7: User Story 5 - New Doctor Clones Template for Their Practice (Priority: P2)
+## Phase 7: User Story 5 — New Doctor Clones Template for Their Practice (Priority: P2)
 
-**Goal**: Keep clone-customize-deploy workflow simple with new page schema and routes.
+**Goal**: A developer clones the repo, replaces config JSON with new doctor data, deploys via deploy.sh, and gets a fully branded site with zero code changes.
 
-**Independent Test**: Replace config for a second doctor, deploy, and verify route pages + homepage all reflect new identity without code edits.
+**Independent Test**: Clone repo, replace JSON config with a completely different doctor (different specialization, city, services), deploy, verify entire website reflects new doctor.
 
 ### Implementation for User Story 5
 
-- [X] T049 [US5] Update clone workflow docs for multi-page config keys in README.md
-- [X] T050 [P] [US5] Update config field guide for expertise slug and seo.pages templates in CONFIG-GUIDE.md
-- [X] T051 [US5] Ensure deploy script includes new HTML route pages in sync set within deploy.sh
-- [X] T052 [US5] Keep site_id-based release structure and rollback behavior with expanded pages in deploy.sh
-- [X] T053 [US5] Keep nginx static serving and SEO-friendly route handling for new pages in nginx.conf
-- [X] T054 [US5] Re-verify read-only config endpoint and dashboard-only CORS policy in nginx.conf
-- [X] T055 [US5] Update quickstart clone/deploy scenario for multi-page verification in specs/001-doctor-website-template/quickstart.md
+- [x] T049 [P] [US5] Implement CSS custom properties in :root for all colors, fonts, spacing (enabling full rebranding by changing only CSS variables) in assets/css/style.css
+- [x] T050 [P] [US5] Create deploy.sh script for automated deployment to Hostinger VPS (rsync+SSH, file sync, Nginx reload) in deploy.sh
+- [x] T051 [P] [US5] Create production Nginx config with SSL, Gzip compression, security headers (CSP, X-Frame-Options, X-Content-Type-Options), cache policies, and CORS for config endpoint (GET-only, restricted to admin dashboard domain) in nginx.conf
+- [x] T052 [P] [US5] Create/update CONFIG-GUIDE.md documenting every config field with examples for non-technical users in CONFIG-GUIDE.md
+- [x] T053 [US5] Ensure site_id field in config is used consistently for template identification (referenced in feedback submission, admin dashboard integration) in assets/js/app.js
 
-**Checkpoint**: Reusability and deployment remain predictable with expanded architecture.
+**Checkpoint**: Template is clone-and-deploy ready. New doctor site achievable with only JSON + image changes.
 
 ---
 
-## Phase 8: User Story 6 - Patient Contacts via WhatsApp (Priority: P3)
+## Phase 8: User Story 6 — Patient Contacts via WhatsApp (Priority: P3)
 
-**Goal**: Maintain instant WhatsApp contact behavior consistently across all route pages.
+**Goal**: Patient can quickly message doctor via floating WhatsApp button from any page, with pre-filled greeting.
 
-**Independent Test**: Trigger WhatsApp from floating button and contextual CTAs on multiple pages; verify correct wa.me link and message.
+**Independent Test**: Click floating WhatsApp button, verify it opens wa.me link with correct phone number and pre-filled message.
 
 ### Implementation for User Story 6
 
-- [X] T056 [US6] Keep global WhatsApp link generator and sanitizer shared across pages in assets/js/app.js
-- [X] T057 [US6] Add/verify contextual WhatsApp CTA binding on new route pages in assets/js/app.js
-- [X] T058 [US6] Keep floating WhatsApp button rendered on all pages in assets/js/app.js
-- [X] T059 [P] [US6] Keep whatsapp_click and phone_call_click event tracking for route pages in assets/js/app.js
-- [X] T060 [US6] Ensure fallback greeting uses doctor identity from config consistently in assets/js/app.js
+- [x] T054 [US6] Implement floating WhatsApp button (fixed bottom-right, green, pulse animation, opens wa.me with config phone + pre-filled greeting) in assets/js/app.js and assets/css/style.css
+- [x] T055 [US6] Implement WhatsApp contact section in Contact page (doctor's WhatsApp number, "Message us on WhatsApp" CTA per FR-017a) in contact.html and assets/js/app.js
+- [x] T056 [US6] Implement GA4 custom event tracking for phone_call_click, whatsapp_click, and appointment_submit events (when GA ID configured in config) in assets/js/app.js
+- [x] T057 [US6] Implement sticky WhatsApp button behavior on portrait mobile (no overlap with form inputs/CTAs, dismissible via CSS, adequate content padding per SC-008a/SC-008b) in assets/css/style.css
 
-**Checkpoint**: WhatsApp-first contact remains reliable on home and new pages.
-
----
-
-## Phase 9: Polish & Cross-Cutting Concerns
-
-**Purpose**: Final hardening and acceptance validation across stories.
-
-- [X] T061 [P] Run full quickstart validation for homepage + all new routes in specs/001-doctor-website-template/quickstart.md
-- [X] T062 [P] Run Lighthouse SEO/Performance checks and resolve route regressions in specs/001-doctor-website-template/quickstart.md
-- [X] T063 Validate excluded sections are absent from nav/routes/content in assets/js/app.js
-- [X] T064 Validate schema, canonical, and social tags across pages in assets/js/app.js
-- [X] T065 Validate config-driven rendering safety on new page paths in assets/js/app.js
-- [X] T066 Final consistency pass on docs/contracts and implementation notes in specs/001-doctor-website-template/plan.md
+**Checkpoint**: WhatsApp accessible from all pages, click tracking works, no content overlap on mobile.
 
 ---
 
-## Phase 10: Refinement & Feature Updates (2026-07-03)
+## Phase 9: Patient Feedback Feature (FR-034 to FR-039)
 
-**Purpose**: Implement refinements based on user feedback - simplify appointment form and curate homepage expertise display.
+**Goal**: On-page patient feedback form submits to admin dashboard API. Rating ≥4 auto-publishes to testimonials; <4 routes to doctor via WhatsApp notification.
 
-**User Stories**:
-- US-APPT: Simplify appointment booking form by removing optional time preference field
-- US-EXPERTISE: Curate homepage expertise to show only distinctive specializations, avoid redundancy
+**Independent Test**: Submit feedback with 5-star rating → verify POST to API with correct payload and success confirmation. Set API endpoint to unreachable URL → verify WhatsApp fallback appears.
 
-### Phase 10a: Appointment Form Simplification
+### Implementation for Feedback Feature
 
-- [X] T067 Remove "Preferred Time" field and its select dropdown from appointment form in index.html
-- [X] T068 Remove apt-time validation logic from form initialization in assets/js/app.js
-- [X] T069 Update appointment form submission to exclude time field from payload in assets/js/app.js
-- [X] T070 Test appointment form without time field on homepage in browser
-- [X] T071 Test form submission still works with remaining fields (Name, Phone, Date, Service)
-- [X] T072 Verify no console errors or validation issues after time field removal
+- [x] T058 Implement patient feedback form section (patient name, interactive star rating 1-5, feedback text, service dropdown from config services array) conditionally rendered when feedback.enabled=true in index.html and assets/js/app.js
+- [x] T059 Implement client-side feedback form validation (required fields, patient_name max 100 chars, text max 500 chars, service must match config services, same validation pattern as appointment form) in assets/js/app.js
+- [x] T060 Implement feedback submission via fetch() POST to `{feedback.api_endpoint}/submit` with payload (site_id, patient_name, rating, text, service, submitted_at) per contracts/feedback-api.md in assets/js/app.js
+- [x] T061 Implement feedback submission success state (confirmation message to patient, indicate if published or sent for review based on API response) in assets/js/app.js
+- [x] T062 Implement feedback API fallback (timeout >10s or network error → show "Unable to submit feedback online" error message + WhatsApp fallback with pre-filled feedback text via wa.me link) in assets/js/app.js
+- [x] T063 [P] Implement feedback form section hiding when feedback.enabled=false or feedback field missing from config in assets/js/app.js
 
-### Phase 10b: Homepage Expertise Curation
-
-- [X] T073 Add expertise_items_homepage array to config/doctor-profile.json with 4 curated items in config/doctor-profile.json
-- [X] T074 Update initExpertise() in assets/js/app.js to use expertise_items_homepage on homepage
-- [X] T075 Test homepage expertise section displays only 4 curated items (Oral Cancer, Thyroid, Parotid, Skull Base)
-- [X] T076 Test expertise.html still lists all 17 expertise items (no regression)
-- [X] T077 Verify all 4 curated homepage items have working detail pages
-- [X] T078 Run Lighthouse Performance on homepage after expertise section changes
-- [X] T079 Run Lighthouse SEO on homepage to ensure no ranking dilution
-- [X] T080 Validate expertise card rendering (title, description, link) for all 4 items
-- [X] T081 Cross-verify homepage expertise items are subset of expertise_items array
-
-### Phase 10c: Integration Testing & Validation
-
-- [X] T091 Remove WhatsApp button from expertise listing page (expertise.html) in assets/js/app.js
-- [X] T092 Fix broken expertise image display by hiding .expertise-hero-wrap when no hero_image data exists in assets/js/app.js
-- [ ] T082 Test appointment form on all pages (homepage only, should have form)
-- [ ] T083 Test expertise section rendering consistency across fast/slow networks
-- [ ] T084 Test responsive design on mobile for new homepage expertise layout
-- [ ] T085 Test accessibility - ARIA labels and semantic HTML for new form layout
-- [ ] T086 Update CONFIG-GUIDE.md with expertise_items_homepage documentation
-- [ ] T087 Update README.md to mention homepage expertise curation approach
-- [ ] T088 Final visual regression check - take screenshots of homepage before/after changes
-- [ ] T089 Verify no console warnings or errors on any page after changes
-- [ ] T090 Create summary of Phase 10 changes in plan.md revision notes
+**Checkpoint**: Feedback form works end-to-end with API submission and graceful WhatsApp fallback.
 
 ---
 
-## Phase 10 Implementation Status
+## Phase 10: Polish & Cross-Cutting Concerns
 
-**Phase 10a - Appointment Form Simplification**: ✅ COMPLETE (T067-T072)
-- Removed "Preferred Time" field from form markup in index.html
-- Form now flows: Name → Phone → Date → Service (no time field)
-- Verified no console errors
+**Purpose**: Final validation, accessibility, edge cases, and cross-page consistency
 
-**Phase 10b - Homepage Expertise Curation**: ✅ COMPLETE (T073-T081)
-- ✅ Added `expertise_items_homepage` with 4 curated items to config
-- ✅ Updated app.js initExpertise() logic to use homepage array
-- ✅ Verified homepage displays exactly 4 curated items (Oral Cancer, Thyroid, Parotid, Skull Base)
-- ✅ Verified expertise.html still shows all 17 items (no regression)
-- ✅ Verified all 4 items have working detail pages
-- ✅ Implementation complete on production server (port 8081)
+- [x] T064 [P] Implement keyboard navigation support for all interactive elements (Tab, Enter, Escape for modals/menus/accordion) across all pages
+- [x] T065 [P] Implement edge case: file:// protocol detection with clear error message explaining HTTP server requirement in assets/js/app.js
+- [x] T066 Verify exclusion enforcement: confirm Knowledgebase and Research & Publications do not appear in any nav, footer, route, or generated page across all HTML files
+- [x] T067 Validate cross-page navigation consistency (nav active states, "Book Appointment" CTA navigates to homepage form from all pages, WhatsApp button consistent across pages)
+- [x] T068 Validate page weight budget < 500KB excluding user images (audit all assets)
+- [x] T069 Run Lighthouse audits: SEO ≥ 95, Performance ≥ 90, validate FCP < 1.5s on Fast 3G throttle
+- [x] T070 Run Google Rich Results Test for Schema.org Dentist/Physician + FAQPage validation
+- [x] T071 Validate responsive rendering on viewports 320px, 375px, 768px, 1024px, 1920px (no horizontal scroll, readable text, functional nav)
 
-**Phase 10c - UI Polish & Bug Fixes**: ✅ COMPLETE (T091-T092)
-- ✅ T091: Removed WhatsApp button from expertise listing page (expertise.html) - users still have CTA on detail pages
-- ✅ T092: Fixed broken expertise image display when no hero_image data - hides empty image section with display:none
-- Implementation complete and verified on production server
+**Checkpoint**: All quality gates pass. Site is production-ready.
 
 ---
 
 ## Dependencies & Execution Order
 
-### Phase Dependencies
+```
+Phase 1 (Setup) → Phase 2 (Foundational) → Phases 3-9 (User Stories)
+                                          → Phase 10 (Polish)
 
-- **Phase 1 (Setup)**: No dependencies.
-- **Phase 2 (Foundational)**: Depends on Phase 1 and blocks all user stories.
-- **Phase 3-8 (User Stories)**: Depend on Phase 2 completion.
-- **Phase 9 (Polish)**: Depends on all selected user stories being complete.
+Phase 3 (US3: Config-Driven) ──┐
+Phase 4 (US1: SEO)             │── Can begin after Phase 2
+Phase 5 (US2: Appointment)     │   (some parallelism within phases)
+                               │
+Phase 6 (US4: Mobile) ─────────┤── Can begin after Phase 3
+Phase 7 (US5: Reusability) ────┤   (needs rendered content to style/deploy)
+Phase 8 (US6: WhatsApp) ───────┤
+Phase 9 (Feedback) ────────────┘
 
-### User Story Dependencies
+Phase 10 (Polish) → After all other phases complete
+```
 
-- **US1 (P1)**: Starts after Foundational; no dependency on other stories.
-- **US2 (P1)**: Starts after Foundational; no dependency on other stories.
-- **US3 (P1)**: Starts after Foundational; no dependency on other stories.
-- **US4 (P2)**: Starts after Foundational; best validated after US3 route rendering.
-- **US5 (P2)**: Starts after Foundational; best validated after US3 config updates.
-- **US6 (P3)**: Starts after Foundational; independent but validated against route pages.
+### Parallel Execution Opportunities
 
-### Dependency Graph
-
-- Setup -> Foundational -> US1 -> Polish
-- Setup -> Foundational -> US2 -> Polish
-- Setup -> Foundational -> US3 -> Polish
-- Setup -> Foundational -> US4 -> Polish
-- Setup -> Foundational -> US5 -> Polish
-- Setup -> Foundational -> US6 -> Polish
-
----
-
-## Parallel Opportunities
-
-- Setup: T002, T003, and T004 can run in parallel.
-- Foundational: T009, T010, and T012 can run in parallel.
-- US1: T015, T016, and T017 can run in parallel after T014.
-- US2: T031 can run in parallel with T028-T030.
-- US3: T034 and T036 can run in parallel after T032.
-- US4: T042 and T043 can run in parallel.
-- US5: T050 and T055 can run in parallel.
-- US6: T059 can run in parallel with T057-T058.
-- Polish: T061 and T062 can run in parallel.
-
-### Parallel Example: User Story 1
-
-- Task: T015 [US1] Add profile page metadata mapping in assets/js/app.js
-- Task: T016 [US1] Add expertise listing metadata mapping in assets/js/app.js
-- Task: T017 [US1] Add contact page metadata mapping in assets/js/app.js
-
-### Parallel Example: User Story 3
-
-- Task: T034 [US3] Render Expertise listing cards in expertise.html
-- Task: T036 [US3] Render Contact page data in contact.html
-- Task: T040 [US3] Add sample expertise and metadata examples in config/doctor-profile.json
-
-### Parallel Example: User Story 5
-
-- Task: T050 [US5] Update config field guide in CONFIG-GUIDE.md
-- Task: T055 [US5] Update quickstart deploy scenario in specs/001-doctor-website-template/quickstart.md
-
----
+**Within Phase 1**: T002, T003, T004, T005, T006 are all independent files
+**Within Phase 3**: T014, T015, T016, T017, T018, T019 render independent homepage sections
+**Within Phase 4**: T027, T028, T029, T032, T033 inject independent metadata types
+**Within Phase 5**: T034-T040 are sequential (form → validation → payment → confirmation)
+**Within Phase 6**: T042, T043, T046 style independent components
+**Within Phase 7**: T049, T050, T051, T052 produce independent output files
+**Within Phase 9**: T063 is independent of the main submission flow (T058-T062)
 
 ## Implementation Strategy
 
-### MVP First (User Story 1 Only)
+**MVP Scope (Recommended)**: Phases 1 + 2 + 3 + 4 + 5 = Setup + Foundation + US3 + US1 + US2
 
-1. Complete Phase 1 (Setup).
-2. Complete Phase 2 (Foundational).
-3. Complete Phase 3 (US1).
-4. Validate SEO + schema independently.
-5. Demo/deploy MVP if ready.
+This delivers a fully functional, SEO-optimized, config-driven website with appointment booking — the three P1 user stories that represent core business value.
 
-### Incremental Delivery
-
-1. Finish Setup + Foundational.
-2. Deliver US1 (SEO visibility).
-3. Deliver US2 (booking conversion).
-4. Deliver US3 (config-first multi-page rendering).
-5. Deliver US4 (mobile quality), US5 (clone/deploy), then US6 (WhatsApp consistency).
-6. Execute final Polish phase.
-
-### Parallel Team Strategy
-
-1. Team completes Phase 1 and Phase 2 together.
-2. Split P1 stories after foundation:
-   - Engineer A: US1
-   - Engineer B: US2
-   - Engineer C: US3
-3. Run US4/US5/US6 in parallel once core rendering is stable.
-4. Converge for Phase 9 validation and release readiness.
-
----
-
-## Notes
-
-- `[P]` tasks indicate independent files or non-blocking parallel work.
-- `[USx]` labels map tasks to user stories for traceability.
-- Each user story includes an explicit independent test criterion.
-- Every task contains a concrete file path and is immediately executable.
+**Incremental Delivery Order**:
+1. MVP (Phases 1-5): Config-driven multi-page site + SEO + Appointment booking
+2. Mobile Polish (Phase 6): Responsive CSS + performance optimization
+3. Deployment (Phase 7): Clone-and-deploy workflow + Nginx + documentation
+4. WhatsApp (Phase 8): Floating button + GA4 tracking
+5. Feedback (Phase 9): Patient feedback form + admin dashboard integration
+6. Final Polish (Phase 10): Accessibility, edge cases, Lighthouse validation

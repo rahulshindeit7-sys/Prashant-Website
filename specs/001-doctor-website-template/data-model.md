@@ -99,6 +99,52 @@ Service entries remain homepage and booking-form inputs.
 [Build nav/routes] -> [Apply exclusions] -> [Hide Knowledgebase + Research/Publications]
 ```
 
+### Feedback Submission Flow
+
+```text
+[Patient fills feedback form] -> [Validate client-side] -> [POST to admin dashboard API]
+[Admin dashboard receives] -> [Classify: rating >= 4?]
+  -> YES -> [Append to testimonials in doctor-profile.json] -> [Deploy config update] -> [Live on site]
+  -> NO  -> [Log as pending review] -> [WhatsApp notify doctor] -> [Not displayed publicly]
+[Admin dashboard unavailable] -> [Fallback: open WhatsApp with feedback text]
+```
+
+## New Entity: Feedback Submission
+
+### 9. Feedback
+
+| Field | Type | Required | Description |
+|-------|------|:--------:|-------------|
+| `feedback.enabled` | boolean | ✅ | Enables/disables feedback form on the site |
+| `feedback.form_title` | string | ❌ | Heading text for the feedback form section (default: "Share Your Experience") |
+| `feedback.api_endpoint` | string | ✅ | Admin dashboard API URL for feedback submission |
+| `feedback.rating_threshold` | number | ❌ | Minimum stars for auto-publish (default: 4) |
+| `feedback.services_dropdown` | boolean | ❌ | Show service selection in form (default: true, populated from services array) |
+
+**Submission payload** (sent to admin dashboard):
+
+| Field | Type | Required | Description |
+|-------|------|:--------:|-------------|
+| `patient_name` | string | ✅ | Patient's display name |
+| `rating` | number (1-5) | ✅ | Star rating |
+| `text` | string | ✅ | Feedback text content |
+| `service` | string | ✅ | Service received (from services dropdown) |
+| `site_id` | string | ✅ | Auto-filled from config site_id |
+| `submitted_at` | ISO 8601 | ✅ | Client-side timestamp |
+
+**Validation rules**:
+- `patient_name` must be non-empty, max 100 characters.
+- `rating` must be integer 1–5.
+- `text` must be non-empty, max 500 characters.
+- `service` must match one of the configured service names.
+- `site_id` must match the current site's configured ID.
+- All text fields must be sanitized (XSS prevention) before display and before submission.
+
+**Integration with Testimonials entity**:
+- Approved feedback (≥ threshold) is appended to the existing `testimonials[]` array by the admin dashboard.
+- Approved entries use the same schema as manually-added testimonials: `{ name, location: "Patient Feedback", rating, text, date }`.
+- No new rendering logic needed — the testimonials section already handles the display.
+
 ## Relationships Diagram
 
 ```text
@@ -107,5 +153,6 @@ doctor-profile.json
 ├── pages.* ---------------------- Route-level enablement and homepage anchors
 ├── expertise[] ------------------ Listing + slug-based detail content
 ├── seo.pages.* ------------------ Per-page metadata
+├── feedback.* ------------------- Feedback form config and API endpoint
 └── sections exclusions ---------- Knowledgebase + Research/Publications disabled
 ```

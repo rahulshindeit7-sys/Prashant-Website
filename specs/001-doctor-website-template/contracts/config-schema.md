@@ -77,6 +77,41 @@ Single source of truth for homepage and additional route pages. Homepage behavio
 - `expertise[].slug` is required, unique, lowercase, and URL-safe.
 - Expertise detail rendering must rely on one reusable template resolved by slug.
 - `sections.knowledgebase.enabled` and `sections.research_publications.enabled` must remain `false`.
+- `feedback.enabled` controls visibility of the feedback form section.
+- `feedback.api_endpoint` is required when feedback is enabled.
+
+## Contract Additions for Patient Feedback
+
+```json
+{
+  "feedback": {
+    "enabled": true,
+    "form_title": "Share Your Experience",
+    "api_endpoint": "https://admin.yourdomain.com/api/feedback",
+    "rating_threshold": 4,
+    "services_dropdown": true
+  }
+}
+```
+
+### Feedback Config Fields
+
+| Field | Type | Required | Default | Description |
+|-------|------|:--------:|---------|-------------|
+| `feedback.enabled` | boolean | ✅ | `false` | Show/hide the feedback form section |
+| `feedback.form_title` | string | ❌ | `"Share Your Experience"` | Section heading |
+| `feedback.api_endpoint` | string | ✅ (if enabled) | — | Admin dashboard API URL |
+| `feedback.rating_threshold` | number | ❌ | `4` | Minimum stars for auto-publish |
+| `feedback.services_dropdown` | boolean | ❌ | `true` | Show service selector in form |
+
+### Feedback Submission Behavior
+
+- When `feedback.enabled` is `true`, the feedback form renders on the page.
+- Form fields: patient name, star rating (1-5), feedback text, service received (dropdown from `services[]` array).
+- On submit: POST to `feedback.api_endpoint` with payload including `site_id` from config.
+- On success: show confirmation message to patient.
+- On API failure: graceful fallback to WhatsApp with pre-filled feedback text (same pattern as Razorpay fallback in FR-012).
+- When `feedback.enabled` is `false` or field is missing, the feedback form section is hidden.
 
 ## Exclusion Rules
 

@@ -17,11 +17,13 @@ const sitesRouter = require('./routes/sites');
 const configRouter = require('./routes/config');
 const healthRouter = require('./routes/health');
 const logsRouter = require('./routes/logs');
+const feedbackRouter = require('./routes/feedback');
 
 app.use('/api/sites', healthRouter); // refresh endpoint is under /api/sites/refresh
 app.use('/api/sites', sitesRouter);
 app.use('/api/sites', configRouter);
 app.use('/api/logs', logsRouter);
+app.use('/api/feedback', feedbackRouter);
 
 // Fallback to index.html for SPA
 app.get('/', (req, res) => {
