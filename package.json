@@ -10,7 +10,8 @@
     "check:config": "npm run validate:json",
     "intake": "node scripts/intake-generate-config.js",
     "generate:config": "npm run intake",
-    "intake:batch": "node scripts/intake-batch-from-csv.js"
+    "intake:batch": "node scripts/intake-batch-from-csv.js",
+    "onboard:doctor": "node scripts/onboard-doctor.js"
   },
   "devDependencies": {
     "speckit": "^0.1.0"

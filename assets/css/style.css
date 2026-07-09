@@ -44,6 +44,7 @@ html {
   scroll-behavior: smooth;
   font-size: 16px;
   -webkit-text-size-adjust: 100%;
+  overflow-x: hidden;
 }
 
 body {
@@ -2661,13 +2662,15 @@ button {
     display: flex !important;
     position: fixed;
     bottom: 1.2rem;
-    right: 1rem;
+    right: max(0.75rem, env(safe-area-inset-right, 0.75rem));
     z-index: 1000;
-    width: auto;
-    height: auto;
-    padding: 0.6rem;
+    width: 3.25rem;
+    height: 3.25rem;
+    padding: 0;
     border-radius: 50%;
     gap: 0;
+    justify-content: center;
+    align-items: center;
   }
 
   .whatsapp-float__label {
@@ -2675,23 +2678,24 @@ button {
   }
 
   .whatsapp-float svg {
-    width: 28px;
-    height: 28px;
+    width: 26px;
+    height: 26px;
+    flex-shrink: 0;
   }
 
   .call-float {
     display: flex !important;
     position: fixed;
     bottom: 1.2rem;
-    right: 5.15rem;
+    right: calc(3.25rem + 1.5rem);
     z-index: 1000;
-    width: 3.65rem;
-    height: 3.65rem;
+    width: 3.25rem;
+    height: 3.25rem;
   }
 
   .call-float__icon {
-    width: 1.45rem;
-    height: 1.45rem;
+    width: 1.4rem;
+    height: 1.4rem;
   }
 
   /* Add padding to main content to prevent overlap with sticky buttons */

@@ -1,0 +1,363 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [ 4 0 R 6 0 R 8 0 R ] /Count 3 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+4 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R >> >> /Contents 5 0 R >>
+endobj
+5 0 obj
+<< /Length 1711 >>
+stream
+BT
+/F1 11 Tf
+50 792 Td
+14 TL
+(New Doctor Website + CMS Onboarding Steps) Tj
+T*
+() Tj
+T*
+(Date: 2026-07-08) Tj
+T*
+() Tj
+T*
+(Goal) Tj
+T*
+() Tj
+T*
+(This SOP helps you create a new doctor website using the same setup as Dr. Prashant and) Tj
+T*
+(manage it via CMS.) Tj
+T*
+() Tj
+T*
+(Step 1: Collect Intake Data) Tj
+T*
+() Tj
+T*
+(Collect and verify the following:) Tj
+T*
+() Tj
+T*
+(- Doctor full name, degree, specialty, years of experience) Tj
+T*
+(- Registration number, certifications, awards) Tj
+T*
+(- Clinic address, city, pincode, phone, WhatsApp, email) Tj
+T*
+(- Clinic timings \(weekdays, Saturday, Sunday\)) Tj
+T*
+(- About profile content) Tj
+T*
+(- Services list) Tj
+T*
+(- Expertise topics and detailed content) Tj
+T*
+(- Testimonials and FAQs) Tj
+T*
+(- SEO data \(meta title, meta description, keywords\)) Tj
+T*
+(- Domain and DNS access details) Tj
+T*
+() Tj
+T*
+(Step 2: Create Doctor Bootstrap in Project) Tj
+T*
+() Tj
+T*
+(Run this command from project root:) Tj
+T*
+() Tj
+T*
+(npm run onboard:doctor -- --id <doctor-id> --name "Dr. Full Name" --username) Tj
+T*
+(<cms-username> --specialty "Specialty") Tj
+T*
+() Tj
+T*
+(Example:) Tj
+T*
+() Tj
+T*
+(npm run onboard:doctor -- --id amol --name "Dr. Amol Patil" --username amol --specialty) Tj
+T*
+("Cardiology") Tj
+T*
+() Tj
+T*
+(This command does two things:) Tj
+T*
+() Tj
+T*
+(- Creates config/<doctor-id>-profile.json) Tj
+T*
+(- Adds doctor entry in config/doctors-list.json) Tj
+T*
+() Tj
+T*
+(Step 3: Fill New Doctor Config) Tj
+T*
+() Tj
+T*
+(Open config/<doctor-id>-profile.json and replace all placeholders.) Tj
+T*
+() Tj
+T*
+(Mandatory checks:) Tj
+T*
+() Tj
+T*
+(- Correct doctor and clinic details) Tj
+T*
+(- Correct images and contact fields) Tj
+T*
+(- services populated) Tj
+ET
+endstream
+endobj
+6 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R >> >> /Contents 7 0 R >>
+endobj
+7 0 obj
+<< /Length 1319 >>
+stream
+BT
+/F1 11 Tf
+50 792 Td
+14 TL
+(- expertise_items populated) Tj
+T*
+(- expertise detail data present and section-wise) Tj
+T*
+() Tj
+T*
+(Step 4: Expertise Detail Content Rules) Tj
+T*
+() Tj
+T*
+(For every expertise topic, keep section-wise structured data:) Tj
+T*
+() Tj
+T*
+(- overview) Tj
+T*
+(- key_points) Tj
+T*
+(- when_to_consult) Tj
+T*
+(- treatment_options) Tj
+T*
+(- faqs) Tj
+T*
+() Tj
+T*
+(Also keep list and detail sync:) Tj
+T*
+() Tj
+T*
+(- expertise_items has card/list items) Tj
+T*
+(- expertise has full detail content) Tj
+T*
+() Tj
+T*
+(Step 5: Local Validation) Tj
+T*
+() Tj
+T*
+(Run local checks:) Tj
+T*
+() Tj
+T*
+(- npm run check:config) Tj
+T*
+(- npm run start) Tj
+T*
+() Tj
+T*
+(Then verify pages:) Tj
+T*
+() Tj
+T*
+(- Home) Tj
+T*
+(- Profile) Tj
+T*
+(- Expertise list) Tj
+T*
+(- Expertise detail \(Read More\)) Tj
+T*
+(- Contact) Tj
+T*
+() Tj
+T*
+(No "Not Found" should appear for valid expertise slugs.) Tj
+T*
+() Tj
+T*
+(Step 6: CMS Validation) Tj
+T*
+() Tj
+T*
+(In CMS dashboard:) Tj
+T*
+() Tj
+T*
+(- Login using doctor username) Tj
+T*
+(- Save draft) Tj
+T*
+(- Open preview) Tj
+T*
+(- Verify preview navigation keeps preview mode active) Tj
+T*
+(- Verify section-wise expertise rendering is correct) Tj
+T*
+(- Publish and re-check live content) Tj
+T*
+() Tj
+T*
+(Step 7: Deploy on VPS) Tj
+T*
+() Tj
+T*
+(Deploy static site to:) Tj
+T*
+() Tj
+ET
+endstream
+endobj
+8 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R >> >> /Contents 9 0 R >>
+endobj
+9 0 obj
+<< /Length 1739 >>
+stream
+BT
+/F1 11 Tf
+50 792 Td
+14 TL
+(/var/www/doctor-sites/<domain-or-site-id>) Tj
+T*
+() Tj
+T*
+(Verify CMS backend and services:) Tj
+T*
+() Tj
+T*
+(- PM2 process healthy) Tj
+T*
+(- API routes reachable) Tj
+T*
+(- Nginx domain mapping correct) Tj
+T*
+(- SSL active and HTTP redirects to HTTPS) Tj
+T*
+() Tj
+T*
+(Step 8: Cache Bust After JS Changes) Tj
+T*
+() Tj
+T*
+(If frontend/CMS JS is updated, bump script version query so browser loads fresh file.) Tj
+T*
+() Tj
+T*
+(Example pattern:) Tj
+T*
+() Tj
+T*
+(assets/js/app.js?v=20260708d) Tj
+T*
+() Tj
+T*
+(Step 9: Go-Live Checklist) Tj
+T*
+() Tj
+T*
+(Before final approval:) Tj
+T*
+() Tj
+T*
+(- Desktop and mobile layout check) Tj
+T*
+(- Call, WhatsApp, contact form check) Tj
+T*
+(- SEO title and meta description check) Tj
+T*
+(- No console errors on key pages) Tj
+T*
+(- Doctor approval received) Tj
+T*
+() Tj
+T*
+(Step 10: Post Go-Live Monitoring \(24-48 Hours\)) Tj
+T*
+() Tj
+T*
+(- Check app and API logs) Tj
+T*
+(- Verify feedback submissions) Tj
+T*
+(- Check for 404 or broken links) Tj
+T*
+(- Keep backup of config and deployment notes) Tj
+T*
+() Tj
+T*
+(Important Operational Notes) Tj
+T*
+() Tj
+T*
+(- Always verify correct running CMS path before editing on VPS.) Tj
+T*
+(- Preview issues usually come from token persistence, link propagation, or stale cache.) Tj
+T*
+(- Keep expertise_items and expertise synchronized to avoid Read More mismatch.) Tj
+T*
+(- Do not skip cache-busting when script changes are deployed.) Tj
+T*
+() Tj
+T*
+(Quick One-Doctor Execution Flow) Tj
+T*
+() Tj
+T*
+(1. Run onboarding command.) Tj
+T*
+(2. Fill config/<doctor-id>-profile.json.) Tj
+T*
+(3. Validate locally.) Tj
+T*
+(4. Test draft and preview in CMS.) Tj
+T*
+(5. Publish and verify live.) Tj
+T*
+(6. Complete go-live checklist.) Tj
+T*
+() Tj
+ET
+endstream
+endobj
+xref
+0 10
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000129 00000 n 
+0000000199 00000 n 
+0000000325 00000 n 
+0000002088 00000 n 
+0000002214 00000 n 
+0000003585 00000 n 
+0000003711 00000 n 
+trailer
+<< /Size 10 /Root 1 0 R >>
+startxref
+5502
+%%EOF

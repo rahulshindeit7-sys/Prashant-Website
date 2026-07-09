@@ -42,6 +42,8 @@
 
   // Initialize expertise detail page
   function initExpertiseDetail() {
+    // In preview mode, skip this script - let app.js handle rendering with draft config
+    if (new URLSearchParams(window.location.search).get('preview')) return;
     var slug = getSlug();
     var DETAILS = window.EXPERTISE_DETAILS || {};
     var expertise = DETAILS[slug];

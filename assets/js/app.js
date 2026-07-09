@@ -14,15 +14,43 @@
      BOOTSTRAP — fetch config then initialise everything
   ============================================================ */
 
-  // Detect preview mode from ?preview=1 query parameter
-  var previewMode = new URLSearchParams(window.location.search).get('preview') === '1';
+  // Detect preview mode from ?preview=TOKEN query parameter
+  var previewToken = new URLSearchParams(window.location.search).get('preview');
+  var previewMode = !!previewToken && previewToken !== '0';
+
+  // Preview link helper - appends preview token to internal page links
+  function previewHref(path) {
+    if (!previewMode || !previewToken) return path;
+    var sep = path.indexOf('?') === -1 ? '?' : '&';
+    return path + sep + 'preview=' + encodeURIComponent(previewToken);
+  }
+
+  // Rewrite all static HTML links to carry preview token across page navigation
+  function rewriteLinksForPreview() {
+    if (!previewMode || !previewToken) return;
+    var internalPages = ['index.html', 'expertise.html', 'expertise-detail.html', 'profile.html', 'contact.html'];
+    document.querySelectorAll('a[href]').forEach(function(a) {
+      var href = a.getAttribute('href');
+      if (!href || href.startsWith('http') || href.startsWith('mailto:') || href.startsWith('tel:') || href.startsWith('#') || href.startsWith('javascript:')) return;
+      // Check if it's an internal page link
+      var isInternal = internalPages.some(function(page) { return href === page || href.indexOf(page + '?') === 0 || href.indexOf(page + '#') === 0 || href === './' + page; });
+      // Also catch ./#anchor links (homepage anchors)
+      if (href.indexOf('./#') === 0 || href === './') isInternal = true;
+      if (!isInternal) return;
+      // Don't double-add token
+      if (href.indexOf('preview=') !== -1) return;
+      var sep = href.indexOf('?') === -1 ? '?' : '&';
+      a.setAttribute('href', href + sep + 'preview=' + encodeURIComponent(previewToken));
+    });
+  }
+
+
   
   var configPromise;
   if (previewMode) {
-    // Preview mode: fetch draft config from authenticated API
-    configPromise = fetch('/api/preview/config', {
-      method: 'GET',
-      credentials: 'include'  // Include session cookie
+    // Preview mode: fetch draft config using preview token
+    configPromise = fetch('/api/preview/config?token=' + encodeURIComponent(previewToken), {
+      method: 'GET'
     });
   } else {
     // Live mode: fetch static config
@@ -33,7 +61,7 @@
     .then(function (res) {
       if (!res.ok) {
         if (previewMode && res.status === 401) {
-          console.warn('[DoctorSite] Preview session expired, falling back to live config');
+          console.warn('[DoctorSite] Preview token expired, showing live config in preview mode');
           return fetch('./config/doctor-profile.json?v=' + Date.now());
         }
         throw new Error('HTTP ' + res.status + ': config not found.');
@@ -44,7 +72,8 @@
       // Extract config from API response or use directly if static file
       var config = response.config || response;
       window.DOCTOR_CONFIG = config;
-      window.PREVIEW_MODE = previewMode && (response.isDraft || false);
+      window.PREVIEW_MODE = previewMode;
+      window.PREVIEW_TOKEN = previewToken;
       init(config);
     })
     .catch(function (err) {
@@ -124,6 +153,21 @@
       injectPreviewBanner();
     }
 
+    // Preview mode: intercept internal links to carry preview token
+    if (window.PREVIEW_TOKEN) {
+      document.addEventListener('click', function(e) {
+        var link = e.target.closest('a[href]');
+        if (!link) return;
+        var href = link.getAttribute('href');
+        if (!href || href.startsWith('http') || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:')) return;
+        if (href.indexOf('preview=') !== -1) return; // already has token
+        e.preventDefault();
+        var sep = href.indexOf('?') !== -1 ? '&' : '?';
+        window.location.href = href + sep + 'preview=' + encodeURIComponent(window.PREVIEW_TOKEN);
+      });
+    }
+
+
     var ctx = getPageContext();
     initSEO(C, ctx);
     initExclusionGuards(C);
@@ -156,6 +200,7 @@
     initScrollRevealEffects();
     initLazyImages();
     scrollToCurrentHashTarget();
+    rewriteLinksForPreview();
   }
 
   function scrollToCurrentHashTarget() {
@@ -212,24 +257,24 @@
     homeAnchors.forEach(function (anchor) {
       if (!anchor || !anchor.id || !anchor.label) return;
       if (anchor.id === 'contact' && pages.contact && pages.contact.enabled) return;
-      navItems.push('<a href="./#' + escHtml(anchor.id) + '">' + escHtml(anchor.label) + '</a>');
+      navItems.push('<a href="' + previewHref('./' ) + '#' + escHtml(anchor.id) + '">' + escHtml(anchor.label) + '</a>');
     });
 
     if (pages.profile && pages.profile.enabled && !excluded.profile) {
-      navItems.push('<a href="' + escHtml(pages.profile.path || 'profile.html') + '">' + escHtml(pages.profile.nav_label || 'Profile') + '</a>');
+      navItems.push('<a href="' + escHtml(previewHref(pages.profile.path || 'profile.html')) + '">' + escHtml(pages.profile.nav_label || 'Profile') + '</a>');
     }
     if (pages.expertise && pages.expertise.enabled && !excluded.expertise) {
-      navItems.push('<a href="' + escHtml(pages.expertise.path || 'expertise.html') + '">' + escHtml(pages.expertise.nav_label || 'Expertise') + '</a>');
+      navItems.push('<a href="' + escHtml(previewHref(pages.expertise.path || 'expertise.html')) + '">' + escHtml(pages.expertise.nav_label || 'Expertise') + '</a>');
     }
     if (pages.contact && pages.contact.enabled && !excluded.contact) {
-      navItems.push('<a href="' + escHtml(pages.contact.path || 'contact.html') + '">' + escHtml(pages.contact.nav_label || 'Contact') + '</a>');
+      navItems.push('<a href="' + escHtml(previewHref(pages.contact.path || 'contact.html')) + '">' + escHtml(pages.contact.nav_label || 'Contact') + '</a>');
     }
 
     if (header) {
       header.innerHTML =
         '<nav class="navbar" role="navigation" aria-label="Main Navigation">' +
           '<div class="container navbar__inner">' +
-            '<a href="index.html" class="navbar__logo" aria-label="Home">' +
+            '<a href="' + previewHref('index.html') + '" class="navbar__logo" aria-label="Home">' +
               '<span class="navbar__logo-orbit">' +
                 '<img src="assets/images/Dr Prashant Logo.png" alt="' + escHtml(doc.name || clinic.name || 'Doctor Website') + ' logo" class="navbar__logo-mark" loading="eager" />' +
               '</span>' +
@@ -323,7 +368,7 @@
             '<article class="service-card">' +
               '<h2 class="service-card__name">' + escHtml(item.title || '') + '</h2>' +
               '<p class="service-card__desc">' + escHtml(item.summary || '') + '</p>' +
-              '<a class="btn btn--primary" data-expertise-slug="' + escHtml(slug) + '" href="expertise-detail.html?slug=' + encodeURIComponent(slug) + '">Read More</a>' +
+              '<a class="btn btn--primary" data-expertise-slug="' + escHtml(slug) + '" href="expertise-detail.html?slug=' + encodeURIComponent(slug) + (window.PREVIEW_TOKEN ? '&preview=' + encodeURIComponent(window.PREVIEW_TOKEN) : '') + '">Read More</a>' +
             '</article>'
           );
         }).join('');
@@ -346,27 +391,81 @@
       var detail = expertise.find(function (item) {
         return (item.slug || '').toLowerCase() === (ctx.slug || '').toLowerCase();
       });
-      setTextById('expertise-detail-heading', detail ? detail.title : 'Expertise Detail Not Found');
-      setTextById('expertise-detail-summary', detail ? (detail.summary || '') : 'No content found for this topic.');
-      setTextById('breadcrumbCurrent', detail ? detail.title : 'Not Found');
-      var detailContent = document.getElementById('expertise-detail-content');
-      if (detailContent) {
-        if (!detail) {
-          detailContent.innerHTML = '<p>Please return to the expertise listing and choose a valid topic.</p>';
+
+      function renderDetailSection(id, contentHtml) {
+        var el = document.getElementById(id);
+        if (!el) return;
+        if (contentHtml) {
+          el.innerHTML = contentHtml;
+          el.style.display = '';
         } else {
-          var blocks = Array.isArray(detail.content_blocks) ? detail.content_blocks : [];
-          detailContent.innerHTML = blocks.map(function (block) {
-            var heading = block && block.heading ? '<h2>' + escHtml(block.heading) + '</h2>' : '';
-            if (block && block.type === 'list' && Array.isArray(block.items)) {
-              var items = block.items.map(function (entry) {
-                return '<li>' + escHtml(entry) + '</li>';
-              }).join('');
-              return '<section>' + heading + '<ul>' + items + '</ul></section>';
-            }
-            return '<section>' + heading + '<p>' + escHtml(block && block.body ? block.body : '') + '</p></section>';
-          }).join('');
+          el.innerHTML = '';
+          el.style.display = 'none';
         }
       }
+
+      if (!detail) {
+        setTextById('expertiseDetailTitle', 'Expertise Detail Not Found');
+        setTextById('expertiseDetailSubtitle', 'No content found for this topic.');
+        setTextById('breadcrumbCurrent', 'Not Found');
+        renderDetailSection('expertiseOverview', '<p>Please return to the expertise listing and choose a valid topic.</p>');
+        ['expertiseKeyPoints', 'expertiseSections', 'expertiseWhenToConsult', 'expertiseTreatment', 'expertiseFaqs', 'expertiseRelated'].forEach(function (id) {
+          var el = document.getElementById(id);
+          if (el) el.style.display = 'none';
+        });
+        return;
+      }
+
+      setTextById('expertiseDetailTitle', detail.title || '');
+      setTextById('expertiseDetailSubtitle', detail.summary || '');
+      setTextById('breadcrumbCurrent', detail.title || '');
+
+      // Overview — fall back to first content block body if overview field is absent
+      var overviewText = detail.overview
+        || (Array.isArray(detail.content_blocks) && detail.content_blocks[0] && detail.content_blocks[0].body)
+        || '';
+      renderDetailSection('expertiseOverview', overviewText
+        ? '<h2>Overview</h2><p>' + escHtml(overviewText) + '</p>'
+        : '');
+
+      // Key Points
+      var keyPoints = Array.isArray(detail.keyPoints) ? detail.keyPoints : [];
+      renderDetailSection('expertiseKeyPoints', keyPoints.length
+        ? '<h2>Key Points</h2><div class="key-points-grid">' + keyPoints.map(function (p) {
+            return '<div class="key-point-card"><p>' + escHtml(p) + '</p></div>';
+          }).join('') + '</div>'
+        : '');
+
+      // When to Consult
+      var whenToConsult = Array.isArray(detail.whenToConsult) ? detail.whenToConsult : [];
+      renderDetailSection('expertiseWhenToConsult', whenToConsult.length
+        ? '<h2>When to Consult a Specialist</h2><div class="consultation-list">' + whenToConsult.map(function (i) {
+            return '<div class="consultation-item"><span class="icon">\u2713</span>' + escHtml(i) + '</div>';
+          }).join('') + '</div>'
+        : '');
+
+      // Treatment & Management Options
+      var treatment = Array.isArray(detail.treatment) ? detail.treatment : [];
+      renderDetailSection('expertiseTreatment', treatment.length
+        ? '<h2>Treatment &amp; Management Options</h2><div class="treatment-list">' + treatment.map(function (i) {
+            return '<div class="treatment-item"><span class="bullet">\u2022</span> ' + escHtml(i) + '</div>';
+          }).join('') + '</div>'
+        : '');
+
+      // FAQs
+      var faqs = Array.isArray(detail.faqs) ? detail.faqs : [];
+      renderDetailSection('expertiseFaqs', faqs.length
+        ? '<h2>Frequently Asked Questions</h2><div class="faq-list">' + faqs.map(function (f) {
+            return '<div class="faq-item"><h3 class="faq-question">' + escHtml(f.question || '') + '</h3><p class="faq-answer">' + escHtml(f.answer || '') + '</p></div>';
+          }).join('') + '</div>'
+        : '');
+
+      // Hide sections we don't populate via CMS
+      ['expertiseSections', 'expertiseRelated'].forEach(function (id) {
+        var el = document.getElementById(id);
+        if (el) el.style.display = 'none';
+      });
+
       return;
     }
 
@@ -1010,6 +1109,10 @@
     }
 
     // Update fee note based on payment option
+        // Update Pay Now label with dynamic fee
+    var payNowLabel = document.getElementById('pay-now-label');
+    if (payNowLabel) payNowLabel.textContent = 'Pay Now (₹' + (payment.consultation_fee || 500) + ')';
+
     var paymentRadios = document.querySelectorAll('input[name="payment_option"]');
     if (feeNote && paymentRadios.length > 0) {
       paymentRadios.forEach(function (radio) {
@@ -1385,10 +1488,10 @@
             '<div class="testimonial-card__stars" aria-label="' + rating + ' out of 5 stars">' +
               filled + empty +
             '</div>' +
-            '<p class="testimonial-card__text">"' + escHtml(t.text || '') + '"</p>' +
+            '<p class="testimonial-card__text">"' + escHtml(t.text || t.review_text || '') + '"</p>' +
             '<div class="testimonial-card__footer">' +
-              '<span class="testimonial-card__name">' + escHtml(t.name     || '') + '</span>' +
-              '<span class="testimonial-card__meta">' + escHtml(t.location || '') + ' · ' + escHtml(t.date || '') + '</span>' +
+              '<span class="testimonial-card__name">' + escHtml(t.name || t.patient_name || '') + '</span>' +
+              '<span class="testimonial-card__meta">' + escHtml(t.location || t.treatment || '') + ' · ' + escHtml(t.date || (t.created_at ? t.created_at.slice(0,7) : '') || '') + '</span>' +
             '</div>' +
           '</div>'
         );
@@ -2046,7 +2149,9 @@
   }
 
   function buildExpertiseDetailUrl(slug) {
-    return 'expertise-detail.html?slug=' + encodeURIComponent(slug || '');
+    var detailUrl = 'expertise-detail.html?slug=' + encodeURIComponent(slug || '');
+    if (window.PREVIEW_TOKEN) detailUrl += '&preview=' + encodeURIComponent(window.PREVIEW_TOKEN);
+    return detailUrl;
   }
 
   function storeSelectedExpertiseSlug(slug) {

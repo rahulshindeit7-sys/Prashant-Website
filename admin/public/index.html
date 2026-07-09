@@ -54,7 +54,32 @@
         <h2 id="editor-site-name">Edit Config</h2>
         <button id="editor-close-btn" class="btn btn--icon">&times;</button>
       </div>
-      <div id="editor-container" class="editor-container"></div>
+      <div class="editor-tabs">
+        <button class="editor-tab editor-tab--active" data-tab="json">Raw JSON</button>
+        <button class="editor-tab" data-tab="expertise">Expertise</button>
+      </div>
+      <div id="editor-tab-json" class="editor-tab-content">
+        <div id="editor-container" class="editor-container"></div>
+      </div>
+      <div id="editor-tab-expertise" class="editor-tab-content" style="display:none;">
+        <div class="expertise-editor">
+          <div class="expertise-editor__section">
+            <h3>Section Settings</h3>
+            <div class="form__group">
+              <label for="exp-section-title">Section Title</label>
+              <input type="text" id="exp-section-title" placeholder="e.g. Complete Expertise in Head and Neck Cancer Treatment">
+            </div>
+            <div class="form__group">
+              <label for="exp-section-subtitle">Section Subtitle</label>
+              <input type="text" id="exp-section-subtitle" placeholder="Brief description shown below title">
+            </div>
+          </div>
+          <div class="expertise-editor__section">
+            <h3>Expertise Items <button id="exp-add-item-btn" class="btn btn--primary btn--sm">+ Add Item</button></h3>
+            <div id="exp-items-list" class="expertise-items-list"></div>
+          </div>
+        </div>
+      </div>
       <div class="editor-panel__actions">
         <button id="preview-diff-btn" class="btn btn--secondary">Preview Diff</button>
         <button id="save-deploy-btn" class="btn btn--primary">Save &amp; Deploy</button>

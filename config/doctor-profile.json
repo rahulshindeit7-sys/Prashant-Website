@@ -667,7 +667,7 @@
   "feedback": {
     "enabled": true,
     "form_title": "Share Your Experience",
-    "api_endpoint": "/api/feedback",
+    "api_endpoint": "https://admin.drprashantpawar.com/api/feedback",
     "rating_threshold": 4,
     "services_dropdown": true
   },
