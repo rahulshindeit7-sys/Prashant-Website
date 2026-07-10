@@ -188,17 +188,20 @@
       initFooter(C);
       initWhatsAppFloat(C);
       initCallFloat(C);
-      initEngagementTracking(C);
     } else {
       initSharedPageShell(C, ctx);
       initRoutePageContent(C, ctx);
       initWhatsAppFloat(C);
       initCallFloat(C);
-      initEngagementTracking(C);
     }
 
-    initScrollRevealEffects();
-    initLazyImages();
+    // Defer non-critical work to reduce TBT
+    var deferFn = window.requestIdleCallback || function (cb) { setTimeout(cb, 1); };
+    deferFn(function () {
+      initScrollRevealEffects();
+      initLazyImages();
+      initEngagementTracking(C);
+    });
     scrollToCurrentHashTarget();
     rewriteLinksForPreview();
   }
@@ -371,7 +374,7 @@
             '<article class="service-card">' +
               '<h2 class="service-card__name">' + escHtml(item.title || '') + '</h2>' +
               '<p class="service-card__desc">' + escHtml(item.summary || '') + '</p>' +
-              '<a class="btn btn--primary" data-expertise-slug="' + escHtml(slug) + '" href="expertise-detail.html?slug=' + encodeURIComponent(slug) + (window.PREVIEW_TOKEN ? '&preview=' + encodeURIComponent(window.PREVIEW_TOKEN) : '') + '">Read More</a>' +
+              '<a class="btn btn--primary" data-expertise-slug="' + escHtml(slug) + '" href="expertise-detail.html?slug=' + encodeURIComponent(slug) + (window.PREVIEW_TOKEN ? '&preview=' + encodeURIComponent(window.PREVIEW_TOKEN) : '') + '">Read more about ' + escHtml(item.title || '') + '</a>' +
             '</article>'
           );
         }).join('');
@@ -1045,7 +1048,7 @@
         var link = externalLink || detailLink;
 
         var linkHtml = link
-          ? '<a class="expertise-card__link" data-expertise-slug="' + escHtml(slug) + '" href="' + escHtml(link) + '"' + (externalLink ? ' target="_blank" rel="noopener noreferrer"' : '') + '>Read more</a>'
+          ? '<a class="expertise-card__link" data-expertise-slug="' + escHtml(slug) + '" href="' + escHtml(link) + '"' + (externalLink ? ' target="_blank" rel="noopener noreferrer"' : '') + '>Read more about ' + escHtml(item.title || '') + '</a>'
           : '';
 
         return (
@@ -2196,13 +2199,12 @@
 
   function initScrollRevealEffects() {
     var targets = document.querySelectorAll(
-      '.section, .profile-card, .service-card, .why-card, .testimonial-card, .testimonial-gallery-card, .expertise-card, .case-archive-card, .faq__item, .contact__card, .contact__map, .key-point-card, .consultation-item, .treatment-item, .faq-item, .cta-box'
+      '.section, .service-card, .testimonial-card, .expertise-card, .faq__item'
     );
     if (!targets.length) return;
 
-    targets.forEach(function (el, index) {
+    targets.forEach(function (el) {
       el.classList.add('reveal-on-scroll');
-      el.style.transitionDelay = Math.min(index % 6, 5) * 55 + 'ms';
     });
 
     if (!('IntersectionObserver' in window)) {
