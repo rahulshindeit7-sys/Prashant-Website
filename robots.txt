@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /config/
+Disallow: /scripts/
+Disallow: /backups/
+
+Sitemap: https://drprashantspawar.com/sitemap.xml

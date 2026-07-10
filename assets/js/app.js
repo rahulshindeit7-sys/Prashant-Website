@@ -698,22 +698,32 @@
       );
     }
 
-    // Google Analytics (if configured)
+    // Google Analytics (deferred until user interaction or 5s)
     var gaId = seo.google_analytics_id;
     if (gaId && gaId !== 'G-XXXXXXXXXX') {
-      var gaScript = document.createElement('script');
-      gaScript.async = true;
-      gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(gaId);
-      document.head.appendChild(gaScript);
-      window.dataLayer = window.dataLayer || [];
-      window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
-      window.gtag('js', new Date());
-      window.gtag('config', gaId);
+      function loadGA() {
+        if (window.__gaLoaded) return;
+        window.__gaLoaded = true;
+        var gaScript = document.createElement('script');
+        gaScript.async = true;
+        gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(gaId);
+        document.head.appendChild(gaScript);
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+        window.gtag('js', new Date());
+        window.gtag('config', gaId);
+      }
       window.trackDoctorEvent = function (eventName, params) {
-        if (window.gtag) {
-          window.gtag('event', eventName, params || {});
-        }
+        if (!window.__gaLoaded) loadGA();
+        setTimeout(function () {
+          if (window.gtag) window.gtag('event', eventName, params || {});
+        }, 100);
       };
+      // Load after 5s or first interaction
+      var gaTimer = setTimeout(loadGA, 5000);
+      ['click', 'scroll', 'keydown', 'touchstart'].forEach(function (evt) {
+        document.addEventListener(evt, function () { clearTimeout(gaTimer); loadGA(); }, { once: true, passive: true });
+      });
     }
   }
 
@@ -1260,11 +1270,11 @@
         card.setAttribute('role', 'listitem');
         
         var iconHTML = '';
-        if (s.icon && (s.icon.endsWith('.svg') || s.icon.endsWith('.png') || s.icon.endsWith('.jpg') || s.icon.endsWith('.jpeg'))) {
+        if (s.icon && (s.icon.endsWith('.svg') || s.icon.endsWith('.png') || s.icon.endsWith('.jpg') || s.icon.endsWith('.jpeg') || s.icon.endsWith('.webp'))) {
           // Use path from config (supports both SVG and image files)
           var iconPath = s.icon;
           console.log('[DEBUG] Creating img tag with src:', iconPath);
-          iconHTML = '<img src="' + iconPath + '" alt="' + s.name + '" class="service-icon" loading="lazy" style="width: 80px; height: 80px; object-fit: contain;">';
+          iconHTML = '<img src="' + iconPath + '" alt="' + s.name + '" class="service-icon" loading="lazy" width="80" height="80" style="width: 80px; height: 80px; object-fit: contain;">';
         } else {
           iconHTML = '<div class="service-icon" style="font-size: 2.5rem;">' + (s.icon || '✓') + '</div>';
         }

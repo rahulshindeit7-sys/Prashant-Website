@@ -230,37 +230,37 @@
   "services": [
     {
       "name": "Oral Cancer Surgery",
-      "icon": "assets/icons/oral cancel.png",
+      "icon": "assets/icons/oral-cancel.webp",
       "description": "Includes Cancer involving the Tongue, Buccal mucosa (cheeks), Gums, Teeth, Jaw, Palate, Floor of Mouth and Lip Cancer and there reconstruction to maintain there function and shape ",
       "price_range": "On Consultation"
     },
     {
       "name": "Thyroid Surgery",
-      "icon": "assets/icons/Thyroid.png",
+      "icon": "assets/icons/thyroid.webp",
       "description": "In case of benign and malignant Tumors  of thyroid glad if size of the thyroid glad increase it can create pressure over adjacent vascular structures which can cause difficulty in breathing,hard swelling over the neck,difficulty in speech and phonation,in such cases we might need surgery to overcome all these complications \nPlan might be Hemi-thyroidectomy, Total Thyroidectomy.",
       "price_range": "On Consultation"
     },
     {
       "name": "Reconstruction Surgery",
-      "icon": "assets/icons/Reconstruction.png",
+      "icon": "assets/icons/reconstruction.webp",
       "description": "Reconstruction following Head and Neck Cancer Treatment: Local flaps as well as Microvascular free flaps to mantain  oral shape snd function as it was initial,not complete but with restoring there own functional defects ,size and shape ",
       "price_range": "On Consultation"
     },
     {
       "name": "Salivary Gland Tumor Surgery",
-      "icon": "assets/icons/Salivary Gland.png",
+      "icon": "assets/icons/salivary-gland.webp",
       "description": "In case of salivary glands due to some viral infection in case of parotid glands and dental infection in the form of space infection might needs surgery \n Parotid Gland (Superficial and Total/Radical Parotidectomy) and Submandibular,sublingual Salivary Gland Tumor Surgery.\nIn salivary glans siladenitis also common due to blockage of there respective ducts ",
       "price_range": "On Consultation"
     },
     {
       "name": "Skull Base Surgery",
-      "icon": "assets/icons/Skull_base.png",
+      "icon": "assets/icons/skull_base.webp",
       "description": "Open Craniofacial Resection in case of outer tabel frontal,parietal bone fractures ",
       "price_range": "On Consultation"
     },
     {
       "name": "Larynx Cancer Surgery",
-      "icon": "assets/icons/Laryngel.png",
+      "icon": "assets/icons/laryngel.webp",
       "description": "Total Laryngectomy, Partial Laryngectomy for laryngeal and hypopharyngeal cancers.",
       "price_range": "On Consultation"
     },
@@ -273,6 +273,18 @@
       "name": "Orhtognathic surgery ",
       "description": "If your upper and lower jaws do not meet properly, or if you have difficulty in chewing due to abnormal jaw position, you may require orthognathic surgery.\n\nOrthognathic surgery helps correct skeletal jaw deformities and improves bite alignment, facial profile, smile balance, and oral function.\n\nBased on the case, procedures such as BSSO for lower jaw correction, Le Fort I osteotomy for upper jaw correction, or genioplasty for chin correction may be advised.\n\nBook a consultation for detailed jaw evaluation, bite analysis, facial assessment, and personalized treatment planning.",
       "icon": "/uploads/prashant/973b17eb-389f-43f9-bea7-0337c2ce8c61-orhtognathic-surgery.jpg"
+    },
+    {
+      "name": "Dental Extraction",
+      "icon": "",
+      "description": "Surgical extraction of impacted, broken, or decayed teeth with minimal discomfort and fast recovery.",
+      "price_range": "On Consultation"
+    },
+    {
+      "name": "Dental Implant",
+      "icon": "",
+      "description": "Permanent tooth replacement using titanium implants for natural look, feel, and function.",
+      "price_range": "On Consultation"
     }
   ],
   "expertise_items": [
@@ -1026,26 +1038,31 @@
     "currency": "INR"
   },
   "seo": {
-    "meta_title": "Head & Neck Surgical Oncologist in Mumbai | Dr. Prashant Pawar",
-    "meta_description": "Dr. Prashant Pawar is a leading Head and Neck Cancer Surgeon and Skull Base Surgeon in Mumbai. Expert in oral cancer, thyroid cancer, larynx cancer, skull base tumors surgery.",
+    "meta_title": "Dr. Prashant S. Pawar | Head & Neck Cancer Surgeon, Oral & Maxillofacial Surgeon in Pune & Satara",
+    "meta_description": "Dr. Prashant S. Pawar is a leading Head and Neck Cancer Surgeon, Oral & Maxillofacial Surgeon in Pune & Satara. Expert in oral cancer surgery, thyroid cancer, skull base surgery, orthognathic surgery, dental implants.",
     "keywords": [
-      "head and neck cancer surgeon",
-      "oral cancer surgeon mumbai",
-      "skull base surgeon",
-      "thyroid cancer surgeon",
-      "head neck oncosurgeon",
-      "parotid surgery",
-      "larynx cancer surgery",
-      "tongue cancer surgery",
-      "oral cancer treatment"
+      "head and neck cancer surgeon pune",
+      "oral cancer surgeon pune",
+      "maxillofacial surgeon pune",
+      "skull base surgeon pune",
+      "thyroid cancer surgeon pune",
+      "orthognathic surgery pune",
+      "oral cancer treatment satara",
+      "head neck oncosurgeon pune",
+      "parotid surgery pune",
+      "dental implants pune",
+      "wisdom tooth removal pune",
+      "facial trauma surgeon pune"
     ],
     "local_keywords": [
-      "head neck cancer surgeon mumbai",
-      "oral cancer surgeon mumbai",
-      "skull base surgeon mumbai",
-      "thyroid cancer surgeon mumbai",
-      "best head neck surgeon india",
-      "oral cancer treatment mumbai"
+      "head neck cancer surgeon pune",
+      "oral cancer surgeon narhe pune",
+      "maxillofacial surgeon satara",
+      "best head neck surgeon pune",
+      "oral cancer treatment pune satara",
+      "cancer surgeon silverbirch hospital",
+      "dr prashant pawar pune",
+      "dr prashant pawar satara"
     ],
     "og_image": "assets/images/og-image.jpg",
     "schema_type": "Physician",
