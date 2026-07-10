@@ -266,6 +266,9 @@
     if (pages.expertise && pages.expertise.enabled && !excluded.expertise) {
       navItems.push('<a href="' + escHtml(previewHref(pages.expertise.path || 'expertise.html')) + '">' + escHtml(pages.expertise.nav_label || 'Expertise') + '</a>');
     }
+    if (pages.blog && pages.blog.enabled) {
+      navItems.push('<a href="' + escHtml(previewHref(pages.blog.path || 'blog.html')) + '">' + escHtml(pages.blog.nav_label || 'Blog') + '</a>');
+    }
     if (pages.contact && pages.contact.enabled && !excluded.contact) {
       navItems.push('<a href="' + escHtml(previewHref(pages.contact.path || 'contact.html')) + '">' + escHtml(pages.contact.nav_label || 'Contact') + '</a>');
     }
@@ -508,6 +511,83 @@
           routeMap.appendChild(iframe);
         } else {
           routeMap.innerHTML = '<div class="contact__map--placeholder"><span style="font-size:2rem">📍</span><span>Add location config to display map</span></div>';
+        }
+      }
+    }
+
+    if (ctx.page === 'blog') {
+      var blogContainer = document.getElementById('blog-list');
+      if (blogContainer) {
+        var posts = Array.isArray(C.blog_posts) ? C.blog_posts.filter(function (p) { return p.published !== false; }) : [];
+        if (posts.length === 0) {
+          blogContainer.innerHTML = '<p class="blog-empty">No blog posts yet. Check back soon!</p>';
+        } else {
+          posts.sort(function (a, b) { return (b.date || '').localeCompare(a.date || ''); });
+          var html = '';
+          posts.forEach(function (post) {
+            var imgHtml = post.image
+              ? '<img src="' + escHtml(post.image) + '" alt="' + escHtml(post.title || '') + '" class="blog-card__image" loading="lazy" />'
+              : '<div class="blog-card__image blog-card__image--placeholder">\ud83d\udcdd</div>';
+            var dateStr = post.date ? formatDate(post.date) : '';
+            var tagsHtml = '';
+            if (Array.isArray(post.tags) && post.tags.length) {
+              tagsHtml = '<div class="blog-card__tags">' + post.tags.map(function (t) {
+                return '<span class="blog-card__tag">' + escHtml(t) + '</span>';
+              }).join('') + '</div>';
+            }
+            html += '<a href="' + previewHref('blog-detail.html?slug=' + encodeURIComponent(post.slug || '')) + '" class="blog-card">' +
+              imgHtml +
+              '<div class="blog-card__body">' +
+                '<h3 class="blog-card__title">' + escHtml(post.title || 'Untitled') + '</h3>' +
+                (dateStr ? '<p class="blog-card__date">' + escHtml(dateStr) + '</p>' : '') +
+                '<p class="blog-card__summary">' + escHtml(post.summary || '') + '</p>' +
+                tagsHtml +
+              '</div></a>';
+          });
+          blogContainer.innerHTML = html;
+        }
+      }
+    }
+
+    if (ctx.page === 'blog-detail') {
+      var detailContainer = document.getElementById('blog-detail-content');
+      if (detailContainer) {
+        var slug = new URLSearchParams(window.location.search).get('slug') || '';
+        var allPosts = Array.isArray(C.blog_posts) ? C.blog_posts : [];
+        var post = null;
+        for (var i = 0; i < allPosts.length; i++) {
+          if (allPosts[i].slug === slug) { post = allPosts[i]; break; }
+        }
+        if (!post) {
+          detailContainer.innerHTML = '<h1>Post Not Found</h1><p>The blog post you are looking for does not exist.</p>';
+        } else {
+          var dateStr = post.date ? formatDate(post.date) : '';
+          var tagsHtml = '';
+          if (Array.isArray(post.tags) && post.tags.length) {
+            tagsHtml = '<div class="blog-detail__tags">' + post.tags.map(function (t) {
+              return '<span class="blog-card__tag">' + escHtml(t) + '</span>';
+            }).join('') + '</div>';
+          }
+          var imgHtml = post.image ? '<img src="' + escHtml(post.image) + '" alt="' + escHtml(post.title || '') + '" class="blog-detail__image" loading="lazy" />' : '';
+          var contentHtml = '';
+          if (post.content) {
+            if (/<[a-z][\\s\\S]*>/i.test(post.content)) {
+              contentHtml = post.content;
+            } else {
+              contentHtml = post.content.split(/\\n\\n+/).map(function (para) {
+                return '<p>' + escHtml(para.trim()) + '</p>';
+              }).join('');
+            }
+          }
+          detailContainer.innerHTML =
+            '<h1 id="blog-detail-heading">' + escHtml(post.title || '') + '</h1>' +
+            (post.author || dateStr ? '<p class="blog-detail__meta">' +
+              (post.author ? '<span class="blog-detail__author">By ' + escHtml(post.author) + '</span>' : '') +
+              (dateStr ? '<span class="blog-detail__date">' + escHtml(dateStr) + '</span>' : '') +
+            '</p>' : '') +
+            imgHtml + tagsHtml +
+            '<div class="blog-detail__body">' + contentHtml + '</div>';
+          if (post.title) document.title = post.title + ' | ' + (C.doctor && C.doctor.name ? C.doctor.name : 'Blog');
         }
       }
     }
@@ -2015,8 +2095,8 @@
       document.body.appendChild(el);
     }
 
-    var phoneNumber = clinic.phone || '';
-    var callHref = phoneNumber ? 'tel:' + phoneNumber.replace(/\D/g, '') : '#';
+    var phoneNumber = (clinic.phone || '').split(/[\/,;|]+/)[0].trim();
+    var callHref = phoneNumber ? 'tel:' + phoneNumber.replace(/[^0-9+]/g, '') : '#';
 
     if (el) {
       el.href = callHref;

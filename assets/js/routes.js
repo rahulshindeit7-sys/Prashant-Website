@@ -32,6 +32,8 @@
     if (/\/expertise(\.html)?$/.test(path)) return 'expertise-list';
     if (/\/expertise-detail(\.html)?$/.test(path)) return 'expertise-detail';
     if (/\/expertise\/[a-z0-9-]+$/.test(path)) return 'expertise-detail';
+    if (/\/blog-detail(\.html)?$/.test(path)) return 'blog-detail';
+    if (/\/blog(\.html)?$/.test(path)) return 'blog';
     if (/\/contact(\.html)?$/.test(path)) return 'contact';
     if (/\/(index\.html)?$/.test(path)) return 'home';
     return 'home';

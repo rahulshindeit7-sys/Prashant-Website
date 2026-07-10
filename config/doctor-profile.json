@@ -50,6 +50,11 @@
       "enabled": true,
       "path": "contact.html",
       "nav_label": "Contact"
+    },
+    "blog": {
+      "enabled": true,
+      "path": "blog.html",
+      "nav_label": "Blog"
     }
   },
   "doctor": {
@@ -1084,5 +1089,6 @@
   },
   "media": {
     "videos": []
-  }
+  },
+  "blog_posts": []
 }
