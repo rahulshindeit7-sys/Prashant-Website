@@ -1695,6 +1695,21 @@ button {
   border: 2px dashed var(--border);
 }
 
+/* ---- 13b. VISIT LOCATIONS ---- */
+.visit-locations { margin-top: 1.5rem; }
+.visit-locations__title { font-size: 0.88rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text); margin-bottom: 0.75rem; }
+.visit-locations__cards { display: flex; flex-direction: column; gap: 0.6rem; }
+.visit-location-card { display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.8rem 1rem; border: 2px solid var(--border); border-radius: var(--radius); cursor: pointer; transition: border-color 0.2s, background 0.2s; background: var(--white); }
+.visit-location-card:hover { border-color: var(--primary-light); background: var(--neutral-light); }
+.visit-location-card.active { border-color: var(--primary); background: rgba(58, 124, 165, 0.06); }
+.visit-location-card__icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 2px; }
+.visit-location-card__info { flex: 1; min-width: 0; }
+.visit-location-card__name { font-weight: 600; font-size: 0.9rem; color: var(--text); margin-bottom: 0.15rem; }
+.visit-location-card__address { font-size: 0.82rem; color: var(--text-light); line-height: 1.4; }
+.visit-location-card__badge { display: inline-block; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; padding: 0.15rem 0.45rem; border-radius: 3px; margin-top: 0.3rem; }
+.visit-location-card__badge--primary { background: var(--primary); color: var(--white); }
+.visit-location-card__badge--visit { background: var(--accent, #e67e22); color: var(--white); }
+
 /* ---- 14. FOOTER ---- */
 .footer {
   background: var(--neutral-dark);

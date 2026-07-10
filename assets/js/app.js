@@ -1142,6 +1142,29 @@
         opt.textContent = s.name + (s.price_range ? '  (' + s.price_range + ')' : '');
         serviceSelect.appendChild(opt);
       });
+      var otherOpt = document.createElement('option');
+      otherOpt.value = 'Other';
+      otherOpt.textContent = 'Other';
+      serviceSelect.appendChild(otherOpt);
+    }
+
+    // Populate location dropdown from visit_locations
+    var locationSelect = document.getElementById('apt-location');
+    if (locationSelect) {
+      var visitLocations = Array.isArray(clinic.visit_locations) ? clinic.visit_locations : [];
+      if (visitLocations.length > 0) {
+        visitLocations.forEach(function (loc) {
+          var opt = document.createElement('option');
+          opt.value = loc.name + ', ' + loc.city;
+          opt.textContent = loc.name + ' — ' + loc.city;
+          locationSelect.appendChild(opt);
+        });
+      } else {
+        var opt = document.createElement('option');
+        opt.value = (clinic.name || 'Clinic') + ', ' + (clinic.city || '');
+        opt.textContent = (clinic.name || 'Clinic') + ' — ' + (clinic.city || '');
+        locationSelect.appendChild(opt);
+      }
     }
 
     // Render service cards with SVG icons
@@ -1192,6 +1215,7 @@
         name:    form.elements['name'].value.trim(),
         phone:   form.elements['phone'].value.trim(),
         date:    form.elements['date'].value,
+        location: form.elements['location'] ? form.elements['location'].value : '',
         service: form.elements['service'].value,
         message: form.elements['message'].value.trim(),
         payment_option: form.elements['payment_option'].value
@@ -1218,6 +1242,7 @@
       { name: 'name',    label: 'Full name is required.' },
       { name: 'phone',   label: 'Phone number is required.' },
       { name: 'date',    label: 'Please select a date.' },
+      { name: 'location', label: 'Please select a location.' },
       { name: 'service', label: 'Please select a service.' }
     ];
 
@@ -1411,12 +1436,13 @@
       '━━━━━━━━━━━━━━━━━━━━',
       '👤 Patient : ' + formData.name,
       '📞 Phone   : ' + formData.phone,
+      '📍 Location: ' + (formData.location || 'Not specified'),
       '🦷 Service : ' + formData.service,
       '📅 Date    : ' + formatDate(formData.date),
       paymentStatus,
       formData.message ? '💬 Message : ' + formData.message : '',
       '━━━━━━━━━━━━━━━━━━━━',
-      'Sent via ' + (clinic.name || 'Clinic') + ' website'
+      'Sent via ' + (doc.name || clinic.name || 'Clinic') + ' website'
     ].filter(Boolean);
 
     var url = buildWhatsAppUrl(clinic.whatsapp || '', lines.join('\n'));
@@ -1734,6 +1760,52 @@
           timingItem.hidden = false;
           timingItem.style.removeProperty('display');
         }
+      }
+    }
+
+    // Visit locations cards
+    var locations = Array.isArray(clinic.visit_locations) ? clinic.visit_locations : [];
+    if (locations.length > 0) {
+      var locContainer = document.getElementById('contact-locations');
+      if (locContainer) {
+        var locHtml = '<div class="visit-locations">' +
+          '<p class="visit-locations__title">\ud83d\udccd Our Locations</p>' +
+          '<div class="visit-locations__cards">';
+        locations.forEach(function (loc, idx) {
+          var badge = loc.is_primary
+            ? '<span class="visit-location-card__badge visit-location-card__badge--primary">Primary</span>'
+            : '<span class="visit-location-card__badge visit-location-card__badge--visit">Visit</span>';
+          locHtml += '<div class="visit-location-card' + (idx === 0 ? ' active' : '') + '" data-loc-idx="' + idx + '" role="button" tabindex="0">' +
+            '<span class="visit-location-card__icon">\ud83c\udfe5</span>' +
+            '<div class="visit-location-card__info">' +
+              '<div class="visit-location-card__name">' + escHtml(loc.name || '') + '</div>' +
+              '<div class="visit-location-card__address">' + escHtml(loc.address || '') + '</div>' +
+              badge +
+            '</div></div>';
+        });
+        locHtml += '</div></div>';
+        locContainer.innerHTML = locHtml;
+
+        // Wire map switching
+        var mapTarget = document.getElementById('contact-map');
+        locContainer.querySelectorAll('.visit-location-card').forEach(function (card) {
+          card.addEventListener('click', function () {
+            var idx = parseInt(card.getAttribute('data-loc-idx'), 10);
+            var loc = locations[idx];
+            if (!loc) return;
+            locContainer.querySelectorAll('.visit-location-card').forEach(function (c) { c.classList.remove('active'); });
+            card.classList.add('active');
+            var mapUrl = 'https://www.google.com/maps?q=' + encodeURIComponent((loc.address || '') + ', ' + (loc.city || '')) + '&z=15&output=embed';
+            if (mapTarget) {
+              mapTarget.innerHTML = '';
+              var iframe = document.createElement('iframe');
+              iframe.src = mapUrl; iframe.loading = 'lazy'; iframe.allowFullscreen = true;
+              iframe.referrerPolicy = 'no-referrer-when-downgrade';
+              iframe.title = (loc.name || 'Location') + ' Map';
+              mapTarget.appendChild(iframe);
+            }
+          });
+        });
       }
     }
 
@@ -2219,6 +2291,10 @@
         opt.textContent = svc.name;
         serviceSelect.appendChild(opt);
       });
+      var otherOpt = document.createElement('option');
+      otherOpt.value = 'Other';
+      otherOpt.textContent = 'Other';
+      serviceSelect.appendChild(otherOpt);
     } else if (serviceSelect && feedbackCfg.services_dropdown === false) {
       // Hide service field if dropdown is disabled
       var serviceGroup = serviceSelect.closest('.feedback-form__group');

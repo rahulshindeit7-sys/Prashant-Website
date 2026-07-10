@@ -250,6 +250,19 @@
             />
             <span class="form__error" id="apt-date-error" role="alert" aria-live="polite"></span>
           </div>
+          <div class="form__group">
+            <label for="apt-location">Preferred Location <span aria-hidden="true">*</span></label>
+            <select
+              id="apt-location"
+              name="location"
+              required
+              aria-required="true"
+              aria-describedby="apt-location-error"
+            >
+              <option value="">Select location</option>
+            </select>
+            <span class="form__error" id="apt-location-error" role="alert" aria-live="polite"></span>
+          </div>
         </div>
         <div class="form__row">
           <div class="form__group form__group--full">
@@ -280,7 +293,7 @@
                   required
                   aria-required="true"
                 />
-                <label for="apt-pay-now">Pay Now (₹500)</label>
+                <label id="pay-now-label" for="apt-pay-now">Pay Now (₹500)</label>
               </div>
               <div class="form__radio-option">
                 <input
@@ -456,6 +469,7 @@
             </div>
           </li>
         </ul>
+        <div id="contact-locations"></div>
       </div>
       <div class="contact__map" id="contact-map" aria-label="Clinic location map"></div>
     </div>

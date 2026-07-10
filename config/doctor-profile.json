@@ -10,17 +10,30 @@
       "6. Refresh browser after saving this file"
     ]
   },
-
   "site_id": "dr-prashant-pawar-narhe-pune",
-
   "pages": {
     "home": {
       "anchors": [
-        { "id": "about", "label": "About" },
-        { "id": "services", "label": "Treatments" },
-        { "id": "testimonials", "label": "Testimonials" },
-        { "id": "faq", "label": "FAQ" },
-        { "id": "contact", "label": "Contact" }
+        {
+          "id": "about",
+          "label": "About"
+        },
+        {
+          "id": "services",
+          "label": "Treatments"
+        },
+        {
+          "id": "testimonials",
+          "label": "Testimonials"
+        },
+        {
+          "id": "faq",
+          "label": "FAQ"
+        },
+        {
+          "id": "contact",
+          "label": "Contact"
+        }
       ]
     },
     "profile": {
@@ -39,11 +52,10 @@
       "nav_label": "Contact"
     }
   },
-
   "doctor": {
     "name": "Dr. Prashant Pawar",
     "degree": "BDS,MDS,FHNO",
-    "specialization": "Head and Neck Surgical Oncologist, Skull Base Surgeon, Oral and Maxillofacial Surgeon, Orthognathic Surgeon",
+    "specialization": "Head and Neck Surgical Oncologist,  Oral and Maxillofacial Surgeon, Orthognathic Surgeon, Head and Neck specialist",
     "secondary_specializations": [
       "Head & Neck Oncosurgery",
       "Oral Cancer Surgery",
@@ -56,25 +68,24 @@
     "certifications": [
       "Master in oral and maxillofacial surgery Fellowship in head and neck cancer surgery"
     ],
-    "awards": [
-    ],
+    "awards": [],
     "tagline": "Complete Expertise in Head and Neck Cancer Treatment. Early Treatment. Evidence Based Management.",
     "languages": [
       "Marathi",
       "Hindi",
       "English"
     ],
-    "photo_logo": "assets/images/Dr Prashant.png",
-    "photo_about": "assets/images/Dr Prashant 2.png",
-    "about": "Dr. Prashant Pawar is a leading Head and Neck Cancer Surgeon and Skull Base Surgeon. He is an expert in surgical management of all types of head and neck cancers like mouth cancer (Tongue cancer, Cheek cancer, lip cancer etc), Thyroid Cancer, Larynx Cancer, Nose and Sinonasal cancer, Salivary Gland Tumors and complex tumours involving the skull base region.\n\nDr. Prashant Pawar always strives to give his patients better outcomes not only in terms of Cancer cure but also with regards to cosmetic and functional outcomes after treatment.\n\nDue to his specialized and unique experience in the field and having performed over 2000 surgeries, he is one amongst the top head and neck cancer surgeons in India."
+    "photo_logo": "/uploads/prashant/6cea640c-42fc-4479-88eb-f0f028f8bd49-img-20260709-wa0172.jpg",
+    "photo_about": "/uploads/prashant/ac5bd0f7-23bc-47c4-a1ea-40852165a5a4-img-20260420-wa0002.jpg",
+    "about": "Dr. Prashant Pawar is passed out his master Degree in oral and maxillofacial surgery from bharati vidhyapeeth and hospital pune\nThen head and Neck surgical oncology from Onco-life cancer hospital Talegaon ,pune \nDr.Prashant Pawar is a leading Head and Neck Cancer Surgeon and Skull Base Surgeon. He is an expert in surgical management of all types of head and neck cancers like mouth cancer (Tongue cancer, Cheek cancer, lip cancer etc), Thyroid Cancer, Larynx Cancer, Nose and Sinonasal cancer, Salivary Gland Tumors and complex tumours involving the skull base region.\n\nDr. Prashant Pawar always strives to give his patients better outcomes not only in terms of Cancer cure but also with regards to cosmetic and functional outcomes after treatment.\n\nDue to his specialized and unique experience in the field and having performed over 200 surgeries, he is one amongst the best and well experienced head and neck cancer surgeons in India.",
+    "hero_subtitle": ""
   },
-
   "clinic": {
     "name": "Silverbirch Multispeciality Hospital",
     "address": "Silverbirch Multispeciality Hospital,Narhe-Ambegaon",
     "city": "Pune, Maharashtra",
     "pincode": "411041",
-    "phone": "+91 9762334583",
+    "phone": "+91 9762334583 /+91 8261833520",
     "whatsapp": "+919762334583",
     "email": "prashantpawar7788@gmail.com",
     "website": "",
@@ -105,10 +116,37 @@
       "Bhumkar Bridge",
       "Sinhgad Road",
       "Vadgaon Budruk",
-      "Katraj"
+      "Katraj",
+      "Satara",
+      "Shukrawar Peth",
+      "Shaniwar Peth",
+      "Malhar Peth"
     ],
     "appointment_only": false,
     "branches_note": "Consultation availability may extend to Pune and Satara by appointment.",
+    "visit_locations": [
+      {
+        "name": "Silverbirch Multispeciality Hospital",
+        "address": "Narhe-Ambegaon, Pune, Maharashtra",
+        "city": "Pune",
+        "is_primary": true,
+        "booking_supported": true
+      },
+      {
+        "name": "Arayangla Hospital",
+        "address": "Rajwada, 6, Yadav Colony, Shukrawar Peth, Satara - 415002",
+        "city": "Satara",
+        "is_primary": false,
+        "booking_supported": true
+      },
+      {
+        "name": "City Hospital",
+        "address": "277, Rajpath Rd, near Rajlaxmi Talkies, behind Maharashtra Cold Drinks, Rajpath Satara, Shaniwar Peth, Malhar Peth, Satara, Maharashtra 415002",
+        "city": "Satara",
+        "is_primary": false,
+        "booking_supported": true
+      }
+    ],
     "photos": [
       "assets/images/dr-prashant-case-01.jpeg",
       "assets/images/dr-prashant-case-02.jpeg",
@@ -181,38 +219,38 @@
       "assets/images/dr-prashant-case-18.jpeg",
       "assets/images/dr-prashant-case-20.jpeg",
       "assets/images/dr-prashant-case-22.jpeg"
-    ]
+    ],
+    "timings": ""
   },
-
   "services": [
     {
       "name": "Oral Cancer Surgery",
       "icon": "assets/icons/oral cancel.png",
-      "description": "Includes Cancer involving the Tongue, Buccal mucosa (cheeks), Gums, Teeth, Jaw, Palate, Floor of Mouth and Lip Cancers.",
+      "description": "Includes Cancer involving the Tongue, Buccal mucosa (cheeks), Gums, Teeth, Jaw, Palate, Floor of Mouth and Lip Cancer and there reconstruction to maintain there function and shape ",
       "price_range": "On Consultation"
     },
     {
       "name": "Thyroid Surgery",
       "icon": "assets/icons/Thyroid.png",
-      "description": "Hemi-thyroidectomy, Total Thyroidectomy.",
+      "description": "In case of benign and malignant Tumors  of thyroid glad if size of the thyroid glad increase it can create pressure over adjacent vascular structures which can cause difficulty in breathing,hard swelling over the neck,difficulty in speech and phonation,in such cases we might need surgery to overcome all these complications \nPlan might be Hemi-thyroidectomy, Total Thyroidectomy.",
       "price_range": "On Consultation"
     },
     {
       "name": "Reconstruction Surgery",
       "icon": "assets/icons/Reconstruction.png",
-      "description": "Reconstruction following Head and Neck Cancer Treatment: Local flaps as well as Microvascular free flaps.",
+      "description": "Reconstruction following Head and Neck Cancer Treatment: Local flaps as well as Microvascular free flaps to mantain  oral shape snd function as it was initial,not complete but with restoring there own functional defects ,size and shape ",
       "price_range": "On Consultation"
     },
     {
       "name": "Salivary Gland Tumor Surgery",
       "icon": "assets/icons/Salivary Gland.png",
-      "description": "Parotid Gland (Superficial and Total/Radical Parotidectomy) and Submandibular Salivary Gland Tumor Surgery.",
+      "description": "In case of salivary glands due to some viral infection in case of parotid glands and dental infection in the form of space infection might needs surgery \n Parotid Gland (Superficial and Total/Radical Parotidectomy) and Submandibular,sublingual Salivary Gland Tumor Surgery.\nIn salivary glans siladenitis also common due to blockage of there respective ducts ",
       "price_range": "On Consultation"
     },
     {
       "name": "Skull Base Surgery",
       "icon": "assets/icons/Skull_base.png",
-      "description": "Open Craniofacial Resection and Endoscopic Surgery for Skull base and Sinonasal tumours.",
+      "description": "Open Craniofacial Resection in case of outer tabel frontal,parietal bone fractures ",
       "price_range": "On Consultation"
     },
     {
@@ -220,114 +258,153 @@
       "icon": "assets/icons/Laryngel.png",
       "description": "Total Laryngectomy, Partial Laryngectomy for laryngeal and hypopharyngeal cancers.",
       "price_range": "On Consultation"
+    },
+    {
+      "name": "Oral submucous fibrosis (OSMF)",
+      "description": "Oral Submucous Fibrosis, commonly known as OSMF, is a condition in which the inner lining of the mouth gradually becomes stiff due to fibrosis. Because of this stiffness, the patient may find it difficult to open the mouth properly, chew food, speak comfortably, or maintain oral hygiene.OSMF is commonly associated with habits such as paan, gutkha, betel nut/supari chewing, smokeless tobacco, smoking, and alcohol consumption. Early diagnosis and stopping these habits are very important to prevent further progression.In such cases we do fibrotomy to rele all shrink muscles and if nneds we remove them snd replaces with buccal fat-pador nasolabial flap depends upon severity of the case.",
+      "icon": "/uploads/prashant/75b146b5-ee46-48a0-84f4-3cb58f9ce550-osmf.jpg"
+    },
+    {
+      "name": "Orhtognathic surgery ",
+      "description": "If your upper and lower jaws do not meet properly, or if you have difficulty in chewing due to abnormal jaw position, you may require orthognathic surgery.\n\nOrthognathic surgery helps correct skeletal jaw deformities and improves bite alignment, facial profile, smile balance, and oral function.\n\nBased on the case, procedures such as BSSO for lower jaw correction, Le Fort I osteotomy for upper jaw correction, or genioplasty for chin correction may be advised.\n\nBook a consultation for detailed jaw evaluation, bite analysis, facial assessment, and personalized treatment planning.",
+      "icon": "/uploads/prashant/973b17eb-389f-43f9-bea7-0337c2ce8c61-orhtognathic-surgery.jpg"
     }
   ],
-
   "expertise_items": [
     {
       "slug": "head-and-neck-cancer",
       "title": "Head and Neck Cancer",
       "description": "Comprehensive surgical management of all head and neck cancers.",
-      "read_more_url": "expertise-detail.html?slug=head-and-neck-cancer"
+      "read_more_url": "expertise-detail.html?slug=head-and-neck-cancer",
+      "active": false
     },
     {
       "slug": "diagnosing-head-and-neck-cancer",
       "title": "Diagnosing Head and Neck Cancer",
       "description": "Advanced diagnostic techniques for early detection and staging.",
-      "read_more_url": "expertise-detail.html?slug=diagnosing-head-and-neck-cancer"
+      "read_more_url": "expertise-detail.html?slug=diagnosing-head-and-neck-cancer",
+      "active": false
     },
     {
       "slug": "types-of-treatment-for-head-and-neck-cancer",
       "title": "Types of Treatment for Head and Neck Cancer",
       "description": "Multimodality treatment options including surgery, radiation and chemotherapy.",
-      "read_more_url": "expertise-detail.html?slug=types-of-treatment-for-head-and-neck-cancer"
+      "read_more_url": "expertise-detail.html?slug=types-of-treatment-for-head-and-neck-cancer",
+      "active": false
     },
     {
       "slug": "how-cancer-spreads-in-the-body",
       "title": "How does Cancer spread in the body",
       "description": "Understanding cancer metastasis and spread pathways.",
-      "read_more_url": "expertise-detail.html?slug=how-cancer-spreads-in-the-body"
+      "read_more_url": "expertise-detail.html?slug=how-cancer-spreads-in-the-body",
+      "active": false
     },
     {
       "slug": "oral-precancerous-lesions-and-treatment",
       "title": "Oral Precancerous lesions and treatment",
       "description": "Identification and management of leukoplakia, erythroplakia, and submucous fibrosis.",
-      "read_more_url": "expertise-detail.html?slug=oral-precancerous-lesions-and-treatment"
+      "read_more_url": "expertise-detail.html?slug=oral-precancerous-lesions-and-treatment",
+      "active": false
     },
     {
       "slug": "oral-cancer-in-india",
       "title": "Oral Cancer in India",
       "description": "Understanding the epidemiology and risk factors of oral cancer in India.",
-      "read_more_url": "expertise-detail.html?slug=oral-cancer-in-india"
+      "read_more_url": "expertise-detail.html?slug=oral-cancer-in-india",
+      "active": false
     },
     {
       "slug": "oral-cancer-overview",
       "title": "Oral Cancer Overview",
       "description": "Complete overview of oral cancer types, stages, and treatment approaches.",
-      "read_more_url": "expertise-detail.html?slug=oral-cancer-overview"
+      "read_more_url": "expertise-detail.html?slug=oral-cancer-overview",
+      "active": false
     },
     {
       "slug": "human-papilloma-virus-and-oral-cancer",
       "title": "Human Papilloma Virus and Oral Cancer",
       "description": "Role of HPV in head and neck cancer development and prevention.",
-      "read_more_url": "expertise-detail.html?slug=human-papilloma-virus-and-oral-cancer"
+      "read_more_url": "expertise-detail.html?slug=human-papilloma-virus-and-oral-cancer",
+      "active": false
     },
     {
       "slug": "reconstruction-or-plastic-surgery-for-head-neck-cancer",
       "title": "Reconstruction or Plastic Surgery for Head Neck Cancer",
       "description": "Advanced reconstructive techniques following cancer surgery.",
-      "read_more_url": "expertise-detail.html?slug=reconstruction-or-plastic-surgery-for-head-neck-cancer"
+      "read_more_url": "expertise-detail.html?slug=reconstruction-or-plastic-surgery-for-head-neck-cancer",
+      "active": false
     },
     {
       "slug": "salivary-glands-and-tumours-of-salivary-gland",
       "title": "Salivary Glands and Tumours of Salivary Gland",
       "description": "Diagnosis and surgical management of salivary gland tumors.",
-      "read_more_url": "expertise-detail.html?slug=salivary-glands-and-tumours-of-salivary-gland"
+      "read_more_url": "expertise-detail.html?slug=salivary-glands-and-tumours-of-salivary-gland",
+      "active": false
     },
     {
       "slug": "parotid-surgery",
       "title": "Parotid Surgery",
       "description": "Specialized surgical techniques for parotid gland tumors with nerve preservation.",
-      "read_more_url": "expertise-detail.html?slug=parotid-surgery"
+      "read_more_url": "expertise-detail.html?slug=parotid-surgery",
+      "active": false
     },
     {
       "slug": "what-is-cancer",
       "title": "What is Cancer? Symptoms and risk factors of oral cancer",
       "description": "Understanding cancer fundamentals and early warning signs.",
-      "read_more_url": "expertise-detail.html?slug=what-is-cancer"
+      "read_more_url": "expertise-detail.html?slug=what-is-cancer",
+      "active": false
     },
     {
       "slug": "why-oral-cancer",
       "title": "Why do people who have never used tobacco or alcohol get oral cancer",
       "description": "Non-traditional risk factors and emerging causes of oral cancer.",
-      "read_more_url": "expertise-detail.html?slug=why-oral-cancer"
+      "read_more_url": "expertise-detail.html?slug=why-oral-cancer",
+      "active": false
     },
     {
       "slug": "thyroid-cancer",
       "title": "Thyroid Cancer",
       "description": "Comprehensive thyroid cancer diagnosis and surgical treatment.",
-      "read_more_url": "expertise-detail.html?slug=thyroid-cancer"
+      "read_more_url": "expertise-detail.html?slug=thyroid-cancer",
+      "active": false
     },
     {
       "slug": "skull-base-surgery",
       "title": "Skull Base Surgery",
       "description": "Advanced endoscopic and open surgical approaches for skull base tumors.",
-      "read_more_url": "expertise-detail.html?slug=skull-base-surgery"
+      "read_more_url": "expertise-detail.html?slug=skull-base-surgery",
+      "active": false
     },
     {
       "slug": "minimally-invasive",
       "title": "Minimally invasive and Cosmetically Superior Surgeries",
       "description": "Endoscopic and robotic surgical techniques for better cosmetic outcomes.",
-      "read_more_url": "expertise-detail.html?slug=minimally-invasive"
+      "read_more_url": "expertise-detail.html?slug=minimally-invasive",
+      "active": false
     },
     {
       "slug": "laryngeal-and-hypopharyngeal-cancer",
       "title": "Laryngeal and Hypopharyngeal Cancer",
       "description": "Surgical management of larynx and hypopharynx cancers with voice rehabilitation.",
-      "read_more_url": "expertise-detail.html?slug=laryngeal-and-hypopharyngeal-cancer"
+      "read_more_url": "expertise-detail.html?slug=laryngeal-and-hypopharyngeal-cancer",
+      "active": false
+    },
+    {
+      "slug": "facial-trauma-accidental-cases",
+      "title": "Facial Trauma Accidental Cases",
+      "description": "We provide treatment for facial injuries caused by accidents, including jaw fractures, facial bone fractures, dental injuries, cuts, and soft tissue wounds, with a focus on restoring function, comfort, and facial appearance.",
+      "active": true,
+      "read_more_url": "expertise-detail.html?slug=facial-trauma-accidental-cases"
+    },
+    {
+      "slug": "orthognathic-surgery-for-facial-asymmetry",
+      "title": "Orthognathic Surgery (For Facial Asymmetry)",
+      "description": "Orthognathic surgery helps correct jaw imbalance, facial asymmetry, and abnormal bite by repositioning the upper jaw, lower jaw, or chin to improve function, occlusion, and facial balance.",
+      "active": true,
+      "read_more_url": "expertise-detail.html?slug=orthognathic-surgery-for-facial-asymmetry"
     }
   ],
-
   "expertise_items_homepage": [
     {
       "slug": "oral-cancer-overview",
@@ -354,7 +431,6 @@
       "read_more_url": "expertise-detail.html?slug=skull-base-surgery"
     }
   ],
-
   "expertise": [
     {
       "slug": "head-and-neck-cancer",
@@ -366,7 +442,13 @@
           "heading": "Overview",
           "body": "See detailed content in expertise detail page."
         }
-      ]
+      ],
+      "related_slugs": [],
+      "overview": "See detailed content in expertise detail page.",
+      "keyPoints": [],
+      "whenToConsult": [],
+      "treatment": [],
+      "faqs": []
     },
     {
       "slug": "diagnosing-head-and-neck-cancer",
@@ -378,7 +460,13 @@
           "heading": "Overview",
           "body": "See detailed content in expertise detail page."
         }
-      ]
+      ],
+      "related_slugs": [],
+      "overview": "See detailed content in expertise detail page.",
+      "keyPoints": [],
+      "whenToConsult": [],
+      "treatment": [],
+      "faqs": []
     },
     {
       "slug": "types-of-treatment-for-head-and-neck-cancer",
@@ -390,7 +478,13 @@
           "heading": "Overview",
           "body": "See detailed content in expertise detail page."
         }
-      ]
+      ],
+      "related_slugs": [],
+      "overview": "See detailed content in expertise detail page.",
+      "keyPoints": [],
+      "whenToConsult": [],
+      "treatment": [],
+      "faqs": []
     },
     {
       "slug": "how-cancer-spreads-in-the-body",
@@ -402,7 +496,13 @@
           "heading": "Overview",
           "body": "See detailed content in expertise detail page."
         }
-      ]
+      ],
+      "related_slugs": [],
+      "overview": "See detailed content in expertise detail page.",
+      "keyPoints": [],
+      "whenToConsult": [],
+      "treatment": [],
+      "faqs": []
     },
     {
       "slug": "oral-precancerous-lesions-and-treatment",
@@ -414,7 +514,13 @@
           "heading": "Overview",
           "body": "See detailed content in expertise detail page."
         }
-      ]
+      ],
+      "related_slugs": [],
+      "overview": "See detailed content in expertise detail page.",
+      "keyPoints": [],
+      "whenToConsult": [],
+      "treatment": [],
+      "faqs": []
     },
     {
       "slug": "oral-cancer-in-india",
@@ -426,7 +532,13 @@
           "heading": "Overview",
           "body": "See detailed content in expertise detail page."
         }
-      ]
+      ],
+      "related_slugs": [],
+      "overview": "See detailed content in expertise detail page.",
+      "keyPoints": [],
+      "whenToConsult": [],
+      "treatment": [],
+      "faqs": []
     },
     {
       "slug": "oral-cancer-overview",
@@ -438,7 +550,13 @@
           "heading": "Overview",
           "body": "See detailed content in expertise detail page."
         }
-      ]
+      ],
+      "related_slugs": [],
+      "overview": "See detailed content in expertise detail page.",
+      "keyPoints": [],
+      "whenToConsult": [],
+      "treatment": [],
+      "faqs": []
     },
     {
       "slug": "human-papilloma-virus-and-oral-cancer",
@@ -450,21 +568,327 @@
           "heading": "Overview",
           "body": "See detailed content in expertise detail page."
         }
-      ]
+      ],
+      "related_slugs": [],
+      "overview": "See detailed content in expertise detail page.",
+      "keyPoints": [],
+      "whenToConsult": [],
+      "treatment": [],
+      "faqs": []
+    },
+    {
+      "slug": "reconstruction-or-plastic-surgery-for-head-neck-cancer",
+      "title": "Reconstruction or Plastic Surgery for Head Neck Cancer",
+      "summary": "Advanced reconstructive techniques following cancer surgery.",
+      "content_blocks": [
+        {
+          "type": "paragraph",
+          "heading": "Overview",
+          "body": "Advanced reconstructive techniques following cancer surgery."
+        }
+      ],
+      "related_slugs": [],
+      "overview": "Advanced reconstructive techniques following cancer surgery.",
+      "keyPoints": [],
+      "whenToConsult": [],
+      "treatment": [],
+      "faqs": []
+    },
+    {
+      "slug": "salivary-glands-and-tumours-of-salivary-gland",
+      "title": "Salivary Glands and Tumours of Salivary Gland",
+      "summary": "Diagnosis and surgical management of salivary gland tumors.",
+      "content_blocks": [
+        {
+          "type": "paragraph",
+          "heading": "Overview",
+          "body": "Diagnosis and surgical management of salivary gland tumors."
+        }
+      ],
+      "related_slugs": [],
+      "overview": "Diagnosis and surgical management of salivary gland tumors.",
+      "keyPoints": [],
+      "whenToConsult": [],
+      "treatment": [],
+      "faqs": []
+    },
+    {
+      "slug": "parotid-surgery",
+      "title": "Parotid Surgery",
+      "summary": "Specialized surgical techniques for parotid gland tumors with nerve preservation.",
+      "content_blocks": [
+        {
+          "type": "paragraph",
+          "heading": "Overview",
+          "body": "Specialized surgical techniques for parotid gland tumors with nerve preservation."
+        }
+      ],
+      "related_slugs": [],
+      "overview": "Specialized surgical techniques for parotid gland tumors with nerve preservation.",
+      "keyPoints": [],
+      "whenToConsult": [],
+      "treatment": [],
+      "faqs": []
+    },
+    {
+      "slug": "what-is-cancer",
+      "title": "What is Cancer? Symptoms and risk factors of oral cancer",
+      "summary": "Understanding cancer fundamentals and early warning signs.",
+      "content_blocks": [
+        {
+          "type": "paragraph",
+          "heading": "Overview",
+          "body": "Understanding cancer fundamentals and early warning signs."
+        }
+      ],
+      "related_slugs": [],
+      "overview": "Understanding cancer fundamentals and early warning signs.",
+      "keyPoints": [],
+      "whenToConsult": [],
+      "treatment": [],
+      "faqs": []
+    },
+    {
+      "slug": "why-oral-cancer",
+      "title": "Why do people who have never used tobacco or alcohol get oral cancer",
+      "summary": "Non-traditional risk factors and emerging causes of oral cancer.",
+      "content_blocks": [
+        {
+          "type": "paragraph",
+          "heading": "Overview",
+          "body": "Non-traditional risk factors and emerging causes of oral cancer."
+        }
+      ],
+      "related_slugs": [],
+      "overview": "Non-traditional risk factors and emerging causes of oral cancer.",
+      "keyPoints": [],
+      "whenToConsult": [],
+      "treatment": [],
+      "faqs": []
+    },
+    {
+      "slug": "thyroid-cancer",
+      "title": "Thyroid Cancer",
+      "summary": "Comprehensive thyroid cancer diagnosis and surgical treatment.",
+      "content_blocks": [
+        {
+          "type": "paragraph",
+          "heading": "Overview",
+          "body": "Comprehensive thyroid cancer diagnosis and surgical treatment."
+        }
+      ],
+      "related_slugs": [],
+      "overview": "Comprehensive thyroid cancer diagnosis and surgical treatment.",
+      "keyPoints": [],
+      "whenToConsult": [],
+      "treatment": [],
+      "faqs": []
+    },
+    {
+      "slug": "skull-base-surgery",
+      "title": "Skull Base Surgery",
+      "summary": "Advanced endoscopic and open surgical approaches for skull base tumors.",
+      "content_blocks": [
+        {
+          "type": "paragraph",
+          "heading": "Overview",
+          "body": "Advanced endoscopic and open surgical approaches for skull base tumors."
+        }
+      ],
+      "related_slugs": [],
+      "overview": "Advanced endoscopic and open surgical approaches for skull base tumors.",
+      "keyPoints": [],
+      "whenToConsult": [],
+      "treatment": [],
+      "faqs": []
+    },
+    {
+      "slug": "minimally-invasive",
+      "title": "Minimally invasive and Cosmetically Superior Surgeries",
+      "summary": "Endoscopic and robotic surgical techniques for better cosmetic outcomes.",
+      "content_blocks": [
+        {
+          "type": "paragraph",
+          "heading": "Overview",
+          "body": "Endoscopic and robotic surgical techniques for better cosmetic outcomes."
+        }
+      ],
+      "related_slugs": [],
+      "overview": "Endoscopic and robotic surgical techniques for better cosmetic outcomes.",
+      "keyPoints": [],
+      "whenToConsult": [],
+      "treatment": [],
+      "faqs": []
+    },
+    {
+      "slug": "laryngeal-and-hypopharyngeal-cancer",
+      "title": "Laryngeal and Hypopharyngeal Cancer",
+      "summary": "Surgical management of larynx and hypopharynx cancers with voice rehabilitation.",
+      "content_blocks": [
+        {
+          "type": "paragraph",
+          "heading": "Overview",
+          "body": "Surgical management of larynx and hypopharynx cancers with voice rehabilitation."
+        }
+      ],
+      "related_slugs": [],
+      "overview": "Surgical management of larynx and hypopharynx cancers with voice rehabilitation.",
+      "keyPoints": [],
+      "whenToConsult": [],
+      "treatment": [],
+      "faqs": []
+    },
+    {
+      "slug": "facial-trauma-accidental-cases",
+      "title": "Facial Trauma Accidental Cases",
+      "summary": "We provide treatment for facial injuries caused by accidents, including jaw fractures, facial bone fractures, dental injuries, cuts, and soft tissue wounds, with a focus on restoring function, comfort, and facial appearance.",
+      "overview": "Facial trauma includes injuries to the face, jaws, teeth, gums, lips, and surrounding soft tissues caused by road accidents, falls, sports injuries, workplace injuries, or physical impact.\n\nThese injuries may involve cuts, swelling, bleeding, broken teeth, jaw fractures, cheekbone fractures, or difficulty in opening and closing the mouth. Early diagnosis and timely treatment are important to restore chewing, speech, facial appearance, and normal jaw function.",
+      "keyPoints": [
+        "Treatment for facial cuts, wounds, and soft tissue injuries",
+        "Management of jaw fractures and facial bone fractures",
+        "Treatment for broken, loose, or displaced teeth after trauma",
+        "Jaw fixation or surgical correction may be required in selected cases",
+        "Focus on restoring bite, mouth opening, facial function, and appearance",
+        "Early treatment helps reduce complications and improves healing"
+      ],
+      "whenToConsult": [
+        "Accident or fall causing injury to face, jaw, mouth, or teeth",
+        "Bleeding wounds, deep cuts, or swelling on the face",
+        "Difficulty in opening or closing the mouth",
+        "Pain while chewing or change in bite after injury",
+        "Broken, loose, missing, or displaced teeth",
+        "Numbness over lips, chin, cheeks, or face after injury",
+        "Suspected jaw fracture or facial bone fracture",
+        "Persistent facial pain, swelling, or deformity after trauma"
+      ],
+      "treatment": [
+        "Clinical examination and radiographic evaluation such as X-ray or CBCT if required",
+        "Cleaning and suturing of facial or oral wounds",
+        "Management of dental injuries such as broken, loose, or displaced teeth",
+        "Jaw fracture treatment with fixation when required",
+        "Facial bone fracture correction depending on severity",
+        "Medication for pain, swelling, and infection control",
+        "Follow-up care to monitor healing, bite, mouth opening, and facial function",
+        "Referral or hospital-based care for severe emergency trauma cases"
+      ],
+      "faqs": [
+        {
+          "question": "Is facial trauma an emergency?",
+          "answer": "Severe bleeding, breathing difficulty, loss of consciousness, eye injury, or suspected jaw fracture should be treated as an emergency."
+        },
+        {
+          "question": "Can jaw fracture happen after an accident?",
+          "answer": "Yes, road accidents, falls, sports injuries, or direct impact can cause jaw or facial bone fractures."
+        },
+        {
+          "question": "How is facial trauma diagnosed?",
+          "answer": "Diagnosis is done through clinical examination and imaging such as X-ray or CBCT when required."
+        },
+        {
+          "question": "Is surgery always required?",
+          "answer": "No. Minor injuries may need wound care and medicines, while fractures or severe injuries may require fixation or surgery."
+        },
+        {
+          "question": "Can broken teeth after an accident be treated?",
+          "answer": "Yes. Depending on the injury, dental treatment, stabilization, restoration, or replacement may be advised."
+        },
+        {
+          "question": "Why is early treatment important?",
+          "answer": "Early treatment helps restore bite, mouth opening, chewing, speech, facial appearance, and reduces the risk of complications."
+        }
+      ],
+      "content_blocks": [
+        {
+          "type": "paragraph",
+          "heading": "Overview",
+          "body": "Facial trauma includes injuries to the face, jaws, teeth, gums, lips, and surrounding soft tissues caused by road accidents, falls, sports injuries, workplace injuries, or physical impact.\n\nThese injuries may involve cuts, swelling, bleeding, broken teeth, jaw fractures, cheekbone fractures, or difficulty in opening and closing the mouth. Early diagnosis and timely treatment are important to restore chewing, speech, facial appearance, and normal jaw function."
+        }
+      ],
+      "related_slugs": []
+    },
+    {
+      "slug": "orthognathic-surgery-for-facial-asymmetry",
+      "title": "Orthognathic Surgery (For Facial Asymmetry)",
+      "summary": "Orthognathic surgery helps correct jaw imbalance, facial asymmetry, and abnormal bite by repositioning the upper jaw, lower jaw, or chin to improve function, occlusion, and facial balance.",
+      "overview": "Orthognathic surgery, also known as corrective jaw surgery, is performed for patients with jaw imbalance, facial asymmetry, or skeletal malocclusion where the upper and lower jaws do not meet properly.\n\nFacial asymmetry may affect facial appearance, smile balance, chewing, speech, and bite alignment. In such cases, surgery is carefully planned to reposition the jaws and improve both function and facial harmony.\n\nDepending on the patient’s condition, procedures such as BSSO, Le Fort I osteotomy, or genioplasty may be advised.",
+      "keyPoints": [
+        "Corrects jaw imbalance and facial asymmetry",
+        "Helps improve abnormal bite and occlusion",
+        "Improves chewing, speech, smile balance, and facial profile",
+        "Treatment is planned with clinical examination and radiographic evaluation",
+        "May involve upper jaw, lower jaw, or chin correction",
+        "Usually requires detailed planning with dental and facial analysis",
+        "Focus on functional correction and natural facial balance"
+      ],
+      "whenToConsult": [
+        "Uneven or asymmetric facial appearance",
+        "Upper and lower teeth do not meet properly",
+        "Difficulty in chewing due to jaw mismatch",
+        "Prominent or retruded lower jaw",
+        "Upper jaw deficiency or forwardly placed jaw",
+        "Chin appears too small, large, or deviated",
+        "Facial imbalance affecting smile or profile",
+        "Long-standing skeletal malocclusion requiring surgical correction"
+      ],
+      "treatment": [
+        "Clinical examination and bite evaluation",
+        "Facial profile and symmetry assessment",
+        "Radiographic evaluation such as X-ray or CBCT if required",
+        "Orthodontic and surgical treatment planning",
+        "BSSO for lower jaw advancement, setback, or correction",
+        "Le Fort I osteotomy for upper jaw advancement or repositioning",
+        "Genioplasty for chin reshaping or repositioning",
+        "Post-surgical follow-up for healing, bite stability, and jaw function"
+      ],
+      "faqs": [
+        {
+          "question": "What is orthognathic surgery?",
+          "answer": "Orthognathic surgery is corrective jaw surgery used to correct jaw position, bite problems, and facial imbalance."
+        },
+        {
+          "question": "Is it done only for appearance?",
+          "answer": "No. It is mainly done to improve jaw function, bite alignment, chewing, speech, and facial balance."
+        },
+        {
+          "question": "Can it correct facial asymmetry?",
+          "answer": "Yes. In selected cases, jaw repositioning can help improve facial asymmetry and facial harmony."
+        },
+        {
+          "question": "Which procedures may be required?",
+          "answer": "Depending on the case, BSSO, Le Fort I osteotomy, genioplasty, or a combination of procedures may be advised."
+        },
+        {
+          "question": "Is planning required before surgery?",
+          "answer": "Yes. Detailed clinical examination, bite analysis, facial assessment, and radiographic evaluation are required before treatment."
+        },
+        {
+          "question": "Is orthodontic treatment needed?",
+          "answer": "In many cases, orthodontic treatment may be required before or after surgery to achieve proper bite alignment."
+        }
+      ],
+      "content_blocks": [
+        {
+          "type": "paragraph",
+          "heading": "Overview",
+          "body": "Orthognathic surgery, also known as corrective jaw surgery, is performed for patients with jaw imbalance, facial asymmetry, or skeletal malocclusion where the upper and lower jaws do not meet properly.\n\nFacial asymmetry may affect facial appearance, smile balance, chewing, speech, and bite alignment. In such cases, surgery is carefully planned to reposition the jaws and improve both function and facial harmony.\n\nDepending on the patient’s condition, procedures such as BSSO, Le Fort I osteotomy, or genioplasty may be advised."
+        }
+      ],
+      "related_slugs": []
     }
   ],
-
   "sections": {
-    "knowledgebase": { "enabled": false },
-    "research_publications": { "enabled": false }
+    "knowledgebase": {
+      "enabled": false
+    },
+    "research_publications": {
+      "enabled": false
+    }
   },
-
   "expertise_section": {
     "label": "Our Expertise",
     "title": "Complete Expertise in Head and Neck Cancer Treatment",
     "subtitle": "Since its founding, providing patients with full medical care encompassing outpatient services, diagnostics, and advanced surgical treatment."
   },
-
   "treatments": {
     "heading": "Treatments Offered",
     "subtitle": "Comprehensive Head & Neck Cancer Management – with special interest in Cosmetically Aesthetic Cancer treatment.",
@@ -502,7 +926,6 @@
       }
     ]
   },
-
   "research_publications": [
     {
       "title": "Comparative study of outcome of type I tympanoplasty in dry and wet ear Grant Medical College.",
@@ -547,35 +970,25 @@
       "url": "https://www.researchgate.net/publication/230843215"
     }
   ],
-
   "testimonials": [
     {
-      "name": "Patient Review",
-      "location": "Pune",
+      "patient_name": "Nishikant mahadik",
+      "treatment": "Orhtognathic surgery",
       "rating": 5,
-      "text": "Very clear explanation of treatment options and excellent surgical care.",
-      "date": "2026-05"
-    },
-    {
-      "name": "Patient Review",
-      "location": "Narhe",
-      "rating": 5,
-      "text": "Professional team and smooth recovery support throughout treatment.",
-      "date": "2026-04"
-    },
-    {
-      "name": "Patient Review",
-      "location": "Ambegaon",
-      "rating": 5,
-      "text": "Detailed diagnosis and confident surgical approach. Highly recommended.",
-      "date": "2026-03"
+      "review_text": "Good hospital with expert doctors and an excellent staff. The doctors are highly experienced, the staff is polite and supportive, and the overall service is outstanding. Highly recommended!",
+      "mobile": "",
+      "active": false,
+      "source": "website_feedback",
+      "created_at": "2026-07-09T16:38:41.002Z",
+      "name": "Nishikant mahadik",
+      "text": "Good hospital with expert doctors and an excellent staff. The doctors are highly experienced, the staff is polite and supportive, and the overall service is outstanding. Highly recommended!",
+      "location": "Orhtognathic surgery"
     }
   ],
-
   "faqs": [
     {
       "question": "How can I book an appointment?",
-      "answer": "Use the appointment form on this website, call the clinic, or message on WhatsApp."
+      "answer": "Use the appointment form on this website, call, or message on WhatsApp. Booking support is available for Silverbirch (Pune) and Satara visits at Arayangla Hospital and City Hospital."
     },
     {
       "question": "Do you treat oral cancer and tongue cancer cases?",
@@ -602,13 +1015,11 @@
       "answer": "5-year survival is ~65% overall. Stage I has ~80-90% survival, while stage IV has ~30-40%. Survival depends on tumor stage, patient health, and treatment adherence. Early detection dramatically improves survival. Our team will discuss prognosis based on your specific cancer characteristics."
     }
   ],
-
   "payment": {
     "razorpay_key_id": "rzp_test_T9TTm8prcDHgs5",
-    "consultation_fee": 500,
+    "consultation_fee": 800,
     "currency": "INR"
   },
-
   "seo": {
     "meta_title": "Head & Neck Surgical Oncologist in Mumbai | Dr. Prashant Pawar",
     "meta_description": "Dr. Prashant Pawar is a leading Head and Neck Cancer Surgeon and Skull Base Surgeon in Mumbai. Expert in oral cancer, thyroid cancer, larynx cancer, skull base tumors surgery.",
@@ -655,23 +1066,22 @@
         "meta_description_template": "{summary}",
         "canonical_template": "/expertise/{slug}"
       }
-    }
+    },
+    "title": "Dr. Prashant S. Pawar | Oral & Maxillofacial Surgeon in Pune  - Satara ",
+    "description": "Consult Dr. Prashant S. Pawar, experienced Oral and Maxillofacial Surgeon in Pune. Expert in Wisdom Tooth Removal, Dental Implants, Facial Trauma, Oral Cancer Surgery, OSMF Treatment, Orthognathic Surgery and TMJ Disorders."
   },
-
   "social": {
     "google_business": "",
     "instagram": "https://instagram.com/dr.prashant_oncomax_7788",
     "facebook": "https://facebook.com/prashant.pawar.31508"
   },
-
   "feedback": {
     "enabled": true,
     "form_title": "Share Your Experience",
-    "api_endpoint": "https://admin.drprashantpawar.com/api/feedback",
+    "api_endpoint": "/api/feedback",
     "rating_threshold": 4,
     "services_dropdown": true
   },
-
   "media": {
     "videos": []
   }
